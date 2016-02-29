@@ -1,0 +1,16 @@
+.env
+.idea
+.DS_Store
+.phpstorm*
+_ide_helper*
+dredd.*
+git_*
+Homestead.*
+node_modules
+npm-debug.log
+/public/css
+/public/js
+/resources/assets/css
+/resources/assets/vendor
+/tests/database.sqlite
+/vendor
