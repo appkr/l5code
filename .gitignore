@@ -3,6 +3,7 @@
 .DS_Store
 .phpstorm*
 _ide_helper*
+.phpstorm.meta.php
 dredd.*
 git_*
 Homestead.*
