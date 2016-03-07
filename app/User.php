@@ -12,7 +12,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'confirm_code', 'activated',
+        'name',
+        'email',
+        'password',
+        'confirm_code',
+        'activated',
     ];
 
     /**
@@ -21,7 +25,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'confirm_code',
+        'password',
+        'remember_token',
+        'confirm_code',
     ];
 
     /**
@@ -45,5 +51,12 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    /* Query Scopes */
+
+    public function scopeSocialUser($query, $email)
+    {
+        return $query->whereEmail($email)->where('password', '')->orWhereNull('password');
     }
 }

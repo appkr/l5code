@@ -15,8 +15,6 @@ Route::get('docs/{file?}', 'DocsController@show');
 Route::get('docs/images/{image}', 'DocsController@image')
     ->where('image', '[\pL-\pN\._-]+-img-[0-9]{2}.png');
 
-//    Route::auth();
-
 /* User Registration */
 Route::get('auth/register', [
     'as' => 'users.create',
@@ -43,6 +41,12 @@ Route::post('auth/login', [
 Route::get('auth/logout', [
     'as' => 'sessions.destroy',
     'uses' => 'SessionsController@destroy',
+]);
+
+/* Social Login */
+Route::get('social/{provider}', [
+    'as' => 'social.login',
+    'uses' => 'SocialController@execute',
 ]);
 
 /* Password Reminder */
