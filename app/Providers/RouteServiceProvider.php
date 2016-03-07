@@ -28,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('articles', \App\Article::class);
         $router->model('comments', \App\Comment::class);
+        $router->model('attachments', \App\Attachment::class);
     }
 
     /**

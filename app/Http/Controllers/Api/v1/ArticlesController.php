@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\ArticlesController as ParentController;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 
 class ArticlesController extends ParentController
 {
@@ -13,6 +12,9 @@ class ArticlesController extends ParentController
      */
     public function __construct()
     {
+//        $this->middleware('auth.basic.once', ['except' => ['index', 'show']]);
+        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+        parent::__construct();
     }
 
     public function tags()
@@ -35,9 +37,12 @@ class ArticlesController extends ParentController
      */
     protected function respondCreated(\App\Article $article)
     {
-        return response()->json([
-            'success' => 'created'
-        ], 200, [], JSON_PRETTY_PRINT);
+        return response()->json(
+            ['success' => 'created'],
+            201,
+            ['Location' => route('api.v1.articles.show', $article->id)],
+            JSON_PRETTY_PRINT
+        );
     }
 
     /**

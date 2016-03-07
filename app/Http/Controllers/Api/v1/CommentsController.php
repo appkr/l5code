@@ -2,12 +2,41 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CommentsController as ParentController;
 
-use App\Http\Requests;
-
-class CommentsController extends \App\Http\Controllers\CommentsController
+class CommentsController extends ParentController
 {
+    /**
+     * CommentsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+        parent::__construct();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \App\Article $article
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function index(\App\Article $article)
+    {
+        return $article->comments()->paginate(3)->toJson(JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\Comment $comment
+     * @return \App\Comment
+     */
+    public function show(\App\Comment $comment)
+    {
+        return $comment->toJson(JSON_PRETTY_PRINT);
+    }
+
     /**
      * @param \App\Article $article
      * @param $comment
@@ -15,9 +44,12 @@ class CommentsController extends \App\Http\Controllers\CommentsController
      */
     protected function respondCreated(\App\Article $article, $comment)
     {
-        return response()->json([
-            'success' => 'created'
-        ], 200, [], JSON_PRETTY_PRINT);
+        return response()->json(
+            ['success' => 'created'],
+            201,
+            ['Location' => route('api.v1.comments.show', $comment->id)],
+            JSON_PRETTY_PRINT
+        );
     }
 
     /**

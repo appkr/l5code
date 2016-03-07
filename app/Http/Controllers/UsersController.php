@@ -50,16 +50,14 @@ class UsersController extends Controller
         $user = \App\User::whereConfirmCode($code)->first();
 
         if (! $user) {
-            return $this->respondError(trans('auth.users.error_wrong_url'));
+            return $this->respondWrongUrl();
         }
 
         $user->activated = 1;
         $user->confirm_code = null;
         $user->save();
 
-        auth()->login($user);
-
-        return $this->respondCreated(trans('auth.users.info_confirmed', ['name' => $user->name]));
+        return $this->respondConfirmed($user);
     }
 
     /**
@@ -84,9 +82,7 @@ class UsersController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        auth()->login($user);
-
-        return $this->respondCreated(trans('auth.users.info_welcome', ['name' => $user->name]));
+        return $this->respondUpdated($user);
     }
 
     /**
@@ -115,18 +111,17 @@ class UsersController extends Controller
 
         event(new \App\Events\UserCreated($user));
 
-        return $this->respondCreated(trans('auth.users.info_confirmation_sent'));
+        return $this->respondConfirmationEmailSent();
     }
 
     /**
      * Make an error response.
      *
-     * @param string $message
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function respondError($message)
+    protected function respondWrongUrl()
     {
-        flash()->error($message);
+        flash()->error(trans('auth.users.error_wrong_url'));
 
         return redirect('/');
     }
@@ -134,15 +129,57 @@ class UsersController extends Controller
     /**
      * Make a success response.
      *
-     * @param string $message
+     * @param \App\User $user
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function respondCreated($message)
+    protected function respondConfirmed(\App\User $user)
     {
+        return $this->respondSuccess(
+            $user,
+            trans('auth.users.info_confirmed', ['name' => $user->name])
+        );
+    }
+
+    /**
+     * Make a success response.
+     *
+     * @param \App\User $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondUpdated(\App\User $user)
+    {
+        return $this->respondSuccess(
+            $user,
+            trans('auth.users.info_welcome', ['name' => $user->name])
+        );
+    }
+
+    /**
+     * Make a success response.
+     *
+     * @param \App\User $user
+     * @param null $message
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondSuccess(\App\User $user, $message = null)
+    {
+        auth()->login($user);
         flash($message);
 
         return ($return = request('return'))
             ? redirect(urldecode($return))
             : redirect()->intended();
+    }
+
+    /**
+     * Make a success response.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondConfirmationEmailSent()
+    {
+        flash(trans('auth.users.info_confirmation_sent'));
+
+        return redirect('/');
     }
 }

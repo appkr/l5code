@@ -42,18 +42,18 @@ class AttachmentsController extends Controller
             }
         }
 
-        return response()->json($attachments);
+        return response()->json($attachments, 200, [], JSON_PRETTY_PRINT);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param \App\Attachment $attachment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(\App\Attachment $attachment)
     {
-        $attachment = \App\Attachment::findOrFail($id);
+//        $attachment = \App\Attachment::findOrFail($id);
         $path = attachments_path($attachment->name);
 
         if (\File::exists($path)) {
@@ -62,6 +62,6 @@ class AttachmentsController extends Controller
 
         $attachment->delete();
 
-        return response()->json($attachment, 200);
+        return response()->json($attachment, 200, [], JSON_PRETTY_PRINT);
     }
 }

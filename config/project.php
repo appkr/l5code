@@ -20,6 +20,7 @@ return [
     'url' => env('APP_URL', 'http://localhost:8000'),
     'description' => '',
     'api_domain' => env('API_DOMAIN', 'api.myapp.dev'),
+    'app_domain' => env('APP_DOMAIN', 'myapp.dev'),
 
     /*
     |--------------------------------------------------------------------------

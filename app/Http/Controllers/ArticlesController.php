@@ -80,7 +80,6 @@ class ArticlesController extends Controller implements Cacheable
         ]);
 
         $article = $request->user()->articles()->create($payload);
-//        $article = \App\User::find(1)->articles()->create($payload);
 
         if (! $article) {
             flash()->error(trans('forum.articles.error_writing'));
