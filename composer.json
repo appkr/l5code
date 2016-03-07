@@ -14,7 +14,8 @@
     "guzzlehttp/guzzle": "~5.3|~6.0",
     "symfony/psr-http-message-bridge": "~0.2",
     "erusev/parsedown-extra": " ~0.7.1",
-    "barryvdh/laravel-debugbar": "2.2.*"
+    "barryvdh/laravel-debugbar": "2.2.*",
+    "intervention/image": "2.3.*"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

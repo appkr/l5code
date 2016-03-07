@@ -14,26 +14,52 @@ class Documentation
      */
     public function get($file = 'documentation.md')
     {
-        if (! File::exists($this->path($file))) {
-            abort(404, '요청하신 파일이 없습니다.');
-        }
-
         $content = File::get($this->path($file));
 
         return $this->replaceLinks($content);
     }
 
     /**
-     * Generate path of the given file.
+     * Create intervention image instance from the given file.
+     *
+     * @param $file
+     * @return \Intervention\Image\Image
+     */
+    public function image($file)
+    {
+        return \Image::make($this->path($file, 'docs/images'));
+    }
+
+    /**
+     * Calculate etag value.
      *
      * @param $file
      * @return string
      */
-    protected function path($file)
+    public function etag($file)
     {
-        $file = ends_with($file, '.md') ? $file : $file . '.md';
+        $lastModified = File::lastModified($this->path($file, 'docs/images'));
 
-        return base_path('docs' . DIRECTORY_SEPARATOR . $file);
+        return md5($file . $lastModified);
+    }
+
+    /**
+     * Generate path of the given file.
+     *
+     * @param string $file
+     * @param string $dir
+     * @return string
+     */
+    protected function path($file, $dir = 'docs')
+    {
+        $file = ends_with($file, ['.md', '.png']) ? $file : $file . '.md';
+        $path = base_path($dir . DIRECTORY_SEPARATOR . $file);
+
+        if (! File::exists($path)) {
+            abort(404, '요청하신 파일이 없습니다.');
+        }
+
+        return $path;
     }
 
     /**

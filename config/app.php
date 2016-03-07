@@ -159,8 +159,7 @@ return [
         /**
          * 3rd Party Service Providers...
          */
-//        Barryvdh\Debugbar\ServiceProvider::class,
-
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -207,6 +206,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        /**
+         * 3rd Party Facades
+         */
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
