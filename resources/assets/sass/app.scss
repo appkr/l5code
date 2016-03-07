@@ -1,12 +1,15 @@
-//@import 'node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
-//@import 'node_modules/font-awesome/scss/font-awesome';
+@charset "utf-8";
 
 @import '../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import '../../../node_modules/font-awesome/scss/font-awesome';
 
-//body {
-//  background-color: #EEE;
-//}
+body {
+  font-family: 'Nanum Gothic', Lato;
+}
+
+.fa-btn {
+  margin-right: 6px;
+}
 
 #app-layout {
   .docs__sidebar {

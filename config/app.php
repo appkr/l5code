@@ -160,6 +160,7 @@ return [
          * 3rd Party Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
     /*
@@ -210,6 +211,7 @@ return [
          * 3rd Party Facades
          */
         'Image' => Intervention\Image\Facades\Image::class,
+        'Flash' => Laracasts\Flash\Flash::class,
     ],
 
 ];
