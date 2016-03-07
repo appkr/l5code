@@ -29,17 +29,11 @@ class UserTransformer extends TransformerAbstract
     public function transform(User $user)
     {
         $payload = [
-            'id' => (int) $user->id,
+            'id' => optimus($user->id),
             'name' => $user->name,
             'email' => $user->email,
             'avatar' => 'http:' . gravatar_profile_url($user->email),
             'created' => $user->created_at->toIso8601String(),
-            'links' => [
-                [
-                    'rel' => 'self',
-                    'href' => route('api.v1.users.show', $user->id),
-                ],
-            ],
             'articles' => (int) $user->articles->count(),
             'comments' => (int) $user->comments->count(),
         ];

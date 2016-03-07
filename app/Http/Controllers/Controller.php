@@ -24,7 +24,7 @@ class Controller extends BaseController
         $this->cache = app('cache');
 
         if ((new \ReflectionClass($this))->implementsInterface(\App\Http\Controllers\Cacheable::class) and taggable()) {
-            $this->cache = app('cache')->tags($this->cacheKeys());
+            $this->cache = app('cache')->tags($this->cacheTags());
         }
     }
 

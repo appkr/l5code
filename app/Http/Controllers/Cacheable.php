@@ -10,5 +10,5 @@ interface Cacheable
      *
      * @return string
      */
-    public function cacheKeys();
+    public function cacheTags();
 }

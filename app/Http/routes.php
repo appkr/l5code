@@ -1,8 +1,8 @@
 <?php
 
-Route::group(['domain' => config('project.api_domain'), 'namespace' => 'Api', 'as' => 'api.'], function () {
+Route::group(['domain' => config('project.api_domain'), 'namespace' => 'Api', 'as' => 'api.', 'middleware' => ['cors']], function() {
     /* api.v1 */
-    Route::group(['prefix' => 'v1', 'namespace' => 'v1'], function () {
+    Route::group(['prefix' => 'v1', 'namespace' => 'v1', 'middleware' => ['throttle:60,1']], function() {
         /* Home */
         Route::get('/', [
             'as' => 'v1.index',

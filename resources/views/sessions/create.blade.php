@@ -11,7 +11,7 @@
     <div class="page-header">
       <h4>{{ trans('auth.sessions.title') }}</h4>
       <p class="text-muted">
-        {{ trans('auth.sessions.title') }}
+        {{ trans('auth.sessions.description') }}
       </p>
     </div>
 

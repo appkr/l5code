@@ -18,7 +18,6 @@ class ArticlesController extends ParentController
 
     public function tags()
     {
-//        return \App\Tag::all();
         return json()->withCollection(
             \App\Tag::all(),
             new \App\Transformers\TagTransformer
@@ -27,13 +26,19 @@ class ArticlesController extends ParentController
 
     /**
      * @param LengthAwarePaginator $articles
+     * @param string $cacheKey
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondCollection(LengthAwarePaginator $articles)
+    protected function respondCollection(LengthAwarePaginator $articles, $cacheKey)
     {
-//        return $articles->toJson(JSON_PRETTY_PRINT);
-//        return (new \App\Transformers\ArticleTransformerBasic)->withPagination($articles);
-        return json()->withPagination(
+        $reqEtag = request()->getETags();
+        $genEtag = $this->etags($articles, $cacheKey);
+
+        if (config('project.etag') and isset($reqEtag[0]) and $reqEtag[0] === $genEtag) {
+            return json()->notModified();
+        }
+
+        return json()->setHeaders(['Etag' => $genEtag])->withPagination(
             $articles,
             new \App\Transformers\ArticleTransformer
         );
@@ -45,12 +50,6 @@ class ArticlesController extends ParentController
      */
     protected function respondCreated(\App\Article $article)
     {
-//        return response()->json(
-//            ['success' => 'created'],
-//            201,
-//            ['Location' => route('api.v1.articles.show', $article->id)],
-//            JSON_PRETTY_PRINT
-//        );
         return json()->setHeaders([
             'Location' => route('api.v1.articles.show', $article->id)
         ])->created('created');
@@ -63,9 +62,15 @@ class ArticlesController extends ParentController
      */
     protected function respondInstance(\App\Article $article, \Illuminate\Database\Eloquent\Collection $comments)
     {
-//        return $article->toJson(JSON_PRETTY_PRINT);
-//        return (new \App\Transformers\ArticlesTransformerBasic)->withItem($article);
-        return json()->withItem(
+        $cacheKey = cache_key('articles.'.$article->id);
+        $reqEtag = request()->getETags();
+        $genEtag = $this->etag($article, $cacheKey);
+
+        if (config('project.etag') and isset($reqEtag[0]) and $reqEtag[0] === $genEtag) {
+            return json()->notModified();
+        }
+
+        return json()->setHeaders(['Etag' => $genEtag])->withItem(
             $article,
             new \App\Transformers\ArticleTransformer
         );
@@ -77,9 +82,6 @@ class ArticlesController extends ParentController
      */
     protected function respondUpdated(\App\Article $article)
     {
-//        return response()->json([
-//            'success' => 'updated'
-//        ], 200, [], JSON_PRETTY_PRINT);
         return json()->success('updated');
     }
 }

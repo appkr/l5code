@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller implements Cacheable
 {
+    use \App\EtagTrait;
+
     /**
      * ArticlesController constructor.
      */
@@ -20,7 +22,7 @@ class ArticlesController extends Controller implements Cacheable
      *
      * @return string
      */
-    public function cacheKeys()
+    public function cacheTags()
     {
         return 'articles';
     }
@@ -52,7 +54,7 @@ class ArticlesController extends Controller implements Cacheable
 
         $articles = $this->cache($cacheKey, 5, $query, 'paginate', 3);
 
-        return $this->respondCollection($articles);
+        return $this->respondCollection($articles, $cacheKey);
     }
 
     /**
@@ -111,8 +113,10 @@ class ArticlesController extends Controller implements Cacheable
      */
     public function show(\App\Article $article)
     {
-        $article->view_count += 1;
-        $article->save();
+        if (! is_api_domain()) {
+            $article->view_count += 1;
+            $article->save();
+        }
 
         $cacheKey = cache_key('articles.' . $article->id . '.comments');
         $query = $article->comments()->with('replies')->withTrashed()
@@ -178,9 +182,10 @@ class ArticlesController extends Controller implements Cacheable
 
     /**
      * @param \Illuminate\Contracts\Pagination\LengthAwarePaginator $articles
+     * @param string $cacheKey
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function respondCollection(\Illuminate\Contracts\Pagination\LengthAwarePaginator $articles)
+    protected function respondCollection(\Illuminate\Contracts\Pagination\LengthAwarePaginator $articles, $cacheKey)
     {
         return view('articles.index', compact('articles'));
     }

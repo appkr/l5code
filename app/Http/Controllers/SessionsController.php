@@ -6,6 +6,22 @@ use Illuminate\Http\Request;
 
 class SessionsController extends Controller
 {
+    use \Illuminate\Foundation\Auth\ThrottlesLogins;
+
+    /**
+     * The number of "seconds" to delay further login attempts
+     *
+     * @var int
+     */
+    protected $lockoutTime = 60;
+
+    /**
+     * Maximum number of login attempts.
+     *
+     * @var int
+     */
+    protected $maxLoginAttempts = 5;
+
     /**
      * SessionsController constructor.
      */
@@ -37,6 +53,17 @@ class SessionsController extends Controller
             'password' => 'required|min:6',
         ]);
 
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        $throttles = method_exists($this, 'hasTooManyLoginAttempts');
+
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
         $token = is_api_domain()
             ? jwt()->attempt($request->only('email', 'password'))
             : auth()->attempt($request->only('email', 'password'), $request->has('remember'));
@@ -44,6 +71,13 @@ class SessionsController extends Controller
         if (! $token) {
             if (\App\User::socialUser($request->input('email'))->first()) {
                 return $this->respondSocialUser();
+            }
+
+            // If the login attempt was unsuccessful we will increment the number of attempts
+            // to login and redirect the user back to the login form. Of course, when this
+            // user surpasses their maximum number of attempts they will get locked out.
+            if ($throttles && ! $lockedOut) {
+                $this->incrementLoginAttempts($request);
             }
 
             return $this->respondLoginFailed();
@@ -71,6 +105,15 @@ class SessionsController extends Controller
 
         return redirect('/');
     }
+
+    /* Helpers */
+
+    public function loginUsername()
+    {
+        return 'email';
+    }
+
+    /* Response Methods */
 
     /**
      * Make an error response.

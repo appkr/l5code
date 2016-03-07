@@ -23,7 +23,6 @@ class CommentsController extends ParentController
      */
     public function index(\App\Article $article)
     {
-//        return $article->comments()->paginate(3)->toJson(JSON_PRETTY_PRINT);
         return json()->withPagination(
             $article->comments,
             new \App\Transformers\CommentTransformer
@@ -38,7 +37,6 @@ class CommentsController extends ParentController
      */
     public function show(\App\Comment $comment)
     {
-//        return $comment->toJson(JSON_PRETTY_PRINT);
         return json()->withItem(
             $comment,
             new \App\Transformers\CommentTransformer
@@ -52,12 +50,6 @@ class CommentsController extends ParentController
      */
     protected function respondCreated(\App\Article $article, $comment)
     {
-//        return response()->json(
-//            ['success' => 'created'],
-//            201,
-//            ['Location' => route('api.v1.comments.show', $comment->id)],
-//            JSON_PRETTY_PRINT
-//        );
         return json()->setHeaders([
             'Location' => route('api.v1.comments.show', $comment->id)
         ])->created('created');
@@ -69,9 +61,6 @@ class CommentsController extends ParentController
      */
     protected function respondUpdated(\App\Comment $comment)
     {
-//        return response()->json([
-//            'success' => 'updated'
-//        ], 200, [], JSON_PRETTY_PRINT);
         return json()->success('updated');
     }
 }
