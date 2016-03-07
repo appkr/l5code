@@ -22,8 +22,9 @@ class ArticlesRequest extends Request
     public function rules()
     {
         return [
-            'title'   => ['required'],
+            'title' => ['required'],
             'content' => ['required', 'min:10'],
+            'tags' => ['required', 'array'],
         ];
     }
 

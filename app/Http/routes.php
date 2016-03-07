@@ -6,12 +6,16 @@ Route::get('/', [
     'uses' => 'WelcomeController@index',
 ]);
 
+
 /* Forum */
 Route::resource('articles', 'ArticlesController');
+Route::get('tags/{slug}/articles', [
+    'as' => 'tags.articles.index',
+    'uses' => 'ArticlesController@index',
+]);
 
 /* Documentation */
 Route::get('docs/{file?}', 'DocsController@show');
-
 Route::get('docs/images/{image}', 'DocsController@image')
     ->where('image', '[\pL-\pN\._-]+-img-[0-9]{2}.png');
 
@@ -66,3 +70,7 @@ Route::post('auth/reset', [
     'as' => 'reset.store',
     'uses' => 'PasswordsController@postReset',
 ]);
+
+//DB::listen(function($sql) {
+//    dump($sql->sql);
+//});

@@ -6,6 +6,7 @@
     "gulp": "^3.9.1",
     "highlightjs": "^8.7.0",
     "jquery": "^2.2.1",
-    "laravel-elixir": "^5.0.0"
+    "laravel-elixir": "^5.0.0",
+    "select2": "^4.0.2"
   }
 }

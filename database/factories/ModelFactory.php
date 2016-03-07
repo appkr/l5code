@@ -20,16 +20,18 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => bcrypt('password'),
         'remember_token' => str_random(10),
         'activated' => $activated,
-        'confirm_code' => $activated ? str_random(60) : null,
+        'confirm_code' => $activated ? null : str_random(60),
     ];
 });
 
 $factory->define(App\Article::class, function (Faker\Generator $faker) {
     $date = $faker->dateTimeThisMonth;
+    $userId = App\User::pluck('id')->toArray();
 
     return [
         'title' => $faker->sentence(),
         'content' => $faker->paragraph(),
+        'user_id' => $faker->randomElement($userId),
         'created_at' => $date,
         'updated_at' => $date,
     ];
