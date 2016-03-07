@@ -46,12 +46,20 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         if (app()->environment('production')) {
-            if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-                return response(view('errors.notice', [
-                    'title'       => '찾을 수 없습니다.',
-                    'description' => '죄송합니다! 요청하신 페이지가 없습니다.'
-                ]), 404);
+            $statusCode = 400;
+            $title = '죄송합니다. :(';
+            $description = '에러가 발생했습니다.';
+
+            if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException
+                or $e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                $statusCode = 404;
+                $description = $e->getMessage() ?: '요청하신 페이지가 없습니다.';
             }
+
+            return response(view('errors.notice', [
+                'title' => $title,
+                'description' => $description,
+            ]), $statusCode);
         }
 
         return parent::render($request, $e);
