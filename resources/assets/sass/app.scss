@@ -68,11 +68,13 @@ hr {
 }
 
 #app-layout {
-  .docs__sidebar {
+  .docs__sidebar,
+  .footer__master {
     margin-top: 20px;
   }
 }
 
 @import 'highlight';
 @import 'form';
+@import 'forum';
 

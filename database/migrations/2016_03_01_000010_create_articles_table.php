@@ -19,8 +19,7 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')
-                  ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -31,6 +30,10 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropForeign('articles_user_id_foreign');
+        });
+
         Schema::drop('articles');
     }
 }

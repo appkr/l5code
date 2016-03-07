@@ -59,4 +59,18 @@ class User extends Authenticatable
     {
         return $query->whereEmail($email)->where('password', '')->orWhereNull('password');
     }
+
+    /* Accessor */
+
+    public function getGravatarUrlAttribute()
+    {
+        return sprintf("//www.gravatar.com/avatar/%s?s=%s", md5($this->email), 48);
+    }
+
+    /* Helpers */
+
+    public function isAdmin()
+    {
+        return ($this->id === 1) ? true : false;
+    }
 }

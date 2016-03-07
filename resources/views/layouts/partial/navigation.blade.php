@@ -17,6 +17,9 @@
         <li>
           <a href="/">홈</a>
         </li>
+        <li>
+          <a href="{{ route('articles.index') }}">포럼</a>
+        </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

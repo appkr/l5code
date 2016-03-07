@@ -38,6 +38,10 @@ class SessionsController extends Controller
         ]);
 
         if (! auth()->attempt($request->only('email', 'password'), $request->has('remember'))) {
+            if (\App\User::socialUser($request->get('email'))->first()) {
+                return $this->respondError('회원가입하지 않으셨습니다. 지난번엔 깃허브로 로그인하셨어요.');
+            }
+
             return $this->respondError('이메일 또는 비밀번호가 맞지 않습니다.');
         }
 
@@ -87,6 +91,6 @@ class SessionsController extends Controller
     {
         flash($message);
 
-        return redirect()->intended('/');
+        return redirect()->intended();
     }
 }

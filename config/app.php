@@ -13,6 +13,7 @@ return [
     |
     */
 
+//    'env' => 'production',
     'env' => env('APP_ENV', 'production'),
 
     /*

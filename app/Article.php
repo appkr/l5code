@@ -6,10 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title',
         'content'
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'user',
+    ];
+
+    /* Relationships */
 
     public function user()
     {
@@ -21,8 +44,10 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function getContentAttribute($value)
-    {
-        return app(\ParsedownExtra::class)->text($value);
-    }
+    /* Accessors */
+
+//    public function getContentAttribute($value)
+//    {
+//        return app(\ParsedownExtra::class)->text($value);
+//    }
 }
