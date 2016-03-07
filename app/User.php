@@ -35,7 +35,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $dates = ['last_login'];
+    protected $dates = [
+        'last_login',
+    ];
 
     /**
      * The attributes that should be casted to native types.
@@ -51,6 +53,16 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
     }
 
     /* Query Scopes */

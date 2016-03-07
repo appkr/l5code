@@ -70,28 +70,61 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Seeded: article_tag table');
 
         /* Attachment */
-        App\Attachment::truncate();
+//        App\Attachment::truncate();
+//
+//        if (! File::isDirectory(attachments_path())) {
+//            File::makeDirectory(attachments_path(), 777, true);
+//        }
+//
+//        File::cleanDirectory(attachments_path());
+//
+//        $this->command->error('Downloading images from lorempixel. It takes time...');
+//
+//        $articles->each(function($article) use ($faker) {
+//            $path = $faker->image(attachments_path());
+//            $filename = File::basename($path);
+//            $bytes = File::size($path);
+//            $mime = File::mimeType($path);
+//            $this->command->warn("Creating file: {$filename}");
+//
+//            $article->attachments()->save(
+//                factory(App\Attachment::class)->make(compact('filename', 'bytes', 'mime'))
+//            );
+//        });
+//
+//        $this->command->info('Seeded: attachments table and files');
 
-        if (! File::isDirectory(attachments_path())) {
-            File::makeDirectory(attachments_path(), 777, true);
-        }
-
-        File::cleanDirectory(attachments_path());
-
-        $this->command->error('Downloading images from lorempixel. It takes time...');
-
-        $articles->each(function($article) use ($faker) {
-            $path = $faker->image(attachments_path());
-            $filename = File::basename($path);
-            $bytes = File::size($path);
-            $mime = File::mimeType($path);
-            $this->command->warn("Creating file: {$filename}");
-
-            $article->attachments()->save(
-                factory(App\Attachment::class)->make(compact('filename', 'bytes', 'mime'))
-            );
+        /* Comments */
+        $articles->each(function($article) {
+            $article->comments()->save(factory(App\Comment::class)->make());
+            $article->comments()->save(factory(App\Comment::class)->make());
         });
 
-        $this->command->info('Seeded: attachments table and files');
+        // Children comments
+        $articles->each(function($article) use ($faker){
+            $commentIds = App\Comment::pluck('id')->toArray();
+
+            foreach(range(1,5) as $index) {
+                $article->comments()->save(
+                    factory(App\Comment::class)->make([
+                        'parent_id' => $faker->randomElement($commentIds),
+                    ])
+                );
+            }
+        });
+
+        $this->command->info('Seeded: comments table');
+
+        /* Vote */
+        $comments = App\Comment::all();
+
+        $comments->each(function($comment) {
+            $comment->votes()->save(factory(App\Vote::class)->make());
+            $comment->votes()->save(factory(App\Vote::class)->make());
+            $comment->votes()->save(factory(App\Vote::class)->make());
+        });
+
+        $this->command->info('Seeded: votes table');
+
     }
 }

@@ -17,8 +17,9 @@ class AppServiceProvider extends ServiceProvider
             $allTags = \Cache::rememberForever('tags.list', function() {
                 return \App\Tag::all();
             });
+            $currentUser = auth()->user();
 
-            $view->with(compact('allTags'));
+            $view->with(compact('allTags', 'currentUser'));
         });
     }
 

@@ -7,8 +7,19 @@
     <div class="page-header">
       <h4>회원가입</h4>
       <p class="text-muted">
-        아래 양식을 채우세요.
+        깃허브 계정으로 로그인하면 회원가입이 필요없습니다.
       </p>
+    </div>
+
+    <div class="form-group">
+      <a class="btn btn-default btn-lg btn-block" href="{{ route('social.login', ['github']) }}">
+        <strong><i class="fa fa-github"></i> 깃허브 계정으로 로그인하기</strong>
+      </a>
+    </div>
+
+    <div class="login-or">
+      <hr class="hr-or">
+      <span class="span-or">or</span>
     </div>
 
     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">

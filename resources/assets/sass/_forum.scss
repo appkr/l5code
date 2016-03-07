@@ -89,6 +89,73 @@
   }
 }
 
+.media__edit__comment,
+.media__create__comment.sub {
+  display: none;
+}
+
+.form__new__comment,
+.list__comment {
+  .form-group {
+    width: 100%;
+    margin: auto;
+  }
+
+  div.text-right {
+    margin: 10px auto;
+  }
+}
+
+.content__comment {
+  p {
+    margin: 0;
+  }
+}
+
+.action__comment {
+  button, span {
+    color: $color_muted;
+    font-size: $font_size_small * 0.8;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  button {
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    color: darken($color_muted, 20%);
+    transition: all .2s ease-in-out
+  }
+
+  &>span {
+    margin: 0 5px;
+  }
+}
+
+.item__comment.top {
+  padding: 1rem;
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+  float: right;
+  width: 100%;
+  border: 1px solid $color_background;
+}
+
+.link__login__comment {
+  padding: 1rem;
+  border-radius: 3px;
+  border: 1px solid $color_background;
+  width: 100%;
+}
+
 .dropzone,
 .select2-dropdown,
 .select2-container--default .select2-selection--multiple,

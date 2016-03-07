@@ -42,6 +42,10 @@
           <i class="fa fa-list"></i> 글 목록
         </a>
       </div>
+
+      <div class="container__comment">
+        @include('comments.index')
+      </div>
     </div>
   </div>
 @stop

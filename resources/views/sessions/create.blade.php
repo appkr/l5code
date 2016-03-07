@@ -1,38 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-  <style>
-    .login-or {
-      position: relative;
-      font-size: 16px;
-      color: #aaa;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-    .span-or {
-      display: block;
-      position: absolute;
-      left: 50%;
-      top: -1px;
-      margin-left: -25px;
-      background-color: #FFF;
-      width: 50px;
-      text-align: center;
-    }
-    .hr-or {
-      background-color: #cdcdcd;
-      height: 1px;
-      margin-top: 0px !important;
-      margin-bottom: 0px !important;
-    }
-    .fa-github {
-      margin-right: 10px;
-    }
-  </style>
-@stop
-
 @section('content')
   <form action="{{ route('sessions.store') }}" method="POST" role="form" class="form__auth">
     {!! csrf_field() !!}

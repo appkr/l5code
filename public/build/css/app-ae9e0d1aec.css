@@ -8745,6 +8745,30 @@ hr {
     z-index: 2; }
   .form__auth input {
     margin-bottom: 10px; }
+  .form__auth .login-or {
+    position: relative;
+    font-size: 16px;
+    color: #aaa;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px; }
+  .form__auth .span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -1px;
+    margin-left: -25px;
+    background-color: #FFF;
+    width: 50px;
+    text-align: center; }
+  .form__auth .hr-or {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important; }
+  .form__auth .fa-github {
+    margin-right: 10px; }
 
 span.form-error {
   margin-top: 5px;
@@ -8754,7 +8778,8 @@ span.form-error {
   font-style: italic;
   font-weight: 100; }
 
-.form-control {
+.form-control:focus {
+  border-color: #ccc;
   box-shadow: none; }
 
 .sidebar__article ul {
@@ -8824,6 +8849,58 @@ span.form-error {
   max-width: 100%;
   margin: 0 auto;
   transition: all .2s ease-in-out; }
+
+.media__edit__comment,
+.media__create__comment.sub {
+  display: none; }
+
+.form__new__comment .form-group,
+.list__comment .form-group {
+  width: 100%;
+  margin: auto; }
+
+.form__new__comment div.text-right,
+.list__comment div.text-right {
+  margin: 10px auto; }
+
+.content__comment p {
+  margin: 0; }
+
+.action__comment button, .action__comment span {
+  color: #777;
+  font-size: 11.2px;
+  font-weight: 400;
+  text-decoration: none; }
+
+.action__comment button {
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0; }
+
+.action__comment button:hover,
+.action__comment button:active,
+.action__comment button:focus {
+  color: #444444;
+  transition: all .2s ease-in-out; }
+
+.action__comment > span {
+  margin: 0 5px; }
+
+.item__comment.top {
+  padding: 1rem;
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+  float: right;
+  width: 100%;
+  border: 1px solid #f5f5f5; }
+
+.link__login__comment {
+  padding: 1rem;
+  border-radius: 3px;
+  border: 1px solid #f5f5f5;
+  width: 100%; }
 
 .dropzone,
 .select2-dropdown,

@@ -13,6 +13,12 @@ Route::get('tags/{slug}/articles', [
     'uses' => 'ArticlesController@index',
 ]);
 Route::resource('attachments', 'AttachmentsController', ['only' => ['store', 'destroy']]);
+Route::resource('comments', 'CommentsController', ['only' => ['update', 'destroy']]);
+Route::resource('articles.comments', 'CommentsController', ['only' => 'store']);
+Route::post('comments/{comments}/votes', [
+    'as' => 'comments.vote',
+    'uses' => 'CommentsController@vote',
+]);
 
 /* Documentation */
 Route::get('docs/{file?}', 'DocsController@show');

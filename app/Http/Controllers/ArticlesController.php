@@ -68,21 +68,6 @@ class ArticlesController extends Controller
             });
         }
 
-//        if ($request->hasFile('files')) {
-//            $files = $request->file('files');
-//
-//            foreach($files as $file) {
-//                $filename = str_random().filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
-//                $file->move(attachments_path(), $filename);
-//
-//                $article->attachments()->create([
-//                    'filename' => $filename,
-//                    'bytes' => $file->getClientSize(),
-//                    'mime' => $file->getClientMimeType(),
-//                ]);
-//            }
-//        }
-
         event(new \App\Events\ArticlesEvent($article));
         flash()->success('작성하신 글을 저장했습니다.');
 
@@ -97,7 +82,9 @@ class ArticlesController extends Controller
      */
     public function show(\App\Article $article)
     {
-        return view('articles.show', compact('article'));
+        $comments = $article->comments()->with('replies')->whereNull('parent_id')->latest()->get();
+
+        return view('articles.show', compact('article', 'comments'));
     }
 
     /**

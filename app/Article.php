@@ -13,7 +13,8 @@ class Article extends Model
      */
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'user_id',
     ];
 
     /**
@@ -47,6 +48,11 @@ class Article extends Model
     public function attachments()
     {
         return $this->hasMany(Attachment::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     /* Accessors */
