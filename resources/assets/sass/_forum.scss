@@ -181,3 +181,11 @@
 label[for=my-dropzone]>small {
   cursor: pointer;
 }
+
+.preview__content {
+  display: none;
+  margin-top: $margin_narrow;
+  height: auto;
+  @extend .form-control;
+  box-shadow: none;
+}

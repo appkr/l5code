@@ -9,7 +9,7 @@ return [
     |
     */
     'cache' => function() {
-        return true;
+        return false;
 //        return ! env('APP_DEBUG', false);
 //        return app()->environment('production');
     },
@@ -29,12 +29,28 @@ return [
     | Tag 목록
     |--------------------------------------------------------------------------
     */
+//    'tags' => [
+//        'laravel' => '라라벨',
+//        'lumen' => '루멘',
+//        'general' => '자유의견',
+//        'server' => '서버',
+//        'tip' => '팁',
+//    ],
     'tags' => [
-        'laravel' => '라라벨',
-        'lumen' => '루멘',
-        'general' => '자유의견',
-        'server' => '서버',
-        'tip' => '팁',
+        'ko' => [
+            'laravel' => '라라벨',
+            'lumen' => '루멘',
+            'general' => '자유의견',
+            'server' => '서버',
+            'tip' => '팁',
+        ],
+        'en' => [
+            'laravel' => 'Laravel',
+            'lumen' => 'Lumen',
+            'general' => 'General',
+            'server' => 'Server',
+            'tip' => 'Tip',
+        ],
     ],
 
     /*
@@ -58,6 +74,17 @@ return [
     'sorting' => [
         'view_count' => '조회수',
         'created_at' => '작성일',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | 지원하는 언어 목록
+    |--------------------------------------------------------------------------
+    |
+    */
+    'locales' => [
+        'ko' => '한국어',
+        'en' => 'English',
     ],
 
 ];

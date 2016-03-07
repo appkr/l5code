@@ -62,12 +62,11 @@ class UsersEventListener
     public function onUserCreated(\App\Events\UserCreated $event)
     {
         $user = $event->user;
+        $view = 'emails.'.app()->getLocale().'.auth.confirm';
 
-        $this->mailer->send('emails.auth.confirm', compact('user'), function ($message) use ($user){
+        $this->mailer->send($view, compact('user'), function ($message) use ($user){
             $message->to($user->email);
-            $message->subject(
-                sprintf('[%s] 회원가입을 확인해주세요.', config('project.name'))
-            );
+            $message->subject(trans('emails.auth.confirm'));
         });
     }
 
@@ -78,11 +77,11 @@ class UsersEventListener
      */
     public function onPasswordRemindCreated(\App\Events\PasswordRemindCreated $event)
     {
-        $this->mailer->send('emails.passwords.reset', ['token' => $event->token], function ($message) use ($event) {
+        $view = 'emails.'.app()->getLocale().'.passwords.reset';
+
+        $this->mailer->send($view, ['token' => $event->token], function ($message) use ($event) {
             $message->to($event->email);
-            $message->subject(
-                sprintf('[%s] 비밀번호를 초기화하세요.', config('project.name'))
-            );
+            $message->subject(trans('emails.passwords.reset'));
         });
     }
 }

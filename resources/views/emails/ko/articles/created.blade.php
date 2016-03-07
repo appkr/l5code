@@ -7,7 +7,7 @@
 
 <p>
   {!! markdown($article->content) !!}
-  <small>{{ $article->created_at }}</small>
+  <small>{{ $article->created_at->timezone('Asia/Seoul') }}</small>
 </p>
 
 <hr/>

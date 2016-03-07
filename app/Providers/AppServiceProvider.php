@@ -13,15 +13,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($locale = request()->cookie('locale__myapp')) {
+            app()->setLocale(\Crypt::decrypt($locale));
+        }
+
+        \Carbon\Carbon::setLocale(app()->getLocale());
+
         view()->composer('*', function($view) {
             $allTags = \Cache::rememberForever('tags.list', function() {
                 return \App\Tag::all();
             });
             $currentUser = auth()->user();
             $sortCols = config('project.sorting');
+            $currentLocale = app()->getLocale();
+            $currentUrl = current_url();
 
-            $view->with(compact('allTags', 'currentUser', 'sortCols'));
-
+            $view->with(compact('allTags', 'currentUser', 'sortCols', 'currentLocale', 'currentUrl'));
         });
     }
 

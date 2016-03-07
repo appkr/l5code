@@ -8,11 +8,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class ArticlesEventListener
 {
     /**
-     * Create the event listener.
+     * @var \Illuminate\Contracts\Mail\Mailer
      */
-    public function __construct()
+    protected $mailer;
+
+    /**
+     * Create the event listener.
+     *
+     * @param \Illuminate\Contracts\Mail\Mailer $mailer
+     */
+    public function __construct(\Illuminate\Contracts\Mail\Mailer $mailer)
     {
-        //
+        $this->mailer = $mailer;
     }
 
     /**
@@ -22,11 +29,17 @@ class ArticlesEventListener
      */
     public function handle(\App\Events\ArticlesEvent $event)
     {
+        $article = $event->article;
+
         if ($event->action === 'created') {
-            \Log::info(sprintf(
-                '새로운 포럼 글이 등록되었습니다.: %s',
-                $event->article->title
-            ));
+            $view = 'emails.'.app()->getLocale().'.articles.created';
+
+            $this->mailer->send($view, compact('article'), function ($message) {
+                $message->to(config('mail.from.address'));
+                $message->subject(trans('emails.articles.created'));
+            });
+
+//            \Log::info(trans('emails.articles.created', ['title' => $event->article->title]));
         }
     }
 }

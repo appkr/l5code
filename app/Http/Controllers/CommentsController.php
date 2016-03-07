@@ -30,8 +30,9 @@ class CommentsController extends Controller
             ['user_id' => $request->user()->id]
         ));
 
+        event(new \App\Events\ModelChanged(['articles']));
         event(new \App\Events\CommentsEvent($comment));
-        flash()->success('작성하신 댓글을 저장했습니다.');
+        flash()->success(trans('forum.comments.success_writing'));
 
         return redirect(route('articles.show', $article->id).'#comment_'.$comment->id);
     }
@@ -46,6 +47,8 @@ class CommentsController extends Controller
     public function update(\App\Http\Requests\CommentsRequest $request, \App\Comment $comment)
     {
         $comment->update($request->all());
+
+        event(new \App\Events\ModelChanged(['articles']));
 
         return redirect(route('articles.show', $comment->commentable->id).'#comment_'.$comment->id);
     }
@@ -64,6 +67,8 @@ class CommentsController extends Controller
             $comment->votes()->delete();
             $comment->forceDelete();
         }
+
+        event(new \App\Events\ModelChanged(['articles']));
 
         return response()->json([], 204);
     }

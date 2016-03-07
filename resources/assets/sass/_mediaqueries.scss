@@ -1,0 +1,23 @@
+@media screen and (max-width: $screen_md_max) {
+  .action__article {
+    margin-bottom: 1rem;
+  }
+
+  .sidebar__article {
+    margin-bottom: $margin_narrow;
+  }
+
+  .item__comment {
+    &>a.pull-left {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: $screen_sm_max) {
+
+}
+
+@media screen and (max-width: $screen_xs_max) {
+
+}

@@ -39,11 +39,11 @@ class CommentsEventListener
             return;
         }
 
-        $this->mailer->send('emails.comments.created', compact('comment'), function ($message) use ($to) {
+        $view = 'emails.'.app()->getLocale().'.comments.created';
+
+        $this->mailer->send($view, compact('comment'), function ($message) use ($to) {
             $message->to($to);
-            $message->subject(
-                sprintf('[%s] 새로운 댓글이 등록되었습니다.', config('project.name'))
-            );
+            $message->subject(trans('emails.comments.created'));
         });
     }
 

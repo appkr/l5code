@@ -69,7 +69,8 @@ class User extends Authenticatable
 
     public function scopeSocialUser($query, $email)
     {
-        return $query->whereEmail($email)->where('password', '')->orWhereNull('password');
+//        return $query->whereEmail($email)->where('password', '')->orWhereNull('password');
+        return $query->whereEmail($email)->whereNull('password');
     }
 
     /* Accessor */

@@ -3,8 +3,8 @@
 @section('content')
   <div class="page-header">
     <h4>
-      <a href="{{ route('articles.index') }}">포럼</a>
-      <small> / 글 수정 / {{ $article->title }}</small>
+      <a href="{{ route('articles.index') }}">{{ trans('forum.title') }}</a>
+      <small> / {{ trans('forum.articles.edit') }} / {{ $article->title }}</small>
     </h4>
   </div>
 
@@ -16,7 +16,7 @@
 
     <div class="form-group text-center">
       <button type="submit" class="btn btn-primary">
-        수정하기
+        {{ trans('forum.articles.update') }}
       </button>
     </div>
   </form>

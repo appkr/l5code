@@ -83,7 +83,7 @@ class ArticlesController extends Controller implements Cacheable
         $article = $request->user()->articles()->create($payload);
 
         if (! $article) {
-            flash()->error('작성하신 글을 저장하지 못했습니다.');
+            flash()->error(trans('forum.articles.error_writing'));
 
             return back()->withInput();
         }
@@ -100,7 +100,7 @@ class ArticlesController extends Controller implements Cacheable
 
         event(new \App\Events\ArticlesEvent($article));
         event(new \App\Events\ModelChanged(['articles']));
-        flash()->success('작성하신 글을 저장했습니다.');
+        flash()->success(trans('forum.articles.success_writing'));
 
         return redirect(route('articles.show', $article->id));
     }
@@ -157,7 +157,7 @@ class ArticlesController extends Controller implements Cacheable
         $article->tags()->sync($request->input('tags'));
 
         event(new \App\Events\ModelChanged(['articles']));
-        flash()->success('수정하신 내용을 저장했습니다.');
+        flash()->success(trans('forum.articles.success_updating'));
 
         return redirect(route('articles.show', $article->id));
     }

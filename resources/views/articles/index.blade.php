@@ -5,19 +5,19 @@
 
   <div class="page-header">
     <h4>
-      <a href="{{ route('articles.index') }}">포럼</a>
-      <small> / 글 목록</small>
+      <a href="{{ route('articles.index') }}">{{ trans('forum.title') }}</a>
+      <small> / {{ trans('forum.articles.index') }}</small>
     </h4>
   </div>
 
   <div class="text-right action__article">
     <a href="{{ route('articles.create') }}" class="btn btn-primary">
-      <i class="fa fa-plus-circle"></i> 글 쓰기
+      <i class="fa fa-plus-circle"></i> {{ trans('forum.articles.create') }}
     </a>
     <div class="btn-group sort__article">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-sort"></i>
-        목록 정렬
+        {{ trans('forum.articles.sort') }}
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
@@ -42,7 +42,7 @@
         @forelse($articles as $article)
           @include('articles.partial.article', compact('article'))
         @empty
-          <p class="text-center text-danger">글이 없습니다.</p>
+          <p class="text-center text-danger">{{ trans('forum.articles.empty') }}</p>
         @endforelse
       </article>
 

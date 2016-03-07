@@ -5,7 +5,7 @@
 
   <div class="page-header">
     <h4>
-      <a href="{{ route('articles.index') }}">포럼</a>
+      <a href="{{ route('articles.index') }}">{{ trans('forum.title') }}</a>
       <small> / {{ $article->title }}</small>
     </h4>
   </div>
@@ -31,16 +31,16 @@
       <div class="form-group text-right action__article">
         @can('update', $article)
           <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-info">
-            <i class="fa fa-pencil"></i> 글 수정
+            <i class="fa fa-pencil"></i> {{ trans('forum.articles.edit') }}
           </a>
         @endcan
         @can('delete', $article)
           <button class="btn btn-danger button__delete">
-            <i class="fa fa-trash-o"></i> 글 삭제
+            <i class="fa fa-trash-o"></i> {{ trans('forum.articles.destroy') }}
           </button>
         @endcan
         <a href="{{ route('articles.index') }}" class="btn btn-default">
-          <i class="fa fa-list"></i> 글 목록
+          <i class="fa fa-list"></i> {{ trans('forum.articles.index') }}
         </a>
       </div>
 
@@ -56,7 +56,7 @@
     $('.button__delete').on('click', function(e) {
       var articleId = $('article').data('id');
 
-      if (confirm('글을 삭제합니다.')) {
+      if (confirm('{{ trans('forum.articles.deleting') }}')) {
         $.ajax({
           type: 'DELETE',
           url: '/articles/' + articleId

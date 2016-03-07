@@ -14,7 +14,7 @@ class PasswordsControllerTest extends AuthHelper
         $this->remind()
             ->seeInDatabase('password_resets', ['email' => $this->user->email])
             ->seePageIs('/')
-            ->see('비밀번호를 바꾸는 방법을 담은 이메일을 발송했습니다. 메일박스를 확인해 주세요.');
+            ->see(trans('auth.passwords.sent_reminder'));
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class PasswordsControllerTest extends AuthHelper
         $this->reset()
             ->notSeeInDatabase('password_resets', ['email' => $this->user->email])
             ->seePageIs('/')
-            ->see('비밀번호를 바꾸었습니다. 새로운 비밀번호로 로그인하세요.');
+            ->see(trans('auth.passwords.success_reset'));
     }
 
     /** @test */
@@ -53,6 +53,6 @@ class PasswordsControllerTest extends AuthHelper
         $this->createTestStub();
 
         $this->reset(['token' => str_random(64)])
-            ->see('URL이 정확하지 않습니다.');
+            ->see(trans('auth.passwords.error_wrong_url'));
     }
 }

@@ -7,11 +7,14 @@
       <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
         <textarea name="content" class="form-control">{{ old('content', $comment->content) }}</textarea>
         {!! $errors->first('content', '<span class="form-error">:message</span>') !!}
+        <div class="preview__content">
+          {!! markdown(old('content', '...')) !!}
+        </div>
       </div>
 
       <div class="text-right">
         <button type="submit" class="btn btn-primary btn-sm">
-          수정하기
+          {{ trans('forum.comments.update') }}
         </button>
       </div>
     </form>

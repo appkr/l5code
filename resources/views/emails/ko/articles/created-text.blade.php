@@ -3,7 +3,7 @@
 ---
 
 {{ $article->content }}
-{{ $article->created_at }}에 작성됨
+{{ $article->created_at->timezone('Asia/Seoul') }}에 작성됨
 
 ---
 

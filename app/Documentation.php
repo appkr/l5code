@@ -56,7 +56,7 @@ class Documentation
         $path = base_path($dir . DIRECTORY_SEPARATOR . $file);
 
         if (! File::exists($path)) {
-            abort(404, '요청하신 파일이 없습니다.');
+            abort(404, trans('docs.messages.not_found'));
         }
 
         return $path;

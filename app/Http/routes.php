@@ -6,6 +6,12 @@ Route::get('/', [
     'uses' => 'WelcomeController@index',
 ]);
 
+/* Locale */
+Route::get('locale', [
+    'as' => 'locale',
+    'uses' => 'WelcomeController@locale',
+]);
+
 /* Forum */
 Route::resource('articles', 'ArticlesController');
 Route::get('tags/{slug}/articles', [

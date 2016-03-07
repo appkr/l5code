@@ -15,20 +15,28 @@
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
       <ul class="nav navbar-nav">
         <li>
-          <a href="/">홈</a>
+          <a href="/">
+            {{ trans('master.home') }}
+          </a>
         </li>
         <li>
-          <a href="{{ route('articles.index') }}">포럼</a>
+          <a href="{{ route('articles.index') }}">
+            {{ trans('forum.title') }}
+          </a>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         @if (auth()->guest())
           <li>
-            <a href="{{ route('sessions.create') }}">로그인</a>
+            <a href="{{ route('sessions.create') }}">
+              {{ trans('auth.sessions.title') }}
+            </a>
           </li>
           <li>
-            <a href="{{ route('users.create') }}">회원가입</a>
+            <a href="{{ route('users.create') }}">
+              {{ trans('auth.users.title') }}
+            </a>
           </li>
         @else
           <li class="dropdown">

@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <header class="page-header">
-      <h2>마크다운 뷰어</h2>
+      <h2>{{ trans('docs.title') }}</h2>
     </header>
 
     <div class="row">

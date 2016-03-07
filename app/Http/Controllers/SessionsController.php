@@ -38,20 +38,20 @@ class SessionsController extends Controller
         ]);
 
         if (! auth()->attempt($request->only('email', 'password'), $request->has('remember'))) {
-            if (\App\User::socialUser($request->get('email'))->first()) {
-                return $this->respondError('회원가입하지 않으셨습니다. 지난번엔 깃허브로 로그인하셨어요.');
+            if (\App\User::socialUser($request->input('email'))->first()) {
+                return $this->respondError(trans('auth.sessions.error_social_user'));
             }
 
-            return $this->respondError('이메일 또는 비밀번호가 맞지 않습니다.');
+            return $this->respondError(trans('auth.sessions.error_incorrect_credentials'));
         }
 
         if (! auth()->user()->activated) {
             auth()->logout();
 
-            return $this->respondError('가입확인해 주세요.');
+            return $this->respondError(trans('auth.sessions.error_not_confirmed'));
         }
 
-        return $this->respondCreated(auth()->user()->name . '님, 환영합니다.');
+        return $this->respondCreated(trans('auth.sessions.info_welcome', ['name' => auth()->user()->name]));
     }
 
     /**
@@ -63,7 +63,7 @@ class SessionsController extends Controller
     {
         auth()->logout();
 
-        flash('또 방문해 주세요.');
+        flash(trans('auth.sessions.info_bye'));
 
         return redirect('/');
     }

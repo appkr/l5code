@@ -49,10 +49,7 @@ class SocialController extends Controller
      */
     protected function handleProviderCallback($provider)
     {
-        // Laravel\Socialite\Two\User
         $user = \Socialite::driver($provider)->user();
-
-//        dd($user);
 
         $user = (\App\User::whereEmail($user->getEmail())->first())
             ?: \App\User::create([
@@ -62,7 +59,7 @@ class SocialController extends Controller
             ]);
 
         auth()->login($user);
-        flash(auth()->user()->name . '님, 환영합니다.');
+        flash(trans('auth.sessions.info_welcome', ['name' => auth()->user()->name]));
 
         return redirect('/');
     }

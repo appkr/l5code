@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h4>댓글</h4>
+  <h4>{{ trans('forum.comments.title') }}</h4>
 </div>
 
 <div class="form__new__comment">
@@ -30,7 +30,7 @@
       var commentId = $(this).closest('.item__comment').data('id'),
         articleId = $('#item__article').data('id');
 
-      if (confirm('댓글을 삭제합니다.')) {
+      if (confirm('{{ trans('forum.comments.deleting') }}')) {
         $.ajax({
           type: 'POST',
           url: "/comments/" + commentId,
