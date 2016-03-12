@@ -15,6 +15,8 @@ class ArticlesController extends Controller
     {
         $articles = \App\Article::latest()->paginate(3);
 
+//        dd(view('articles.index', compact('articles'))->render());
+
         return view('articles.index', compact('articles'));
     }
 
@@ -42,14 +44,6 @@ class ArticlesController extends Controller
             return back()->with('flash_message', '글이 저장되지 않았습니다.')->withInput();
         }
 
-//        var_dump('이벤트를 던집니다.');
-//        event('article.created', [$article]);
-//        var_dump('이벤트를 던졌습니다.');
-
-//        var_dump('이벤트를 던집니다.');
-//        event(new \App\Events\ArticleCreated($article));
-//        var_dump('이벤트를 던졌습니다.');
-
         event(new \App\Events\ArticlesEvent($article));
 
         return redirect(route('articles.index'))->with('flash_message', '작성하신 글이 저장되었습니다.');
@@ -63,7 +57,13 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        return __METHOD__ . '은(는) 다음 기본 키를 가진 Article 모델을 조회합니다.:' . $id;
+//        echo $foo;
+
+        $article = \App\Article::findOrFail($id);
+
+//        dd($article);
+
+        return $article->toArray();
     }
 
     /**
