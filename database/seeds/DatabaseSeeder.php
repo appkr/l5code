@@ -11,11 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (config('database.default') !== 'sqlite') {
+        $sqlite = in_array(config('database.default'), ['sqlite', 'testing']);
+
+        if (! $sqlite) {
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
         }
-
-//        Model::unguard();
 
         App\User::truncate();
         $this->call(UsersTableSeeder::class);
@@ -23,9 +23,7 @@ class DatabaseSeeder extends Seeder
         App\Article::truncate();
         $this->call(ArticlesTableSeeder::class);
 
-//        Model::reguard();
-
-        if (config('database.default') !== 'sqlite') {
+        if (! $sqlite) {
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
         }
     }
