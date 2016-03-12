@@ -7,7 +7,7 @@ use File;
 class Documentation
 {
     /**
-     * 주어진 파일의 내용을 조회한다.
+     * Read content of given markdown file.
      *
      * @param string $file
      * @return string
@@ -24,7 +24,7 @@ class Documentation
     }
 
     /**
-     * 주어진 파일의 절대 경로를 계산한다.
+     * Generate path of the given file.
      *
      * @param $file
      * @return string
@@ -37,7 +37,7 @@ class Documentation
     }
 
     /**
-     * 링크에 포함된 불필요한 문자열을 제거한다.
+     * Replace unnecessary string in link.
      *
      * @param $content
      * @return string
