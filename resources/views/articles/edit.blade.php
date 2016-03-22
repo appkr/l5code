@@ -12,7 +12,7 @@
     {!! csrf_field() !!}
     {!! method_field('PUT') !!}
 
-    @include('articles.partial.form')
+    @include('articles.partial.form', ['viewName' => 'articles.edit'])
 
     <div class="form-group text-center">
       <button type="submit" class="btn btn-primary">

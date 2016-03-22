@@ -1,8 +1,3 @@
-{{--@php
-  $currentUser = auth()->user();
-  $comments = $article->comments;
-@endphp--}}
-
 <div class="page-header">
   <h4>댓글</h4>
 </div>
@@ -20,6 +15,8 @@
     @include('comments.partial.comment', [
       'parentId' => $comment->id,
       'isReply' => false,
+      'hasChild' => $comment->replies->count(),
+      'isTrashed' => $comment->trashed(),
     ])
   @empty
   @endforelse
@@ -31,7 +28,7 @@
     // Send delete a comment request to the server
     $('.btn__delete__comment').on('click', function(e) {
       var commentId = $(this).closest('.item__comment').data('id'),
-        articleId = $('article').data('id');
+        articleId = $('#item__article').data('id');
 
       if (confirm('댓글을 삭제합니다.')) {
         $.ajax({

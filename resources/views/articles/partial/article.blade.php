@@ -13,9 +13,14 @@
         <i class="fa fa-user"></i> {{ $article->user->name }}
       </a>
 
-      <span class="icon__article">
-        <i class="fa fa-clock-o"></i> {{ $article->created_at->diffForHumans() }}
-      </span>
+      <small>
+        / {{ $article->created_at->diffForHumans() }}에 작성
+        • 조회수 {{ $article->view_count }}
+
+        @if ($article->comment_count > 0)
+          • 댓글 {{ $article->comment_count }}
+        @endif
+      </small>
     </p>
 
     @if ($viewName === 'articles.show')

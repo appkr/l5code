@@ -11,7 +11,7 @@
   <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data" class="form__article">
     {!! csrf_field() !!}
 
-    @include('articles.partial.form')
+    @include('articles.partial.form', ['viewName' => 'articles.create'])
 
     <div class="form-group text-center">
       <button type="submit" class="btn btn-primary">

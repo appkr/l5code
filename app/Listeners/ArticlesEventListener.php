@@ -17,6 +17,8 @@ class ArticlesEventListener
 
     /**
      * Handle the event.
+     *
+     * @param \App\Events\ArticlesEvent $event
      */
     public function handle(\App\Events\ArticlesEvent $event)
     {

@@ -4,28 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class ArticlesController extends Controller implements Cacheable
 {
     /**
      * ArticlesController constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+    /**
+     * Specify the tags for caching.
+     *
+     * @return string
+     */
+    public function cacheKeys()
+    {
+        return 'articles';
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request $request
+     * @param null                     $slug
      * @return \Illuminate\Http\Response
      */
-    public function index($slug = null)
+    public function index(Request $request, $slug = null)
     {
+        $cacheKey = cache_key('articles.index');
+
         $query = $slug
             ? \App\Tag::whereSlug($slug)->firstOrFail()->articles()
             : new \App\Article;
 
-        $articles = $query->latest()->paginate(3);
+        $query = $query->orderBy(
+            $request->input('sort', 'created_at'),
+            $request->input('order', 'desc')
+        );
+
+        if ($keyword = request()->input('q')) {
+            $raw = 'MATCH(title,content) AGAINST(? IN BOOLEAN MODE)';
+            $query = $query->whereRaw($raw, [$keyword]);
+        }
+
+//        $articles = $query->paginate(3);
+        $articles = $this->cache($cacheKey, 5, $query, 'paginate', 3);
 
         return view('articles.index', compact('articles'));
     }
@@ -50,7 +76,11 @@ class ArticlesController extends Controller
      */
     public function store(\App\Http\Requests\ArticlesRequest $request)
     {
-        $article = $request->user()->articles()->create($request->all());
+        $payload = array_merge($request->all(), [
+            'notification' => $request->has('notification'),
+        ]);
+
+        $article = $request->user()->articles()->create($payload);
 
         if (! $article) {
             flash()->error('작성하신 글을 저장하지 못했습니다.');
@@ -69,6 +99,7 @@ class ArticlesController extends Controller
         }
 
         event(new \App\Events\ArticlesEvent($article));
+        event(new \App\Events\ModelChanged(['articles']));
         flash()->success('작성하신 글을 저장했습니다.');
 
         return redirect(route('articles.show', $article->id));
@@ -82,7 +113,16 @@ class ArticlesController extends Controller
      */
     public function show(\App\Article $article)
     {
-        $comments = $article->comments()->with('replies')->whereNull('parent_id')->latest()->get();
+        $article->view_count += 1;
+        $article->save();
+
+//        $comments = $article->comments()->with('replies')->withTrashed()
+//            ->whereNull('parent_id')->latest()->get();
+
+        $cacheKey = cache_key('articles.'.$article->id.'.comments');
+        $query = $article->comments()->with('replies')->withTrashed()
+            ->whereNull('parent_id')->latest();
+        $comments = $this->cache($cacheKey, 5, $query, 'get');
 
         return view('articles.show', compact('article', 'comments'));
     }
@@ -109,9 +149,14 @@ class ArticlesController extends Controller
      */
     public function update(\App\Http\Requests\ArticlesRequest $request, \App\Article $article)
     {
-        $article->update($request->all());
+        $payload = array_merge($request->all(), [
+            'notification' => $request->has('notification'),
+        ]);
+
+        $article->update($payload);
         $article->tags()->sync($request->input('tags'));
 
+        event(new \App\Events\ModelChanged(['articles']));
         flash()->success('수정하신 내용을 저장했습니다.');
 
         return redirect(route('articles.show', $article->id));
@@ -127,8 +172,10 @@ class ArticlesController extends Controller
      */
     public function destroy(Request $request, \App\Article $article)
     {
-        $this->authorize('update', $article);
+        $this->authorize('delete', $article);
         $article->delete();
+
+        event(new \App\Events\ModelChanged(['articles']));
 
         return response()->json([], 204);
     }

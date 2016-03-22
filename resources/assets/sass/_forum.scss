@@ -29,6 +29,10 @@
     float: right;
     margin-right: 1rem;
   }
+
+  form {
+    margin-bottom: 30px;
+  }
 }
 
 .tags__article,
@@ -151,6 +155,7 @@
 
 .link__login__comment {
   padding: 1rem;
+  margin-bottom: 1rem;
   border-radius: 3px;
   border: 1px solid $color_background;
   width: 100%;

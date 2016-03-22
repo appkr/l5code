@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +18,7 @@ class Article extends Model
         'title',
         'content',
         'user_id',
+        'notification',
     ];
 
     /**
@@ -22,7 +26,18 @@ class Article extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        'deleted_at',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The relations to eager load on every query.
@@ -56,6 +71,11 @@ class Article extends Model
     }
 
     /* Accessors */
+
+    public function getCommentCountAttribute()
+    {
+        return (int) $this->comments->count();
+    }
 
 //    public function getContentAttribute($value)
 //    {

@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-//    use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,7 @@ class Comment extends Model
         'commentable_type',
         'commentable_id',
         'parent_id',
-//        'deleted_at',
+        'deleted_at',
     ];
 
     /**
@@ -40,9 +40,9 @@ class Comment extends Model
      *
      * @var array
      */
-//    protected $dates = [
-//        'deleted_at'
-//    ];
+    protected $dates = [
+        'deleted_at'
+    ];
 
     /**
      * The relations to eager load on every query.
