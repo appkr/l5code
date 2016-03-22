@@ -60,6 +60,29 @@ class ArticlesController extends Controller
 
         $article->tags()->sync($request->input('tags'));
 
+        if ($request->has('attachments')) {
+            $attachments = \App\Attachment::whereIn('id', $request->input('attachments'))->get();
+            $attachments->each(function ($attachment) use ($article) {
+                $attachment->article()->associate($article);
+                $attachment->save();
+            });
+        }
+
+//        if ($request->hasFile('files')) {
+//            $files = $request->file('files');
+//
+//            foreach($files as $file) {
+//                $filename = str_random().filter_var($file->getClientOriginalName(), FILTER_SANITIZE_URL);
+//                $file->move(attachments_path(), $filename);
+//
+//                $article->attachments()->create([
+//                    'filename' => $filename,
+//                    'bytes' => $file->getClientSize(),
+//                    'mime' => $file->getClientMimeType(),
+//                ]);
+//            }
+//        }
+
         event(new \App\Events\ArticlesEvent($article));
         flash()->success('작성하신 글을 저장했습니다.');
 

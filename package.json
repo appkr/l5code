@@ -2,6 +2,7 @@
   "private": true,
   "devDependencies": {
     "bootstrap-sass": "^3.3.6",
+    "dropzone": "^4.3.0",
     "font-awesome": "^4.5.0",
     "gulp": "^3.9.1",
     "highlightjs": "^8.7.0",

@@ -6,13 +6,13 @@ Route::get('/', [
     'uses' => 'WelcomeController@index',
 ]);
 
-
 /* Forum */
 Route::resource('articles', 'ArticlesController');
 Route::get('tags/{slug}/articles', [
     'as' => 'tags.articles.index',
     'uses' => 'ArticlesController@index',
 ]);
+Route::resource('attachments', 'AttachmentsController', ['only' => ['store', 'destroy']]);
 
 /* Documentation */
 Route::get('docs/{file?}', 'DocsController@show');

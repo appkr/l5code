@@ -19,6 +19,6 @@ class ArticlesTableSeeder extends Seeder
 //            );
 //        });
 
-        factory(App\Article::class, 50)->create();
+        factory(App\Article::class, 10)->create();
     }
 }

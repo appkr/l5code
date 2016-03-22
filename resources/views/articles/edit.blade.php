@@ -8,7 +8,7 @@
     </h4>
   </div>
 
-  <form action="{{ route('articles.update', $article->id) }}" method="POST" class="form__article">
+  <form action="{{ route('articles.update', $article->id) }}" method="POST" enctype="multipart/form-data" class="form__article">
     {!! csrf_field() !!}
     {!! method_field('PUT') !!}
 

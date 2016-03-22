@@ -5,6 +5,7 @@
 _ide_helper*
 .phpstorm.meta.php
 /docs
+/public/files
 /public/css
 /public/js
 /resources/assets/css

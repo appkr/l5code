@@ -8,7 +8,7 @@
     </h4>
   </div>
 
-  <form action="{{ route('articles.store') }}" method="POST" class="form__article">
+  <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data" class="form__article">
     {!! csrf_field() !!}
 
     @include('articles.partial.form')

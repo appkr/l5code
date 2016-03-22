@@ -19,6 +19,7 @@ elixir(function(mix) {
     '../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
     '../../../node_modules/highlightjs/highlight.pack.js',
     '../../../node_modules/select2/dist/js/select2.js',
+    '../../../node_modules/dropzone/dist/dropzone.js',
     'app.js'
   ], 'public/js/app.js');
 
