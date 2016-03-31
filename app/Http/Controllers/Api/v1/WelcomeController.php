@@ -9,7 +9,7 @@ class WelcomeController extends \App\Http\Controllers\Controller
      */
     public function index()
     {
-        return response()->json([
+        return json([
             'name'    => config('project.name').' API',
             'message' => 'This is a base endpoint of v1 API.',
             'links'   => [
@@ -18,10 +18,14 @@ class WelcomeController extends \App\Http\Controllers\Controller
                     'href' => route(\Route::currentRouteName())
                 ],
                 [
-                    'rel'  => 'api.v1.articles',
+                    'rel'  => 'api.v1.articles.index',
                     'href' => route('api.v1.articles.index')
                 ],
+                [
+                    'rel'  => 'api.v1.tags.index',
+                    'href' => route('api.v1.tags.index')
+                ],
             ],
-        ], 200, [], JSON_PRETTY_PRINT);
+        ]);
     }
 }

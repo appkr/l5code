@@ -11,7 +11,7 @@ class AttachmentsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']]);
     }
 
     /**
@@ -53,7 +53,6 @@ class AttachmentsController extends Controller
      */
     public function destroy(\App\Attachment $attachment)
     {
-//        $attachment = \App\Attachment::findOrFail($id);
         $path = attachments_path($attachment->name);
 
         if (\File::exists($path)) {

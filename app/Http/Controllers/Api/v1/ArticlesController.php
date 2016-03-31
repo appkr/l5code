@@ -12,14 +12,17 @@ class ArticlesController extends ParentController
      */
     public function __construct()
     {
-//        $this->middleware('auth.basic.once', ['except' => ['index', 'show']]);
-        $this->middleware('jwt.auth', ['except' => ['index', 'show']]);
+        $this->middleware('jwt.auth', ['except' => ['index', 'show', 'tags']]);
         parent::__construct();
     }
 
     public function tags()
     {
-        return \App\Tag::all();
+//        return \App\Tag::all();
+        return json()->withCollection(
+            \App\Tag::all(),
+            new \App\Transformers\TagTransformer
+        );
     }
 
     /**
@@ -28,7 +31,12 @@ class ArticlesController extends ParentController
      */
     protected function respondCollection(LengthAwarePaginator $articles)
     {
-        return $articles->toJson(JSON_PRETTY_PRINT);
+//        return $articles->toJson(JSON_PRETTY_PRINT);
+//        return (new \App\Transformers\ArticleTransformerBasic)->withPagination($articles);
+        return json()->withPagination(
+            $articles,
+            new \App\Transformers\ArticleTransformer
+        );
     }
 
     /**
@@ -37,12 +45,15 @@ class ArticlesController extends ParentController
      */
     protected function respondCreated(\App\Article $article)
     {
-        return response()->json(
-            ['success' => 'created'],
-            201,
-            ['Location' => route('api.v1.articles.show', $article->id)],
-            JSON_PRETTY_PRINT
-        );
+//        return response()->json(
+//            ['success' => 'created'],
+//            201,
+//            ['Location' => route('api.v1.articles.show', $article->id)],
+//            JSON_PRETTY_PRINT
+//        );
+        return json()->setHeaders([
+            'Location' => route('api.v1.articles.show', $article->id)
+        ])->created('created');
     }
 
     /**
@@ -52,7 +63,12 @@ class ArticlesController extends ParentController
      */
     protected function respondInstance(\App\Article $article, \Illuminate\Database\Eloquent\Collection $comments)
     {
-        return $article->toJson(JSON_PRETTY_PRINT);
+//        return $article->toJson(JSON_PRETTY_PRINT);
+//        return (new \App\Transformers\ArticlesTransformerBasic)->withItem($article);
+        return json()->withItem(
+            $article,
+            new \App\Transformers\ArticleTransformer
+        );
     }
 
     /**
@@ -61,8 +77,9 @@ class ArticlesController extends ParentController
      */
     protected function respondUpdated(\App\Article $article)
     {
-        return response()->json([
-            'success' => 'updated'
-        ], 200, [], JSON_PRETTY_PRINT);
+//        return response()->json([
+//            'success' => 'updated'
+//        ], 200, [], JSON_PRETTY_PRINT);
+        return json()->success('updated');
     }
 }

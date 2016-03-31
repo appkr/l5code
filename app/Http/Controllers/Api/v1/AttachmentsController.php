@@ -11,7 +11,7 @@ class AttachmentsController extends ParentController
      */
     public function __construct()
     {
-        $this->middleware('jwt.auth', ['except' => 'index']);
+        $this->middleware('jwt.auth', ['except' => ['index']]);
         parent::__construct();
     }
 
@@ -23,6 +23,10 @@ class AttachmentsController extends ParentController
      */
     public function index(\App\Article $article)
     {
-        return $article->attachments()->toJson(JSON_PRETTY_PRINT);
+//        return $article->attachments()->toJson(JSON_PRETTY_PRINT);
+        return json()->withCollection(
+            $article->attachments,
+            new \App\Transformers\AttachmentTransformer
+        );
     }
 }

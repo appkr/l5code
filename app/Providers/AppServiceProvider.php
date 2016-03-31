@@ -13,6 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (is_api_domain() and request()->getLanguages()) {
+            $preferred = request()->getPreferredLanguage();
+            $locale = str_contains($preferred, 'ko') ? 'ko' : 'en';
+            app()->setLocale($locale);
+        }
+
         if ($locale = request()->cookie('locale__myapp')) {
             app()->setLocale(\Crypt::decrypt($locale));
         }

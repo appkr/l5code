@@ -12,7 +12,7 @@ class ArticlesController extends Controller implements Cacheable
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'tags']]);
     }
 
     /**
