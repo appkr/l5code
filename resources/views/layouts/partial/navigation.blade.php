@@ -29,12 +29,12 @@
       <ul class="nav navbar-nav navbar-right">
         @if (auth()->guest())
           <li>
-            <a href="{{ route('sessions.create') }}">
+            <a href="{{ route('sessions.create', ['return' => urlencode($currentUrl)]) }}">
               {{ trans('auth.sessions.title') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('users.create') }}">
+            <a href="{{ route('users.create', ['return' => urlencode($currentUrl)]) }}">
               {{ trans('auth.users.title') }}
             </a>
           </li>

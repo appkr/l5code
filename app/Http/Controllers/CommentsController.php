@@ -32,9 +32,8 @@ class CommentsController extends Controller
 
         event(new \App\Events\ModelChanged(['articles']));
         event(new \App\Events\CommentsEvent($comment));
-        flash()->success(trans('forum.comments.success_writing'));
 
-        return redirect(route('articles.show', $article->id).'#comment_'.$comment->id);
+        return $this->respondCreated($article, $comment);
     }
 
     /**
@@ -50,7 +49,7 @@ class CommentsController extends Controller
 
         event(new \App\Events\ModelChanged(['articles']));
 
-        return redirect(route('articles.show', $comment->commentable->id).'#comment_'.$comment->id);
+        return $this->respondUpdated($comment);
     }
 
     /**
@@ -103,5 +102,30 @@ class CommentsController extends Controller
             'voted' => $request->input('vote'),
             'value' => $comment->votes()->sum($request->input('vote')),
         ]);
+    }
+
+    /* Response Methods */
+
+    /**
+     * @param \App\Article $article
+     * @param $comment
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondCreated(\App\Article $article, $comment)
+    {
+        flash()->success(trans('forum.comments.success_writing'));
+
+        return redirect(route('articles.show', $article->id) . '#comment_' . $comment->id);
+    }
+
+    /**
+     * @param \App\Comment $comment
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondUpdated(\App\Comment $comment)
+    {
+        flash()->success(trans('forum.comments.success_updating'));
+
+        return redirect(route('articles.show', $comment->commentable->id) . '#comment_' . $comment->id);
     }
 }

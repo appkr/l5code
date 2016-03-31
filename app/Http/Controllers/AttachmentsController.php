@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 class AttachmentsController extends Controller
 {
     /**
+     * AttachmentsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

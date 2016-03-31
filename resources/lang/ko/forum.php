@@ -51,6 +51,7 @@ return [
         'dislike' => '싫어요',
         'ask_login' => '<a href=":url">로그인</a>하면 댓글을 쓸 수 있습니다.',
         'success_writing' => '작성하신 글을 저장했습니다.',
+        'success_updating' => '수정하신 내용을 저장했습니다.',
     ],
 
     'tags' => [

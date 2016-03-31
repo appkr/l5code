@@ -91,6 +91,8 @@ class SessionsController extends Controller
     {
         flash($message);
 
-        return redirect()->intended();
+        return ($return = request('return'))
+            ? redirect(urldecode($return))
+            : redirect()->intended();
     }
 }

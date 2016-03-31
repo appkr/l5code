@@ -29,7 +29,7 @@ class ArticlesController extends Controller implements Cacheable
      * Display a listing of the resource.
      *
      * @param \Illuminate\Http\Request $request
-     * @param null                     $slug
+     * @param null $slug
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $slug = null)
@@ -50,10 +50,9 @@ class ArticlesController extends Controller implements Cacheable
             $query = $query->whereRaw($raw, [$keyword]);
         }
 
-//        $articles = $query->paginate(3);
         $articles = $this->cache($cacheKey, 5, $query, 'paginate', 3);
 
-        return view('articles.index', compact('articles'));
+        return $this->respondCollection($articles);
     }
 
     /**
@@ -81,6 +80,7 @@ class ArticlesController extends Controller implements Cacheable
         ]);
 
         $article = $request->user()->articles()->create($payload);
+//        $article = \App\User::find(1)->articles()->create($payload);
 
         if (! $article) {
             flash()->error(trans('forum.articles.error_writing'));
@@ -100,9 +100,8 @@ class ArticlesController extends Controller implements Cacheable
 
         event(new \App\Events\ArticlesEvent($article));
         event(new \App\Events\ModelChanged(['articles']));
-        flash()->success(trans('forum.articles.success_writing'));
 
-        return redirect(route('articles.show', $article->id));
+        return $this->respondCreated($article);
     }
 
     /**
@@ -116,15 +115,12 @@ class ArticlesController extends Controller implements Cacheable
         $article->view_count += 1;
         $article->save();
 
-//        $comments = $article->comments()->with('replies')->withTrashed()
-//            ->whereNull('parent_id')->latest()->get();
-
-        $cacheKey = cache_key('articles.'.$article->id.'.comments');
+        $cacheKey = cache_key('articles.' . $article->id . '.comments');
         $query = $article->comments()->with('replies')->withTrashed()
             ->whereNull('parent_id')->latest();
         $comments = $this->cache($cacheKey, 5, $query, 'get');
 
-        return view('articles.show', compact('article', 'comments'));
+        return $this->respondInstance($article, $comments);
     }
 
     /**
@@ -144,7 +140,7 @@ class ArticlesController extends Controller implements Cacheable
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\ArticlesRequest $request
-     * @param \App\Article                       $article
+     * @param \App\Article $article
      * @return \Illuminate\Http\Response
      */
     public function update(\App\Http\Requests\ArticlesRequest $request, \App\Article $article)
@@ -157,16 +153,15 @@ class ArticlesController extends Controller implements Cacheable
         $article->tags()->sync($request->input('tags'));
 
         event(new \App\Events\ModelChanged(['articles']));
-        flash()->success(trans('forum.articles.success_updating'));
 
-        return redirect(route('articles.show', $article->id));
+        return $this->respondUpdated($article);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Article             $article
+     * @param \App\Article $article
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
@@ -178,5 +173,48 @@ class ArticlesController extends Controller implements Cacheable
         event(new \App\Events\ModelChanged(['articles']));
 
         return response()->json([], 204);
+    }
+
+    /* Response Methods */
+
+    /**
+     * @param \Illuminate\Contracts\Pagination\LengthAwarePaginator $articles
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    protected function respondCollection(\Illuminate\Contracts\Pagination\LengthAwarePaginator $articles)
+    {
+        return view('articles.index', compact('articles'));
+    }
+
+    /**
+     * @param \App\Article $article
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondCreated(\App\Article $article)
+    {
+        flash()->success(trans('forum.articles.success_writing'));
+
+        return redirect(route('articles.show', $article->id));
+    }
+
+    /**
+     * @param \App\Article $article
+     * @param \Illuminate\Database\Eloquent\Collection $comments
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    protected function respondInstance(\App\Article $article, \Illuminate\Database\Eloquent\Collection $comments)
+    {
+        return view('articles.show', compact('article', 'comments'));
+    }
+
+    /**
+     * @param \App\Article $article
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondUpdated(\App\Article $article)
+    {
+        flash()->success(trans('forum.articles.success_updating'));
+
+        return redirect(route('articles.show', $article->id));
     }
 }

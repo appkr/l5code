@@ -4,6 +4,10 @@
   <form action="{{ route('users.store') }}" method="POST" role="form" class="form__auth">
     {!! csrf_field() !!}
 
+    @if ($return = request('return'))
+      <input type="hidden" name="return" value="{{ $return }}">
+    @endif
+
     <div class="page-header">
       <h4>{{ trans('auth.users.title') }}</h4>
       <p class="text-muted">

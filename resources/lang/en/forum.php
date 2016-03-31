@@ -51,6 +51,7 @@ return [
         'dislike' => 'Thumbs-down',
         'ask_login' => '<a href=":url">Login</a> to write a comment.',
         'success_writing' => 'Saved.',
+        'success_updating' => 'Updated.',
     ],
 
     'tags' => [

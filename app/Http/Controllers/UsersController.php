@@ -63,19 +63,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Make an error response.
-     *
-     * @param string $message
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function respondError($message)
-    {
-        flash()->error($message);
-
-        return redirect('/');
-    }
-
-    /**
      * A user has logged into the application with social account before.
      * But s/he tries to register an native account again.
      * So updating his/her existing social account with the information.
@@ -132,6 +119,19 @@ class UsersController extends Controller
     }
 
     /**
+     * Make an error response.
+     *
+     * @param string $message
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function respondError($message)
+    {
+        flash()->error($message);
+
+        return redirect('/');
+    }
+
+    /**
      * Make a success response.
      *
      * @param string $message
@@ -141,6 +141,8 @@ class UsersController extends Controller
     {
         flash($message);
 
-        return redirect('/');
+        return ($return = request('return'))
+            ? redirect(urldecode($return))
+            : redirect()->intended();
     }
 }

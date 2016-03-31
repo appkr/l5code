@@ -31,12 +31,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-//        foreach($tags as $slug => $name) {
-//            App\Tag::create([
-//                'name' => $name,
-//                'slug' => str_slug($slug)
-//            ]);
-//        }
         $this->command->info('Seeded: tags table');
 
         if (app()->environment(['local', 'testing'])) {

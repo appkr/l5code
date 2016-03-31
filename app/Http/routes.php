@@ -83,6 +83,35 @@ Route::post('auth/reset', [
     'uses' => 'PasswordsController@postReset',
 ]);
 
+Route::group(['domain' => config('project.api_domain'), 'namespace' => 'Api', 'as' => 'api.'], function() {
+    /* api.v1 */
+    Route::group(['prefix' => 'v1', 'namespace' => 'v1'], function() {
+        /* Home */
+        Route::get('/', [
+            'as' => 'v1.index',
+            'uses' => 'WelcomeController@index',
+        ]);
+
+        /* Forum */
+        Route::resource('articles', 'ArticlesController');
+        Route::get('tags/{slug}/articles', [
+            'as'   => 'v1.tags.articles.index',
+            'uses' => 'ArticlesController@index',
+        ]);
+        Route::get('tags', [
+            'as'   => 'v1.tags.index',
+            'uses' => 'ArticlesController@tags',
+        ]);
+        Route::resource('attachments', 'AttachmentsController', ['only' => ['store', 'destroy']]);
+        Route::resource('comments', 'CommentsController', ['only' => ['update', 'destroy']]);
+        Route::resource('articles.comments', 'CommentsController', ['only' => 'store']);
+        Route::post('comments/{comments}/votes', [
+            'as' => 'v1.comments.vote',
+            'uses' => 'CommentsController@vote',
+        ]);
+    });
+});
+
 //DB::listen(function($sql) {
 //    dump($sql->sql);
 //});

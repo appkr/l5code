@@ -14,16 +14,19 @@ class Tag extends Model
     protected $fillable = [
         'name',
         'slug',
+        'ko',
+        'en',
     ];
 
     /**
-     * The relations to eager load on every query.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-//    protected $with = [
-//        'articles',
-//    ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     /* Relationships */
 
@@ -31,11 +34,4 @@ class Tag extends Model
     {
         return $this->belongsToMany(Article::class);
     }
-
-    /* Accessors */
-
-//    public function getArticlesCountAttribute()
-//    {
-//        return $this->articles->count();
-//    }
 }
