@@ -32,77 +32,10 @@ class ArticlesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\ArticlesRequest $request
      * @return \Illuminate\Http\Response
      */
-//    public function store(Request $request)
-//    {
-////        13.1. Validator 인스턴스를 직접 만들어 사용하는 방법
-//        $rules = [
-//            'title' => ['required'],
-//            'content' => ['required', 'min:10'],
-//        ];
-//
-//        $messages = [
-//            'title.required' => '제목은 필수 입력 항목입니다.',
-//            'content.required' => '본문은 필수 입력 항목입니다.',
-//            'content.min' => '본문은 최소 :min 글자 이상이 필요합니다.',
-//        ];
-//
-//        $validator = \Validator::make($request->all(), $rules, $messages);
-//
-//        if ($validator->fails()) {
-//            return back()
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
-//
-//        $article = \App\User::find(1)
-//            ->articles()
-//            ->create($request->all());
-//
-//        if (! $article) {
-//            return back()
-//                ->with('flash_message', '글이 저장되지 않았습니다.')
-//                ->witnInput();
-//        }
-//
-//        return redirect(route('articles.index'))
-//            ->with('flash_message', '작성하신 글이 저장되었습니다.');
-//    }
-
-//    public function store(Request $request)
-//    {
-////        13.2. 트레이트를 이용하는 방법
-//        $rules = [
-//            'title' => ['required'],
-//            'content' => ['required', 'min:10'],
-//        ];
-//
-//        $messages = [
-//            'title.required' => '제목은 필수 입력 항목입니다.',
-//            'content.required' => '본문은 필수 입력 항목입니다.',
-//            'content.min' => '본문은 최소 :min 글자 이상이 필요합니다.',
-//        ];
-//
-//        $this->validate($request, $rules, $messages);
-//
-//        $article = \App\User::find(1)
-//            ->articles()
-//            ->create($request->all());
-//
-//        if (! $article) {
-//            return back()
-//                ->with('flash_message', '글이 저장되지 않았습니다.')
-//                ->witnInput();
-//        }
-//
-//        return redirect(route('articles.index'))
-//            ->with('flash_message', '작성하신 글이 저장되었습니다.');
-//    }
-
     public function store(\App\Http\Requests\ArticlesRequest $request) {
-        // 13.3. 폼 리퀘스트 클래스 이용
         $article = \App\User::find(1)->articles() ->create($request->all());
 
         if (! $article) {
@@ -111,8 +44,21 @@ class ArticlesController extends Controller
                 ->withInput();
         }
 
+////        14.1. 이벤트 시스템 작동 기본 원리
+//        var_dump('이벤트를 던집니다.');
+//        event('article.created', [$article]);
+//        var_dump('이벤트를 던졌습니다.');
+
+//        14.4. 이벤트 클래스 이용
+//        dump('이벤트를 던집니다.');
+//        event(new \App\Events\ArticleCreated($article));
+//        dump('이벤트를 던졌습니다.');
+
+//        14.5. 실용적인 이벤트 시스템
+        event(new \App\Events\ArticlesEvent($article));
+
         return redirect(route('articles.index'))
-            ->with('flash_message', '작성하신글이저장되었 습니다.');
+            ->with('flash_message', '작성하신 글이 저장되었습니다.');
     }
 
     /**

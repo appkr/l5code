@@ -29,6 +29,11 @@ class ArticlesRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
     public function messages() {
         return [
             'required' => ':attribute은(는) 필수 입력 항목입니다.',
@@ -36,6 +41,11 @@ class ArticlesRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
     public function attributes()
     {
         return [

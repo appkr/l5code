@@ -30,6 +30,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'last_login',
+    ];
+
     /* Relationships */
 
     public function articles() {
