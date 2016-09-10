@@ -21,20 +21,6 @@ class ArticlesEventListener
     /**
      * Handle the event.
      */
-    //    public function handle(\App\Article $article)
-    //    {
-    ////        14.3. 이벤트 리스너 클래스 이용
-    //        var_dump('이벤트를 받았습니다. 받은 데이터(상태)는 다음과 같습니다.');
-    //        var_dump($article->toArray());
-    //    }
-
-//    public function handle(\App\Events\ArticleCreated $event)
-//    {
-//        //        14.4. 이벤트 클래스 이용
-//        dump('이벤트를 받았습니다. 받은 데이터(상태)는 다음과 같습니다.');
-//        dump($event->article->toArray());
-//    }
-
     public function handle(\App\Events\ArticlesEvent $event)
     {
         //        14.5. 실용적인 이벤트 시스템

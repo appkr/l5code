@@ -44,19 +44,6 @@ class ArticlesController extends Controller
                 ->withInput();
         }
 
-////        14.1. 이벤트 시스템 작동 기본 원리
-//        var_dump('이벤트를 던집니다.');
-//        event('article.created', [$article]);
-//        var_dump('이벤트를 던졌습니다.');
-
-//        14.4. 이벤트 클래스 이용
-//        dump('이벤트를 던집니다.');
-//        event(new \App\Events\ArticleCreated($article));
-//        dump('이벤트를 던졌습니다.');
-
-//        14.5. 실용적인 이벤트 시스템
-        event(new \App\Events\ArticlesEvent($article));
-
         return redirect(route('articles.index'))
             ->with('flash_message', '작성하신 글이 저장되었습니다.');
     }
@@ -69,7 +56,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        return __METHOD__ . '은(는) 다음 기본 키를 가진 Article 모델을 조회합니다.:'. $id;
+        $article = \App\Article::findOrFail($id);
+
+        return $article->toArray();
     }
 
     /**
