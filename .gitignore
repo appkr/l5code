@@ -3,6 +3,8 @@
 /vendor
 /.idea
 /docs
+/public/css
+/public/js
 Homestead.json
 Homestead.yaml
 .env

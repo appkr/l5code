@@ -46,12 +46,6 @@ class DocsController extends Controller
      */
     public function image($file)
     {
-//        $image = $this->docs->image($file);
-//
-//        return response($image->encode('png'), 200, [
-//            'Content-Type' => 'image/png'
-//        ]);
-
         $reqEtag = \Request::getEtags();
         $genEtag = $this->docs->etag($file);
 
