@@ -28,7 +28,7 @@ elixir(mix => {
     'js/app.js'
   ]);
 
-  mix.copy('node_modules/font-awesome/fonts', 'public/build/fonts');
+  // mix.copy('node_modules/font-awesome/fonts', 'public/build/fonts');
 
   // mix.browserSync({proxy: 'localhost:8000'});
 });
