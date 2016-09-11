@@ -112,4 +112,9 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 
+//    'to' => [
+//        'address' => 'juwonkim@me.com',
+//        'name' => 'Tester',
+//    ],
+
 ];
