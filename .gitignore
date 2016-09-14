@@ -5,6 +5,7 @@
 /docs
 /public/css
 /public/js
+/tests/database.sqlite
 Homestead.json
 Homestead.yaml
 .env

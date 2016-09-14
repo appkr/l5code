@@ -18,6 +18,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'confirm_code',
+        'activated',
     ];
 
     /**
@@ -28,6 +30,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'confirm_code',
     ];
 
     /**
@@ -37,6 +40,15 @@ class User extends Authenticatable
      */
     protected $dates = [
         'last_login',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'activated' => 'boolean',
     ];
 
     /* Relationships */
