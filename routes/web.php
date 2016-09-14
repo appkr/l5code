@@ -45,6 +45,12 @@ Route::get('auth/logout', [
     'uses' => 'SessionsController@destroy',
 ]);
 
+/* 소셜 로그인 */
+Route::get('social/{provider}', [
+    'as' => 'social.login',
+    'uses' => 'SocialController@execute',
+]);
+
 /* 비밀번호 초기화 */
 Route::get('auth/remind', [
     'as' => 'remind.create',

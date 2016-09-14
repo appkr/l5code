@@ -49,6 +49,10 @@ class SessionsController extends Controller
             return $this->respondError('가입확인해 주세요.');
         }
 
+        if (\App\User::socialUser($request->input('email'))->first()) {
+            return $this->respondError('소셜 로그인으로 로그인해주세요.');
+        }
+
         return $this->respondCreated(auth()->user()->name . '님, 환영합니다.');
     }
 
@@ -62,7 +66,7 @@ class SessionsController extends Controller
         auth()->logout();
         flash('또 방문해 주세요.');
 
-        return redirect('/');
+        return redirect(route('root'));
     }
 
     /* Helpers */

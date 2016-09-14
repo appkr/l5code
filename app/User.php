@@ -56,4 +56,11 @@ class User extends Authenticatable
     public function articles() {
         return $this->hasMany(Article::class);
     }
+
+    /* Query Scopes */
+
+    public function scopeSocialUser(\Illuminate\Database\Eloquent\Builder $query, $email)
+    {
+        return $query->wehreEmail($email)->whereNull('password');
+    }
 }

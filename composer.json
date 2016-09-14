@@ -15,7 +15,9 @@
     "erusev/parsedown-extra": " ~0.7.1",
     "barryvdh/laravel-debugbar": "2.2.*",
     "intervention/image": "2.3.*",
-    "laracasts/flash": " 2.0.*"
+    "laracasts/flash": " 2.0.*",
+    "laravel/socialite": "2.0.*",
+    "doctrine/dbal": "^2.5"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
