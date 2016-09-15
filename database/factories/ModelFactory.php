@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => bcrypt('password'),
         'remember_token' => str_random(10),
         'activated' => $activated,
-        'confirm_code' => $activated ? str_random(60) : null,
+        'confirm_code' => $activated ? null : str_random(60),
     ];
 });
 

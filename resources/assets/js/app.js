@@ -19,6 +19,15 @@ const app = new Vue({
 
   ready() {
     hljs.initHighlightingOnLoad();
+    this.removeFlashMessages();
+  },
+
+  methods: {
+    removeFlashMessages() {
+      if($('.alert')) {
+        $('.alert').delay(5000).fadeOut();
+      }
+    }
   }
 });
 

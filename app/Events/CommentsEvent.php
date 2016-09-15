@@ -9,32 +9,22 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class ArticleCreated
+class CommentsEvent
 {
     use InteractsWithSockets, SerializesModels;
 
     /**
-     * @var \App\Article
+     * @var \App\Comment
      */
-    public $article;
+    public $comment;
 
     /**
      * Create a new event instance.
      *
-     * @param \App\Article $article
+     * @param \App\Comment $comment
      */
-    public function __construct(\App\Article $article)
+    public function __construct(\App\Comment $comment)
     {
-        $this->article = $article;
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-     */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
+        $this->comment = $comment;
     }
 }

@@ -35,6 +35,11 @@ class CreateArticleTagTable extends Migration
      */
     public function down()
     {
+        Schema::table('article_tag', function (Blueprint $table) {
+            $table->dropForeign('article_tag_tag_id_foreign');
+            $table->dropForeign('article_tag_article_id_foreign');
+        });
+        
         Schema::dropIfExists('article_tag');
     }
 }

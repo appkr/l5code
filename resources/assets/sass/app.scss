@@ -11,6 +11,11 @@
 // FontAwesome
 @import 'node_modules/font-awesome/scss/font-awesome';
 
+// Application Layouts
+.footer__master {
+  margin-top: 20px;
+}
+
 // Form
 .form__auth {
   max-width: 400px;

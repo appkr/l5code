@@ -76,7 +76,7 @@
 
     <div class="content">
       <div class="title m-b-md">
-        <a href="route('home')">
+        <a href="{{ route('home') }}">
           {{ config('app.name', 'Laravel') }}
         </a>
       </div>

@@ -40,6 +40,10 @@ class SessionsController extends Controller
         ]);
 
         if (! auth()->attempt($request->only('email', 'password'), $request->has('remember'))) {
+            if (\App\User::socialUser($request->input('email'))->first()) {
+                return $this->respondError('소셜 로그인으로 로그인해주세요.');
+            }
+
             return $this->respondError('이메일 또는 비밀번호가 맞지 않습니다.');
         }
 
@@ -53,7 +57,9 @@ class SessionsController extends Controller
             return $this->respondError('소셜 로그인으로 로그인해주세요.');
         }
 
-        return $this->respondCreated(auth()->user()->name . '님, 환영합니다.');
+        return $this->respondCreated(
+            auth()->user()->name . '님, 환영합니다.'
+        );
     }
 
     /**
