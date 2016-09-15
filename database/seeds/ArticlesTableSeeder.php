@@ -13,10 +13,13 @@ class ArticlesTableSeeder extends Seeder
     {
         $users = App\User::all();
 
-        $users->each(function ($user) {
-            $user->articles()->save(
-                factory(App\Article::class)->make()
-            );
-        });
+//        $users->each(function ($user) {
+//            $user->articles()->save(
+//                factory(App\Article::class)->make()
+//            );
+//        });
+
+        App\Article::truncate();
+        factory(App\Article::class, 50)->create();
     }
 }

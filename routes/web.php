@@ -10,7 +10,12 @@ Route::get('/home', [
     'uses' => 'HomeController@index',
 ]);
 
+/* 아티클 */
 Route::resource('articles', 'ArticlesController');
+Route::get('tags/{slug}/articles', [
+    'as' => 'tags.articles.index',
+    'uses' => 'ArticlesController@index',
+]);
 
 /* Markdown Viewer */
 Route::get('docs/{file?}', 'DocsController@show');

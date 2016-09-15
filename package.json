@@ -15,6 +15,8 @@
     "laravel-elixir-vue": "^0.1.4",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.14.0",
+    "select2": "^4.0.3",
+    "select2-bootstrap-css": "^1.4.6",
     "vue": "^1.0.26",
     "vue-resource": "^0.9.3"
   }

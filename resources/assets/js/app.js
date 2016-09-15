@@ -24,7 +24,7 @@ const app = new Vue({
 
   methods: {
     removeFlashMessages() {
-      if($('.alert')) {
+      if ($('.alert')) {
         $('.alert').delay(5000).fadeOut();
       }
     }

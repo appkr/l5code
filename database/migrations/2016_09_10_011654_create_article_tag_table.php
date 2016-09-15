@@ -39,7 +39,7 @@ class CreateArticleTagTable extends Migration
             $table->dropForeign('article_tag_tag_id_foreign');
             $table->dropForeign('article_tag_article_id_foreign');
         });
-        
+
         Schema::dropIfExists('article_tag');
     }
 }

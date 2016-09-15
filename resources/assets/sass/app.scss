@@ -9,11 +9,96 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // FontAwesome
-@import 'node_modules/font-awesome/scss/font-awesome';
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// Select2
+@import 'node_modules/select2/src/scss/core';
+
+.select2-dropdown,
+.select2-container--default .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: 1px $input-border solid;
+  border-radius: 4px;
+}
+
+.select2-container,
+.select2-container--default .select2-selection--multiple {
+  font-size: $font-size-base;
+}
+
 
 // Application Layouts
 .footer__master {
   margin-top: 20px;
+}
+
+// Sidebar
+.sidebar__article,
+.tags__article {
+  a {
+    color: $text-color;
+    text-decoration: none;
+  }
+}
+
+.sidebar__article {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    a {
+      padding: 0.5rem;
+      display: block;
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+      border-radius: 3px;
+      background-color: darken($body-bg, 5%);
+      transition: all 0.3s ease;
+    }
+
+    &.active>a {
+      border-radius: 3px;
+      background-color: darken($body-bg, 10%);
+    }
+  }
+
+  .badge {
+    float: right;
+    margin-right: 1rem;
+  }
+
+  form {
+    margin-bottom: 30px;
+  }
+}
+
+// Tags Line
+.tags__article {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: 100;
+  font-size: $font-size-base * 0.8;
+
+  li {
+    display: inline-block;
+  }
+
+  li:not(:first-child) {
+    padding: 4px 8px;
+    background-color: darken($body-bg, 5%);
+    border-radius: 3px;
+
+    &:hover {
+      background-color: darken($body-bg, 10%);
+    }
+  }
 }
 
 // Form

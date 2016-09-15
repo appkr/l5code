@@ -18,5 +18,9 @@
         <!--•-->
       </small>
     </p>
+
+    @if ($viewName === 'articles.index')
+      @include('tags.partial.list', ['tags' => $article->tags])
+    @endif
   </div>
 </div>

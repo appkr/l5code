@@ -13,7 +13,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) {
+            $allTags = \Cache::rememberForever('tags.list', function () {
+                return \App\Tag::all();
+            });
+
+            $view->with(compact('allTags'));
+        });
     }
 
     /**
