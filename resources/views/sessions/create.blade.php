@@ -55,11 +55,14 @@
 
     <div>
       <p class="text-center">
-        회원이 아니라면
+        <a href="{{ route('users.create') }}">
+          회원이 아니라면
+        </a>
       </p>
       <p class="text-center">
-        <a href="{{ route('remind.create') }}"></a>
-        비밀번호를 잊으셨나요?
+        <a href="{{ route('remind.create') }}">
+          비밀번호를 잊으셨나요?
+        </a>
       </p>
       <p class="text-center">
         <small class="help-block">

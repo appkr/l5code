@@ -20,6 +20,7 @@ class User extends Authenticatable
         'password',
         'confirm_code',
         'activated',
+        'notification',
     ];
 
     /**

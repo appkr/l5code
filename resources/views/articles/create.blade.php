@@ -1,9 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-  <h1>새 포럼 글 쓰기</h1>
-
-  <hr/>
+  <div class="page-header">
+    <h4>
+      <a href="{{ route('articles.index') }}">
+        포럼
+      </a>
+      <small>
+        / 글 쓰기
+      </small>
+    </h4>
+  </div>
 
   <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data" class="form__article">
     {!! csrf_field() !!}

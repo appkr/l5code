@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use \Illuminate\Database\Eloquent\SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +30,7 @@ class Comment extends Model
         'commentable_type',
         'commentable_id',
         'parent_id',
+        'deleted_at',
     ];
 
     /**
@@ -49,6 +51,15 @@ class Comment extends Model
     protected $appends = [
         'up_count',
         'down_count',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
     ];
 
     /* Relationships */

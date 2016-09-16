@@ -19,8 +19,9 @@ class AppServiceProvider extends ServiceProvider
             });
 
             $currentUser = auth()->user();
+            $currentRouteName = \Route::currentRouteName();
 
-            $view->with(compact('allTags', 'currentUser'));
+            $view->with(compact('allTags', 'currentUser', 'currentRouteName'));
         });
     }
 

@@ -13,6 +13,8 @@
     @include('comments.partial.comment', [
       'parentId' => $comment->id,
       'isReply' => false,
+      'hasChild' => $comment->replies->count(),
+      'isTrashed' => $comment->trashed(),
     ])
   @empty
   @endforelse
@@ -31,7 +33,14 @@
           type: 'DELETE',
           url: "/comments/" + commentId
         }).then(function() {
-          $('#comment_' + commentId).fadeOut(1000, function () { $(this).remove(); });
+          console.log($('#comment_' + commentId).find('.content__comment').first());
+          $('#comment_' + commentId)
+            .find('.content__comment')
+            .first()
+            .addClass('text-danger')
+            .fadeIn(1000, function () {
+              $(this).text('삭제된 댓글입니다.');
+            });
         });
       }
     });
@@ -54,7 +63,7 @@
       el__edit.toggle('fast').end().find('textarea').first().focus();
     });
 
-    // Send save a vote request to the server
+    // 투표 저장 요청을 한다.
     $('.btn__vote__comment').on('click', function(e) {
       var self = $(this),
         commentId = self.closest('.item__comment').data('id');

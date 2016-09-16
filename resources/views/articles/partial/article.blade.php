@@ -16,6 +16,11 @@
 
       <small>
         • {{ $article->created_at->diffForHumans() }}
+        • 조회수 {{ $article->view_count }}
+
+        @if ($article->comment_count > 0)
+          • 댓글 {{ $article->comment_count }}개
+        @endif
       </small>
     </p>
 

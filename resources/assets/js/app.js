@@ -39,4 +39,3 @@ const app = new Vue({
     }
   }
 });
-

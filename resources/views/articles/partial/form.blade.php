@@ -22,11 +22,14 @@
   {!! $errors->first('content', '<span class="form-error">:message</span>') !!}
 </div>
 
-{{--<div class="form-group {{ $errors->has('files') ? 'has-error' : '' }}">--}}
-  {{--<label for="files">파일</label>--}}
-  {{--<input type="file" name="files[]" id="files" class="form-control" multiple="multiple"/>--}}
-  {{--{!! $errors->first('files.0', '<span class="form-error">:message</span>') !!}--}}
-{{--</div>--}}
+<div class="form-group">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="notification" value="{{ old('notification', $article->notification) }}">
+      댓글이 작성되면 이메일 알림 받기
+    </label>
+  </div>
+</div>
 
 <div class="form-group">
   <label for="my-dropzone">첨부 파일
@@ -155,5 +158,29 @@
       placeholder: '태그를선택하세요(최대3개)',
       maximumSelectionLength: 3
     });
+
+    /* 이메일 알림 체크박스 조작 */
+    var notifyElem = $('input[name="notification"]');
+
+    notifyElem.on('click', function (e) {
+      var self = $(this),
+          turnOn = self.val() ? false : true;
+
+      if (turnOn) {
+        self.val(1);
+        self.attr('checked', 'checked');
+      } else {
+        self.removeAttr('value');
+        self.removeAttr('checked');
+      }
+    });
+
+    if (Laravel.currentRouteName == 'articles.create') {
+      notifyElem.val(1);
+    }
+
+    if (notifyElem.val()) {
+      notifyElem.attr('checked', 'checked');
+    }
   </script>
 @stop

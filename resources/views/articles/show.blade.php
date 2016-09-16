@@ -17,12 +17,14 @@
   <div class="row container__article">
     <div class="col-md-3 sidebar__article">
       <aside>
+        @include('articles.partial.search')
+
         @include('tags.partial.index')
       </aside>
     </div>
 
     <div class="col-md-9 list__article">
-      <article data-id="{{ $article->id }}">
+      <article data-id="{{ $article->id }}" id="item__article">
         @include('articles.partial.article', compact('article'))
 
         <div class="content__article">
