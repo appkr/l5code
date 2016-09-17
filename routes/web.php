@@ -10,6 +10,12 @@ Route::get('/home', [
     'uses' => 'HomeController@index',
 ]);
 
+/* 언어 선택 */
+Route::get('locale', [
+    'as' => 'locale',
+    'uses' => 'WelcomeController@locale',
+]);
+
 /* 아티클 */
 Route::resource('articles', 'ArticlesController');
 Route::get('tags/{slug}/articles', [

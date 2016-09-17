@@ -50,7 +50,6 @@ class ArticlesController extends Controller implements Cacheable
             $query = $query->whereRaw($raw, [$keyword]);
         }
 
-//        $articles = $query->paginate(3);
         $articles = $this->cache($cacheKey, 5, $query, 'paginate', 3);
 
         return view('articles.index', compact('articles'));
@@ -83,7 +82,9 @@ class ArticlesController extends Controller implements Cacheable
         $article = $request->user()->articles()->create($payload);
 
         if (! $article) {
-            flash()->error('작성하신 글을 저장하지 못했습니다.');
+            flash()->error(
+                trans('forum.articles.error_writing')
+            );
 
             return back()->withInput();
         }
@@ -93,7 +94,9 @@ class ArticlesController extends Controller implements Cacheable
 
         event(new \App\Events\ArticlesEvent($article));
         event(new \App\Events\ModelChanged(['articles']));
-        flash()->success('작성하신 글이 저장되었습니다.');
+        flash()->success(
+            trans('forum.articles.success_writing')
+        );
 
         return redirect(route('articles.index'));
     }
@@ -150,7 +153,9 @@ class ArticlesController extends Controller implements Cacheable
         $article->tags()->sync($request->input('tags'));
 
         event(new \App\Events\ModelChanged(['articles']));
-        flash()->success('수정하신 내용을 저장했습니다.');
+        flash()->success(
+            trans('forum.articles.success_updating')
+        );
 
         return redirect(route('articles.show', $article->id));
     }
@@ -168,6 +173,6 @@ class ArticlesController extends Controller implements Cacheable
 
         event(new \App\Events\ModelChanged(['articles']));
 
-        return response()->json([], 204);
+        return response()->json([], 204, [], JSON_PRETTY_PRINT);
     }
 }

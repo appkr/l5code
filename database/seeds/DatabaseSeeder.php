@@ -22,11 +22,13 @@ class DatabaseSeeder extends Seeder
         DB::table('article_tag')->truncate();
         $tags = config('project.tags');
 
-        foreach($tags as $slug => $name) {
+        foreach(array_transpose($tags) as $slug => $names) {
             App\Tag::create([
-                'name' => $name,
-                'slug' => str_slug($slug) ]
-            );
+                'name' => $names['ko'],
+                'ko' => $names['ko'],
+                'en' => $names['en'],
+                'slug' => str_slug($slug)
+            ]);
         }
 
         $this->command->info('Seeded: tags table');

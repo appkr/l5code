@@ -7,29 +7,29 @@
     <input type="hidden" name="token" value="{{ $token }}">
 
     <div class="page-header">
-      <h4>비밀번호 바꾸기</h4>
+      <h4>{{ trans('auth.passwords.title_reset') }}</h4>
       <p class="text-muted">
-        회원가입했던 이메일을 입력하고, 새로운 비밀번호를 입력하세요.
+        {{ trans('auth.passwords.desc_reset') }}
       </p>
     </div>
 
     <div class="form-group">
-      <input type="email" name="email" class="form-control" placeholder="이메일" value="{{ old('email') }}" autofocus>
+      <input type="email" name="email" class="form-control" placeholder="{{ trans('auth.form.email') }}" value="{{ old('email') }}" autofocus>
       {!! $errors->first('email', '<span class="form-error">:message</span>') !!}
     </div>
 
     <div class="form-group">
-      <input type="password" name="password" class="form-control" placeholder="새로운 비밀번호">
+      <input type="password" name="password" class="form-control" placeholder="{{ trans('auth.form.password_new') }}">
       {!! $errors->first('password', '<span class="form-error">:message</span>') !!}
     </div>
 
     <div class="form-group">
-      <input type="password" name="password_confirmation" class="form-control" placeholder="비밀번호 확인">
+      <input type="password" name="password_confirmation" class="form-control" placeholder="{{ trans('auth.form.password_confirmation') }}">
       {!! $errors->first('password_confirmation', '<span class="form-error">:message</span>') !!}
     </div>
 
     <button class="btn btn-primary btn-lg btn-block" type="submit">
-      비밀번호 바꾸기
+      {{ trans('auth.passwords.title_reset') }}
     </button>
   </form>
 @stop

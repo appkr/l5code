@@ -55,7 +55,7 @@ class AuthHelper extends \TestCase
     {
         return $this->visit(route('sessions.create'))
             ->submitForm(
-                '로그인',
+                trans('auth.sessions.title'),
                 array_merge([
                     'email' => $this->user->email,
                     'password' => 'password',
@@ -83,7 +83,7 @@ class AuthHelper extends \TestCase
     {
         return $this->visit(route('users.create'))
             ->submitForm(
-                '가입하기',
+                trans('auth.users.send_registration'),
                 array_merge(
                     $this->userPayload,
                     ['password_confirmation' => $this->userPayload['password']],
@@ -102,7 +102,7 @@ class AuthHelper extends \TestCase
     {
         return $this->visit(route('remind.create'))
             ->submitForm(
-                '비밀번호 바꾸기 메일 발송',
+                trans('auth.passwords.send_reminder'),
                 [
                     'email' => array_key_exists('email', $overrides)
                         ? $overrides['email']
@@ -133,7 +133,9 @@ class AuthHelper extends \TestCase
             ? $overrides['token'] : $token;
 
         return $this->visit(route('reset.create', ['token' => $token]))
-            ->submitForm('비밀번호 바꾸기', array_merge([
+            ->submitForm(
+                trans('auth.passwords.send_reset'),
+                array_merge([
                     'email' => array_key_exists('email', $overrides)
                         ? $overrides['email'] : $email,
                     'password' => 'password',

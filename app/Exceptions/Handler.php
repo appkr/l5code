@@ -32,6 +32,17 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (app()->environment('production')) {
+            \Slack::send(
+                sprintf(
+                    "%s \n%s \n\n%s",
+                    $exception->getMessage(),
+                    $exception->getFile(),
+                    $exception->getTraceAsString()
+                )
+            );
+        }
+
         parent::report($exception);
     }
 
@@ -46,13 +57,13 @@ class Handler extends ExceptionHandler
     {
         if (app()->environment('production')) {
             $statusCode = 400;
-            $title = '죄송합니다. :(';
-            $description = '에러가발생했습니다.';
+            $title = trans('messages.title');
+            $description = trans('messages.description');
 
             if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException
                 or $exception instanceof \Symfony\Component\HttpKernel\Exception\ NotFoundHttpException) {
                 $statusCode = 404;
-                $description = $exception->getMessage() ?: '요청하신페이지가없습니다.';
+                $description = $exception->getMessage() ?: trans('messages.not_found');
             }
 
             return response(view('errors.notice', [

@@ -49,7 +49,9 @@ class UsersController extends Controller
         $user = \App\User::whereConfirmCode($code)->first();
 
         if (! $user) {
-            return $this->respondError('URL이 정확하지 않습니다.');
+            return $this->respondError(
+                trans('auth.users.error_wrong_url')
+            );
         }
 
         $user->activated = 1;
@@ -57,7 +59,9 @@ class UsersController extends Controller
         $user->save();
 
         auth()->login($user);
-        flash(auth()->user()->name . '님, 환영합니다. 가입 확인되었습니다.');
+        flash(
+            trans('auth.users.info_confirmed', ['name' => $user->name])
+        );
 
         return redirect('home');
     }
@@ -86,7 +90,9 @@ class UsersController extends Controller
 
         auth()->login($user);
 
-        return $this->respondCreated($user->name . '님, 환영합니다.');
+        return $this->respondCreated(
+            trans('auth.sessions.info_welcome', ['name' => $user->name])
+        );
     }
 
     /**
@@ -115,7 +121,7 @@ class UsersController extends Controller
         event(new \App\Events\UserCreated($user));
 
         return $this->respondCreated(
-            '가입하신 메일 계정으로 가입 확인 메일을 보내드렸습니다. 가입 확인하시고 로그인해 주세요.'
+            trans('auth.users.info_confirmation_sent')
         );
     }
 
@@ -131,7 +137,7 @@ class UsersController extends Controller
     {
         flash()->error($message);
 
-        return redirect('/');
+        return redirect(route('root'));
     }
 
     /**
@@ -142,6 +148,6 @@ class UsersController extends Controller
     {
         flash($message);
 
-        return redirect('/');
+        return redirect(route('root'));
     }
 }

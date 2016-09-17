@@ -1,5 +1,7 @@
 <div class="page-header">
-  <h4>댓글</h4>
+  <h4>
+    {{ trans('forum.comments.title') }}
+  </h4>
 </div>
 <div class="form__new__comment">
   @if($currentUser)
@@ -28,7 +30,7 @@
       var commentId = $(this).closest('.item__comment').data('id'),
         articleId = $('#item__article').data('id');
 
-      if (confirm('삭제할까요?')) {
+      if (confirm('{{ trans('forum.comments.deleting') }}')) {
         $.ajax({
           type: 'DELETE',
           url: "/comments/" + commentId
@@ -39,7 +41,7 @@
             .first()
             .addClass('text-danger')
             .fadeIn(1000, function () {
-              $(this).text('삭제된 댓글입니다.');
+              $(this).text('{{ trans('forum.comments.deleted') }}');
             });
         });
       }

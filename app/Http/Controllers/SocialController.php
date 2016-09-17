@@ -61,7 +61,9 @@ class SocialController extends Controller
             ]);
 
         auth()->login($user);
-        flash(auth()->user()->name . '님, 환영합니다.');
+        flash(
+            trans('auth.sessions.info_welcome', ['name' => auth()->user()->name])
+        );
 
         return redirect(route('home'));
     }

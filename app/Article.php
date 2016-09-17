@@ -74,4 +74,13 @@ class Article extends Model
     public function getCommentCountAttribute() {
         return (int) $this->comments->count();
     }
+
+//    // 의사(Pseudo) 코드. 주석 풀어도 작동하지 않습니다.
+//    public function getCreatedAtAttribute($value)
+//    {
+//        $timezone = (auth()->user()->timezone) ?: config('app.timezone');
+//        $datetime = $this->asDateTime($value);
+//
+//        return $datetime->timezone($timezone);
+//    }
 }

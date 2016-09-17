@@ -10,7 +10,9 @@ class SessionsControllerTest extends AuthHelper
         $this->createTestStub(['activated' => 1]);
 
         $this->login()
-             ->see($this->user->name . '님, 환영합니다.');
+             ->see(
+                 trans('auth.sessions.info_welcome', ['name' => $this->user->name])
+             );
     }
 
     /** @test */
@@ -31,7 +33,9 @@ class SessionsControllerTest extends AuthHelper
 
         $this->login(['password' => 'wrong_password'])
              ->seeRouteIs('sessions.create')
-             ->see('이메일 또는 비밀번호가 맞지 않습니다.');
+             ->see(
+                 trans('auth.sessions.error_incorrect_credentials')
+             );
     }
 
     /** @test */
@@ -41,7 +45,9 @@ class SessionsControllerTest extends AuthHelper
 
         $this->login()
              ->seeRouteIs('sessions.create')
-             ->see('가입확인해 주세요.');
+             ->see(
+                 trans('auth.sessions.error_not_confirmed')
+             );
     }
 
     /** @test */
@@ -50,7 +56,9 @@ class SessionsControllerTest extends AuthHelper
         $this->createTestStub();
 
         $this->login(['password' => 'wrong.password'])
-             ->see('이메일 또는 비밀번호가 맞지 않습니다.')
+             ->see(
+                 trans('auth.sessions.error_incorrect_credentials')
+             )
              ->seeRouteIs('sessions.create');
     }
 
@@ -62,6 +70,8 @@ class SessionsControllerTest extends AuthHelper
         $this->actingAs($this->user)
              ->logout()
              ->seeRouteIs('root')
-             ->see('또 방문해 주세요.');
+             ->see(
+                 trans('auth.sessions.info_bye')
+             );
     }
 }

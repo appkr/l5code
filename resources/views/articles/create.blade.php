@@ -4,10 +4,10 @@
   <div class="page-header">
     <h4>
       <a href="{{ route('articles.index') }}">
-        포럼
+        {{ trans('forum.title') }}
       </a>
       <small>
-        / 글 쓰기
+        / {{ trans('forum.articles.create') }}
       </small>
     </h4>
   </div>
@@ -19,7 +19,7 @@
 
     <div class="form-group text-center">
       <button type="submit" class="btn btn-primary">
-        저장하기
+        {{ trans('forum.articles.store') }}
       </button>
     </div>
   </form>

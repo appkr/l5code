@@ -17,7 +17,8 @@
     "intervention/image": "2.3.*",
     "laracasts/flash": " 2.0.*",
     "laravel/socialite": "2.0.*",
-    "doctrine/dbal": "^2.5"
+    "doctrine/dbal": "^2.5",
+    "maknz/slack": "1.*"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

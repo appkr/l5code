@@ -110,6 +110,17 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'Title',
+        'content' => 'Content',
+        'tags' => 'Tag',
+        'files' => 'Files',
+        'files.*' => 'Files',
+        'parent_id' => 'Parent Comments',
+        'name' => 'Name',
+        'email' => 'Email',
+        'password' => 'Password',
+        'password_confirmation' => 'Password Confirmation',
+    ],
 
 ];

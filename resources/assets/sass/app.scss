@@ -51,16 +51,59 @@ label[for=my-dropzone]>small {
 }
 
 // Application Layouts
-.footer__master {
-  margin-top: 1em;
-}
-
 .container__article{
   padding: 1em 0;
 }
 
 .action__article {
   margin-top: 1em;
+}
+
+.footer__master {
+  margin-top: 1em;
+
+  a {
+    display: inline-block;
+    color: $text-color;
+    text-decoration: none;
+    padding: 0 5px;
+  }
+
+  ul {
+    li {
+      padding: 0;
+
+      &:first-child {
+        margin-right: 5px;
+      }
+    }
+
+    li:not(:first-child) {
+      a:hover,
+      a:active,
+      a:focus {
+        border-radius: 3px;
+        background-color: darken($body-bg, 5%);
+        transition: all 0.3s ease;
+      }
+
+      &.active > a {
+        border-radius: 3px;
+        background-color: $body-bg;
+      }
+    }
+  }
+}
+
+.back-to-top {
+  cursor: pointer;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  display: none;
+  z-index: 9998;
+  transition: all 0.5s ease-in-out;
+  padding: 8px 10px;
 }
 
 // Sidebar
@@ -152,8 +195,8 @@ label[for=my-dropzone]>small {
 
 // Comments
 .link__login__comment {
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 1em;
+  margin-bottom: 1em;
   border-radius: 3px;
   border: 1px solid $input-border;
   width: 100%;
@@ -463,4 +506,29 @@ span.form-error {
   }
 
   // 이상 데일 리즈의 칼라 스킴에서 복사한 스타일시트
+}
+
+// 미디어 쿼리
+@media screen and (max-width: 991px) {
+  .action__article {
+    margin-bottom: 1em;
+  }
+
+  .sidebar__article {
+    margin-bottom: 2em;
+  }
+
+  .item__comment {
+    &>a.pull-left {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 479px) {
+
 }

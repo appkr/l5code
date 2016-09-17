@@ -5,19 +5,21 @@
     {!! csrf_field() !!}
 
     <div class="page-header">
-      <h4>비밀번호 바꾸기 신청</h4>
+      <h4>
+        {{ trans('auth.passwords.title_reminder') }}
+      </h4>
       <p class="text-muted">
-        회원가입한 이메일로 신청하신 후, 메일박스를 확인하세요.
+        {{ trans('auth.passwords.desc_reminder') }}
       </p>
     </div>
 
     <div class="form-group">
-      <input type="email" name="email" class="form-control" placeholder="이메일" value="{{ old('email') }}" autofocus>
+      <input type="email" name="email" class="form-control" placeholder="{{ trans('auth.form.email') }}" value="{{ old('email') }}" autofocus>
       {!! $errors->first('email', '<span class="form-error">:message</span>') !!}
     </div>
 
     <button class="btn btn-primary btn-lg btn-block" type="submit">
-      비밀번호 바꾸기 메일 발송
+      {{ trans('auth.passwords.send_reminder') }}
     </button>
   </form>
 @stop

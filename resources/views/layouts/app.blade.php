@@ -45,6 +45,8 @@
       'csrfToken' => csrf_token(),
       'currentUser' => $currentUser,
       'currentRouteName' => $currentRouteName,
+      'currentLocale' => $currentLocale,
+      'currentUrl' => $currentUrl,
     ]); ?>
   </script>
 </head>

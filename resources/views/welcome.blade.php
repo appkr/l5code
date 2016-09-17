@@ -8,8 +8,8 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Styles -->
   <style>
@@ -47,7 +47,7 @@
     }
 
     .title {
-      font-size: 84px;
+      font-size: 64px;
     }
 
     .title a,
@@ -68,6 +68,16 @@
     .m-b-md {
       margin-bottom: 30px;
     }
+
+    .alert {
+       display: inline-block;
+       position: fixed;
+       bottom: 50px;
+       right: 15px;
+       max-width: 450px;
+       opacity: .8;
+       z-index: 999;
+    }
   </style>
 </head>
 <body>
@@ -82,11 +92,24 @@
       </div>
 
       <div class="links">
-        <a href="https://laravel.com/docs">Documentation</a>
-        <a href="https://laracasts.com">Laracasts</a>
-        <a href="https://laravel-news.com">News</a>
-        <a href="https://forge.laravel.com">Forge</a>
-        <a href="https://github.com/laravel/laravel">GitHub</a>
+        <a href="{{ url('docs') }}">
+          {{ trans('docs.title') }}
+        </a>
+        <a href="{{ route('articles.index') }}">
+          {{ trans('forum.title') }}
+        </a>
+        @if (auth()->guest())
+          <a href="{{ route('sessions.create') }}">
+            {{ trans('auth.sessions.title') }}
+          </a>
+          <a href="{{ route('users.create') }}">
+            {{ trans('auth.users.title') }}
+          </a>
+        @else
+          <a href="{{ route('sessions.destroy') }}">
+            {{ auth()->user()->name }} • {{ trans('auth.sessions.destroy') }}
+          </a>
+        @endif
       </div>
     </div>
   </div>

@@ -147,3 +147,44 @@ if (! function_exists('taggable')) {
         return in_array(config('cache.default'), ['memcached', 'redis'], true);
     }
 }
+
+if (! function_exists('current_url')) {
+    /**
+     * Build current url string, without return param.
+     *
+     * @return string
+     */
+    function current_url()
+    {
+        if (! request()->has('return')) {
+            return request()->fullUrl();
+        }
+
+        return sprintf(
+            '%s?%s',
+            request()->url(),
+            http_build_query(request()->except('return'))
+        );
+    }
+}
+
+if (! function_exists('array_transpose')) {
+    /**
+     * Transpose the given array.
+     *
+     * @param array $data
+     * @return array
+     */
+    function array_transpose(array $data)
+    {
+        $res = [];
+
+        foreach ($data as $row => $columns) {
+            foreach ($columns as $row2 => $column2) {
+                $res[$row2][$row] = $column2;
+            }
+        }
+
+        return $res;
+    }
+}

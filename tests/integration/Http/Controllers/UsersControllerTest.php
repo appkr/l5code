@@ -38,7 +38,9 @@ class UsersControllerTest extends AuthHelper
 
         $this->visit(route('users.confirm', $confirmCode))
             ->seeRouteIs('home')
-            ->see($this->user->name . '님, 환영합니다. 가입 확인되었습니다.');
+            ->see(
+                trans('auth.users.info_confirmed', ['name' => $this->user->name])
+            );
 
         $this->assertTrue(\App\User::find($this->user->id)->activated);
     }
@@ -60,6 +62,8 @@ class UsersControllerTest extends AuthHelper
 
         $this->visit(route('users.confirm', str_random(60)))
             ->seeRouteIs('root')
-            ->see('URL이 정확하지 않습니다.');
+            ->see(
+                trans('auth.users.error_wrong_url')
+            );
     }
 }

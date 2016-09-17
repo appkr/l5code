@@ -23,17 +23,14 @@ class CommentsEventListener
             return;
         }
 
+        $view = 'emails.'.app()->getLocale().'.comments.created';
+
         \Mail::send(
-            'emails.comments.created',
+            $view,
             compact('comment'),
             function ($message) use($to) {
                 $message->to($to);
-                $message->subject(
-                    sprintf(
-                        '[%s] 새로운 댓글이 등록되었습니다.',
-                        config('project.name')
-                    )
-                );
+                $message->subject(trans('emails.comments.created'));
             }
         );
     }

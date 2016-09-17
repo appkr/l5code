@@ -50,7 +50,7 @@ class PasswordsController extends Controller
         event(new \App\Events\PasswordRemindCreated($email, $token));
 
         return $this->respondSuccess(
-            '비밀번호 바꾸는 방법을 담은 이메일을 발송했습니다. 메일 박스를 확인해 주세요.'
+            trans('auth.passwords.sent_reminder')
         );
     }
 
@@ -82,13 +82,15 @@ class PasswordsController extends Controller
         $token = $request->get('token');
 
         if (! \DB::table('password_resets')->whereToken($token)->first()) {
-            return $this->respondError('URL이 정확하지 않습니다.');
+            return $this->respondError(
+                trans('auth.passwords.error_wrong_url')
+            );
         }
 
         \DB::table('password_resets')->whereToken($token)->delete();
 
         return $this->respondSuccess(
-            '비밀번호를 바꾸었습니다. 새로운 비밀번호로 로그인하세요.'
+            trans('auth.passwords.success_reset')
         );
     }
 

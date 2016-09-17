@@ -14,7 +14,7 @@
 
       <div class="text-right">
         <button type="submit" class="btn btn-primary btn-sm">
-          수정하기
+          {{ trans('forum.comments.update') }}
         </button>
       </div>
     </form>

@@ -25,32 +25,32 @@
       </h5>
 
       <div class="text-danger content__comment">
-        삭제된 댓글입니다.
+        {{ trans('forum.comments.deleted') }}
       </div>
 
       <div class="action__comment">
         @if ($currentUser)
-          <button class="btn__vote__comment" data-vote="up" title="좋아요" {{ $voted }}>
+          <button class="btn__vote__comment" data-vote="up" title="{{ trans('forum.comments.like') }}" {{ $voted }}>
             <i class="fa fa-chevron-up"></i>
             <span>{{ $comment->up_count }}</span>
           </button>
 
           <span> | </span>
 
-          <button class="btn__vote__comment" data-vote="down" title="싫어요" {{ $voted }}>
+          <button class="btn__vote__comment" data-vote="down" title="{{ trans('forum.comments.dislike') }}" {{ $voted }}>
             <i class="fa fa-chevron-down"></i> <span>{{ $comment->down_count }}</span>
           </button>
           •
         @endif
 
         @can('update', $comment)
-          <button class="btn__delete__comment">댓글 삭제</button> •
-          <button class="btn__edit__comment">댓글 수정</button> •
+          <button class="btn__delete__comment">{{ trans('forum.comments.destroy') }}</button> •
+          <button class="btn__edit__comment">{{ trans('forum.comments.edit') }}</button> •
         @endcan
 
         @if ($currentUser)
           <button class="btn__reply__comment">
-            답글 쓰기
+            {{ trans('forum.comments.reply') }}
           </button>
         @endif
       </div>
@@ -91,27 +91,27 @@
 
       <div class="action__comment">
         @if ($currentUser)
-          <button class="btn__vote__comment" data-vote="up" title="좋아요" {{ $voted }}>
+          <button class="btn__vote__comment" data-vote="up" title="{{ trans('forum.comments.like') }}" {{ $voted }}>
             <i class="fa fa-chevron-up"></i>
             <span>{{ $comment->up_count }}</span>
           </button>
 
           <span> | </span>
 
-          <button class="btn__vote__comment" data-vote="down" title="싫어요" {{ $voted }}>
+          <button class="btn__vote__comment" data-vote="down" title="{{ trans('forum.comments.dislike') }}" {{ $voted }}>
             <i class="fa fa-chevron-down"></i> <span>{{ $comment->down_count }}</span>
           </button>
           •
         @endif
 
         @can('update', $comment)
-          <button class="btn__delete__comment">댓글 삭제</button> •
-          <button class="btn__edit__comment">댓글 수정</button> •
+          <button class="btn__delete__comment">{{ trans('forum.comments.destroy') }}</button> •
+          <button class="btn__edit__comment">{{ trans('forum.comments.edit') }}</button> •
         @endcan
 
         @if ($currentUser)
           <button class="btn__reply__comment">
-            답글 쓰기
+            {{ trans('forum.comments.reply') }}
           </button>
         @endif
       </div>

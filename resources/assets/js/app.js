@@ -21,6 +21,7 @@ const app = new Vue({
     hljs.initHighlightingOnLoad();
     this.removeFlashMessages();
     this.setJqueryAjaxHeaders();
+    this.initBackToTopButton();
   },
 
   methods: {
@@ -34,6 +35,26 @@ const app = new Vue({
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+    },
+
+    initBackToTopButton() {
+      $('#back-to-top').on('click', function () {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+
+        return false;
+      });
+
+      $(window).on('scroll', function () {
+        var scrollPos = $(window).scrollTop();
+
+        if (scrollPos > 50) {
+          $('#back-to-top').fadeIn();
+        } else {
+          $('#back-to-top').fadeOut();
         }
       });
     }
