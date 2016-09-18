@@ -79,20 +79,7 @@ class SessionsController extends Controller
         return redirect(route('root'));
     }
 
-    /* Helpers */
-
-    /**
-     * Make an error response.
-     *
-     * @param string $message
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    protected function respondError($message)
-    {
-        flash()->error($message);
-
-        return back()->withInput();
-    }
+    /* Response Methods */
 
     /**
      * Make a success response.
@@ -106,6 +93,19 @@ class SessionsController extends Controller
 
         return ($return = request('return'))
             ? redirect(urldecode($return))
-            : redirect()->intended('home');
+            : redirect()->intended(route('home'));
+    }
+
+    /**
+     * Make an error response.
+     *
+     * @param string $message
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function respondError($message)
+    {
+        flash()->error($message);
+
+        return back()->withInput();
     }
 }

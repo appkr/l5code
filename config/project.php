@@ -7,7 +7,8 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'cache' => true,
+//    'cache' => true,
+    'cache' => false,
 
 //    // 다음처럼 해도 좋다.
 //    ! env('APP_DEBUG', false),
@@ -19,6 +20,10 @@ return [
     |--------------------------------------------------------------------------
     */
     'url' => env('APP_URL', 'http://localhost:8000'),
+
+    'api_domain' => env('API_DOMAIN', 'api.myapp.dev'),
+
+    'app_domain' => env('APP_DOMAIN', 'myapp.dev'),
 
     'description' => '',
 

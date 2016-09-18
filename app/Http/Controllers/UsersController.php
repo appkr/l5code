@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -31,7 +32,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        if ($socialUser = \App\User::socialUser($request->get('email'))->first()) {
+        if ($socialUser = User::socialUser($request->get('email'))->first()) {
             return $this->updateSocialAccount($request, $socialUser);
         }
 
@@ -46,7 +47,7 @@ class UsersController extends Controller
      */
     public function confirm($code)
     {
-        $user = \App\User::whereConfirmCode($code)->first();
+        $user = User::whereConfirmCode($code)->first();
 
         if (! $user) {
             return $this->respondError(
@@ -58,12 +59,7 @@ class UsersController extends Controller
         $user->confirm_code = null;
         $user->save();
 
-        auth()->login($user);
-        flash(
-            trans('auth.users.info_confirmed', ['name' => $user->name])
-        );
-
-        return redirect('home');
+        return $this->responsConfirmed($user);
     }
 
     /**
@@ -75,7 +71,7 @@ class UsersController extends Controller
      * @param \App\User $user
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function updateSocialAccount(Request $request, \App\User $user)
+    protected function updateSocialAccount(Request $request, User $user)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -88,11 +84,7 @@ class UsersController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        auth()->login($user);
-
-        return $this->respondCreated(
-            trans('auth.sessions.info_welcome', ['name' => $user->name])
-        );
+        return $this->respondUpdated($user);
     }
 
     /**
@@ -111,7 +103,7 @@ class UsersController extends Controller
 
         $confirmCode = str_random(60);
 
-        $user = \App\User::create([
+        $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
@@ -120,12 +112,39 @@ class UsersController extends Controller
 
         event(new \App\Events\UserCreated($user));
 
-        return $this->respondCreated(
-            trans('auth.users.info_confirmation_sent')
-        );
+        return $this->respondConfirmationEmailSent();
     }
 
-    /* Helpers */
+    /**
+     * @param \App\User $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function responsConfirmed(User $user)
+    {
+        auth()->login($user);
+        flash(
+            trans('auth.users.info_confirmed', ['name' => $user->name])
+        );
+
+        return redirect(route('home'));
+    }
+
+    /* Response Methods */
+
+    /**
+     * @param \App\User $user
+     * @param null $message
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondSuccess(User $user, $message = null)
+    {
+        auth()->login($user);
+        flash($message);
+
+        return ($return = request('return'))
+            ? redirect(urldecode($return))
+            : redirect()->intended();
+    }
 
     /**
      * Make an error response.
@@ -141,12 +160,20 @@ class UsersController extends Controller
     }
 
     /**
-     * @param $message
+     * @param \App\User $user
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function respondCreated($message)
+    protected function respondUpdated(User $user)
     {
-        flash($message);
+        return $this->respondSuccess(
+            $user,
+            trans('auth.users.info_welcome', ['name' => $user->name])
+        );
+    }
+
+    protected function respondConfirmationEmailSent()
+    {
+        flash(trans('auth.users.info_confirmation_sent'));
 
         return redirect(route('root'));
     }
