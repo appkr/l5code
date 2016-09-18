@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Article;
 use App\Http\Controllers\AttachmentsController as ParentController;
 
 class AttachmentsController extends ParentController
@@ -22,8 +23,12 @@ class AttachmentsController extends ParentController
      * @param \App\Article $article
      * @return \Illuminate\Http\Response
      */
-    public function index(\App\Article $article)
+    public function index(Article $article)
     {
-        return $article->attachments()->toJson(JSON_PRETTY_PRINT);
+//        return $article->attachments()->toJson(JSON_PRETTY_PRINT);
+        return json()->withCollection(
+            $article->attachments,
+            new \App\Transformers\AttachmentTransformer
+        );
     }
 }

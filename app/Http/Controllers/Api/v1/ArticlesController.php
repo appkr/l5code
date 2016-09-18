@@ -19,10 +19,6 @@ class ArticlesController extends ParentController
 //        $this->middleware('auth.basic.once', ['except' => ['index', 'show', 'tags']]);
 //        parent::__construct();
 
-//        parent::__construct();
-//        $this->middleware = [];
-//        $this->middleware('auth.basic.once', ['except' => ['index', 'show', 'tags']]);
-
         parent::__construct();
         $this->middleware = [];
         $this->middleware('jwt.auth', ['except' => ['index', 'show', 'tags']]);
@@ -32,7 +28,11 @@ class ArticlesController extends ParentController
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function tags() {
-        return \App\Tag::all();
+//        return \App\Tag::all();
+        return json()->withCollection(
+            \App\Tag::all(),
+            new \App\Transformers\TagTransformer
+        );
     }
 
     /**
@@ -41,20 +41,11 @@ class ArticlesController extends ParentController
      */
     protected function respondCollection(LengthAwarePaginator $articles)
     {
-        return $articles->toJson(JSON_PRETTY_PRINT);
-    }
-
-    /**
-     * @param $article
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondCreated($article)
-    {
-        return response()->json(
-            ['success' => 'created'],
-            201,
-            ['Location' => route('api.v1.articles.show', $article->id)],
-            JSON_PRETTY_PRINT
+//        return $articles->toJson(JSON_PRETTY_PRINT);
+//        return (new \App\Transformers\ArticleTransformerBasic)->withPagination($articles);
+        return json()->withPagination(
+            $articles,
+            new \App\Transformers\ArticleTransformer
         );
     }
 
@@ -65,7 +56,29 @@ class ArticlesController extends ParentController
      */
     protected function respondInstance(Article $article, Collection $comments)
     {
-        return $article->toJson(JSON_PRETTY_PRINT);
+//        return $article->toJson(JSON_PRETTY_PRINT);
+//        return (new \App\Transformers\ArticleTransformerBasic)->withItem($article);
+        return json()->withItem(
+            $article,
+            new \App\Transformers\ArticleTransformer
+        );
+    }
+
+    /**
+     * @param $article
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondCreated($article)
+    {
+//        return response()->json(
+//            ['success' => 'created'],
+//            201,
+//            ['Location' => route('api.v1.articles.show', $article->id)],
+//            JSON_PRETTY_PRINT
+//        );
+        return json()->setHeaders([
+            'Location' => route('api.v1.articles.show', $article->id),
+        ])->created('created');
     }
 
     /**
@@ -74,8 +87,9 @@ class ArticlesController extends ParentController
      */
     protected function respondUpdated(Article $article)
     {
-        return response()->json([
-            'success' => 'updated'
-        ], 200, [], JSON_PRETTY_PRINT);
+//        return response()->json([
+//            'success' => 'updated'
+//        ], 200, [], JSON_PRETTY_PRINT);
+        return json()->success('updated');
     }
 }

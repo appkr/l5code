@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\SocialController as ParentController;
+use Illuminate\Http\Request;
 
 class SocialController extends ParentController
 {

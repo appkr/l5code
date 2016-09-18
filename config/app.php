@@ -171,6 +171,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Maknz\Slack\SlackServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Appkr\Api\ApiServiceProvider::class,
 
         /*
          * Application Service Providers...

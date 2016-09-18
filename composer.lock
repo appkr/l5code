@@ -4,9 +4,69 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8e1f0fe97ca0d92e55e7f1d451a140b1",
-    "content-hash": "261d55f7e5a9312f7c0d827558a8999a",
+    "hash": "f5407f384368a393bbbf5c4f70de4a13",
+    "content-hash": "d909a6c2e1c87be9f0bf1a53e3a7aff2",
     "packages": [
+        {
+            "name": "appkr/api",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/appkr/api.git",
+                "reference": "9ef92a3be0a5cbdf43217cbc3d75ac3cdb7ba642"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/appkr/api/zipball/9ef92a3be0a5cbdf43217cbc3d75ac3cdb7ba642",
+                "reference": "9ef92a3be0a5cbdf43217cbc3d75ac3cdb7ba642",
+                "shasum": ""
+            },
+            "require": {
+                "league/fractal": "0.13.*",
+                "php": ">=5.5.9",
+                "shrikeh/teapot": "1.0.*"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.5",
+                "illuminate/console": "~5.0",
+                "phpunit/phpunit": "~5.2"
+            },
+            "suggest": {
+                "barryvdh/laravel-cors": "Handle CORS issue",
+                "tymon/jwt-auth": "Protect your API with JSON Web Tokens"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Appkr\\Api\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "appkr",
+                    "email": "juwonkim@me.com"
+                }
+            ],
+            "description": "RESTful HTTP API dev tool for Laravel or Lumen based project",
+            "keywords": [
+                "RESTful API",
+                "fractal",
+                "laravel"
+            ],
+            "time": "2016-04-23 14:28:00"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "V2.2.3",
@@ -1386,6 +1446,69 @@
             "time": "2016-08-10 08:55:11"
         },
         {
+            "name": "league/fractal",
+            "version": "0.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/fractal.git",
+                "reference": "3caeefbad51bce7a06947321938128512f42346c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/3caeefbad51bce7a06947321938128512f42346c",
+                "reference": "3caeefbad51bce7a06947321938128512f42346c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "illuminate/contracts": "~5.0",
+                "mockery/mockery": "~0.9",
+                "pagerfanta/pagerfanta": "~1.0.0",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5",
+                "zendframework/zend-paginator": "~2.3"
+            },
+            "suggest": {
+                "illuminate/pagination": "The Illuminate Pagination component.",
+                "pagerfanta/pagerfanta": "Pagerfanta Paginator",
+                "zendframework/zend-paginator": "Zend Framework Paginator"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.13-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Fractal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Phil Sturgeon",
+                    "email": "me@philsturgeon.uk",
+                    "homepage": "http://philsturgeon.uk/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle the output of complex data structures ready for API output.",
+            "homepage": "http://fractal.thephpleague.com/",
+            "keywords": [
+                "api",
+                "json",
+                "league",
+                "rest"
+            ],
+            "time": "2015-10-07 14:48:58"
+        },
+        {
             "name": "league/oauth1-client",
             "version": "1.7.0",
             "source": {
@@ -2213,6 +2336,125 @@
                 "uuid"
             ],
             "time": "2016-08-02 18:39:32"
+        },
+        {
+            "name": "shrikeh/teapot",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shrikeh/teapot.git",
+                "reference": "879ad8e197b75d0a34afb92e0ec70b75fd5cf171"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shrikeh/teapot/zipball/879ad8e197b75d0a34afb92e0ec70b75fd5cf171",
+                "reference": "879ad8e197b75d0a34afb92e0ec70b75fd5cf171",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Teapot": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barney Hanlon",
+                    "email": "barney@shrikeh.net"
+                }
+            ],
+            "description": "PHP HTTP Response Status library",
+            "homepage": "http://shrikeh.github.com/teapot",
+            "keywords": [
+                "http"
+            ],
+            "time": "2015-08-17 09:36:20"
+        },
+        {
+            "name": "squizlabs/php_codesniffer",
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+                "reference": "571e27b6348e5b3a637b2abc82ac0d01e6d7bbed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/571e27b6348e5b3a637b2abc82ac0d01e6d7bbed",
+                "reference": "571e27b6348e5b3a637b2abc82ac0d01e6d7bbed",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "ext-tokenizer": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "scripts/phpcs",
+                "scripts/phpcbf"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "CodeSniffer.php",
+                    "CodeSniffer/CLI.php",
+                    "CodeSniffer/Exception.php",
+                    "CodeSniffer/File.php",
+                    "CodeSniffer/Fixer.php",
+                    "CodeSniffer/Report.php",
+                    "CodeSniffer/Reporting.php",
+                    "CodeSniffer/Sniff.php",
+                    "CodeSniffer/Tokens.php",
+                    "CodeSniffer/Reports/",
+                    "CodeSniffer/Tokenizers/",
+                    "CodeSniffer/DocGenerators/",
+                    "CodeSniffer/Standards/AbstractPatternSniff.php",
+                    "CodeSniffer/Standards/AbstractScopeSniff.php",
+                    "CodeSniffer/Standards/AbstractVariableSniff.php",
+                    "CodeSniffer/Standards/IncorrectPatternException.php",
+                    "CodeSniffer/Standards/Generic/Sniffs/",
+                    "CodeSniffer/Standards/MySource/Sniffs/",
+                    "CodeSniffer/Standards/PEAR/Sniffs/",
+                    "CodeSniffer/Standards/PSR1/Sniffs/",
+                    "CodeSniffer/Standards/PSR2/Sniffs/",
+                    "CodeSniffer/Standards/Squiz/Sniffs/",
+                    "CodeSniffer/Standards/Zend/Sniffs/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Sherwood",
+                    "role": "lead"
+                }
+            ],
+            "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+            "homepage": "http://www.squizlabs.com/php-codesniffer",
+            "keywords": [
+                "phpcs",
+                "standards"
+            ],
+            "time": "2016-09-01 23:53:02"
         },
         {
             "name": "swiftmailer/swiftmailer",
