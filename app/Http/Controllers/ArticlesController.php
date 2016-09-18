@@ -56,7 +56,7 @@ class ArticlesController extends Controller implements Cacheable
 
         $articles = $this->cache($cacheKey, 5, $query, 'paginate', 3);
 
-        return $this->respondCollection($articles);
+        return $this->respondCollection($articles, $cacheKey);
     }
 
     /**
@@ -110,8 +110,10 @@ class ArticlesController extends Controller implements Cacheable
      */
     public function show(Article $article)
     {
-        $article->view_count += 1;
-        $article->save();
+        if (! is_api_domain()) {
+            $article->view_count += 1;
+            $article->save();
+        }
 
         $comments = $article->comments()
                             ->with('replies')
@@ -181,9 +183,10 @@ class ArticlesController extends Controller implements Cacheable
 
     /**
      * @param \Illuminate\Contracts\Pagination\LengthAwarePaginator $articles
+     * @param string|null $cacheKey
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function respondCollection(LengthAwarePaginator $articles)
+    protected function respondCollection(LengthAwarePaginator $articles, $cacheKey = null)
     {
         return view('articles.index', compact('articles'));
     }

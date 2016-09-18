@@ -25,7 +25,6 @@ class AttachmentsController extends ParentController
      */
     public function index(Article $article)
     {
-//        return $article->attachments()->toJson(JSON_PRETTY_PRINT);
         return json()->withCollection(
             $article->attachments,
             new \App\Transformers\AttachmentTransformer
