@@ -25,3 +25,12 @@ $factory->define(App\Article::class, function (Faker\Generator $faker) {
         'updated_at' => $date,
     ];
 });
+
+$factory->define(App\Attachment::class, function (Faker\Generator $faker) {
+    return [
+        'filename' => sprintf("%s.%s",
+            str_random(),
+            $faker->randomElement(config('project.mimes'))
+        )
+    ];
+});

@@ -17,7 +17,7 @@
 .select2-dropdown,
 .select2-container--default .select2-selection--multiple,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-  border: 1px $input-border solid;
+  border: 1px solid $input-border;
   border-radius: 4px;
 }
 
@@ -26,15 +26,47 @@
   font-size: $font-size-base;
 }
 
+// Dropzone
+@import 'node_modules/dropzone/src/dropzone';
+
+.dropzone {
+  border: 1px solid $input-border;
+  border-radius: 4px;
+}
+
+.dropzone {
+  display: none;
+}
+
+label[for=my-dropzone]>small {
+  cursor: pointer;
+}
+
+.preview__content {
+  display: none;
+  margin-top: $font-size-base * 1.6;
+  height: auto;
+  @extend .form-control;
+  box-shadow: none;
+}
 
 // Application Layouts
 .footer__master {
-  margin-top: 20px;
+  margin-top: 1em;
+}
+
+.container__article{
+  padding: 1em 0;
+}
+
+.action__article {
+  margin-top: 1em;
 }
 
 // Sidebar
 .sidebar__article,
-.tags__article {
+.tags__article,
+.attachments__article {
   a {
     color: $text-color;
     text-decoration: none;
@@ -78,8 +110,21 @@
   }
 }
 
-// Tags Line
-.tags__article {
+// Article
+.content__article {
+  margin: 2em;
+  img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    transition: all .2s ease-in-out
+  }
+}
+
+// Tags Line, Attachments Line
+.tags__article,
+.attachments__article {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -88,6 +133,10 @@
 
   li {
     display: inline-block;
+  }
+
+  li:first-child {
+    margin-right: 10px;
   }
 
   li:not(:first-child) {
@@ -102,6 +151,10 @@
 }
 
 // Form
+.form-control {
+  box-shadow: none;
+}
+
 .form__auth {
   max-width: 400px;
   width: 100%;

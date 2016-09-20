@@ -25,7 +25,9 @@
       <article data-id="{{ $article->id }}">
         @include('articles.partial.article', compact('article'))
 
-        <p>{!! markdown($article->content) !!}</p>
+        <div class="content__article">
+          {!! markdown($article->content) !!}
+        </div>
 
         @include('tags.partial.list', ['tags' => $article->tags])
       </article>
@@ -54,10 +56,6 @@
 
 @section('script')
   <script>
-    $.ajaxSetup({ headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-    });
-
     $('.button__delete').on('click', function (e) {
       var articleId = $('article').data('id');
 

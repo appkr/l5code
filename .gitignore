@@ -1,4 +1,5 @@
 /node_modules
+/npm-debug.log
 /public/storage
 /vendor
 /.idea
@@ -9,3 +10,4 @@
 Homestead.json
 Homestead.yaml
 .env
+public/files

@@ -17,6 +17,10 @@ Route::get('tags/{slug}/articles', [
     'uses' => 'ArticlesController@index',
 ]);
 
+/* 첨부 파일 */
+Route::resource('attachments', 'AttachmentsController', ['only' => ['store', 'destroy']]);
+Route::get('attachments/{file}', 'AttachmentsController@show');
+
 /* Markdown Viewer */
 Route::get('docs/{file?}', 'DocsController@show');
 Route::get('docs/images/{image}', 'DocsController@image')

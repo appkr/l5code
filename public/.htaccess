@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # Bypass Laravel Route
+    RewriteCond %{REQUEST_URI} !(files) [NC]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]

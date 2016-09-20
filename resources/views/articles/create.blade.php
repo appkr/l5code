@@ -5,7 +5,7 @@
 
   <hr/>
 
-  <form action="{{ route('articles.store') }}" method="POST">
+  <form action="{{ route('articles.store') }}" method="POST" enctype="multipart/form-data" class="form__article">
     {!! csrf_field() !!}
 
     @include('articles.partial.form')
