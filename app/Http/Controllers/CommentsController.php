@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Comment;
+use App\Http\Requests\CommentsRequest;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class CommentsController extends Controller
 {
@@ -23,7 +24,7 @@ class CommentsController extends Controller
      * @param \App\Article $article
      * @return \Illuminate\Http\Response
      */
-    public function store(\App\Http\Requests\CommentsRequest $request, \App\Article $article)
+    public function store(CommentsRequest $request, Article $article)
     {
         $comment = $article->comments()->create(array_merge(
             $request->all(),
@@ -46,7 +47,7 @@ class CommentsController extends Controller
      * @param \App\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(\App\Http\Requests\CommentsRequest $request, \App\Comment $comment)
+    public function update(CommentsRequest $request, Comment $comment)
     {
         $this->authorize('update', $comment);
 
@@ -63,7 +64,7 @@ class CommentsController extends Controller
      * @param \App\Comment $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(\App\Comment $comment)
+    public function destroy(Comment $comment)
     {
         $this->authorize('update', $comment);
 
@@ -86,7 +87,7 @@ class CommentsController extends Controller
      * @param \App\Comment $comment
      * @return \Illuminate\Http\JsonResponse
      */
-    public function vote(Request $request, \App\Comment $comment)
+    public function vote(Request $request, Comment $comment)
     {
         $this->validate($request, [
             'vote' => 'required|in:up,down',
@@ -114,18 +115,18 @@ class CommentsController extends Controller
     /* Response Methods */
 
     /**
-     * @param $article
-     * @param $comment
+     * @param \App\Article $article
+     * @param \App\Comment $comment
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function respondCreated($article, $comment)
+    protected function respondCreated(Article $article, Comment $comment)
     {
         return redirect(
             route('articles.show', $article->id) . '#comment_' . $comment->id
         );
     }
 
-    protected function respondUpdated($comment)
+    protected function respondUpdated(Comment $comment)
     {
         flash()->success(
             trans('forum.comments.success_updating')

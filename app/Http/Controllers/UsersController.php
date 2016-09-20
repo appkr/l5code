@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
 class UsersController extends Controller
 {
     public function __construct()
@@ -50,9 +48,7 @@ class UsersController extends Controller
         $user = User::whereConfirmCode($code)->first();
 
         if (! $user) {
-            return $this->respondError(
-                trans('auth.users.error_wrong_url')
-            );
+            return $this->respondWrongUrl();
         }
 
         $user->activated = 1;
@@ -171,9 +167,24 @@ class UsersController extends Controller
         );
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     protected function respondConfirmationEmailSent()
     {
         flash(trans('auth.users.info_confirmation_sent'));
+
+        return redirect(route('root'));
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondWrongUrl()
+    {
+        flash()->error(
+            trans('auth.users.error_wrong_url')
+        );
 
         return redirect(route('root'));
     }

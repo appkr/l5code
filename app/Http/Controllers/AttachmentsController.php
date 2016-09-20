@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Attachment;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class AttachmentsController extends Controller
 {
@@ -42,7 +41,7 @@ class AttachmentsController extends Controller
 
                 $attachments[] = ($id = $request->input('article_id'))
                     ? \App\Article::findOrFail($id)->attachments()->create($payload)
-                    : \App\Attachment::create($payload);
+                    : Attachment::create($payload);
             }
         }
 
@@ -55,7 +54,7 @@ class AttachmentsController extends Controller
      * @param \App\Attachment $attachment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(\App\Attachment $attachment)
+    public function destroy(Attachment $attachment)
     {
         $path = attachments_path($attachment->name);
 
@@ -65,7 +64,12 @@ class AttachmentsController extends Controller
 
         $attachment->delete();
 
-        return response()->json($attachment, 200, [], JSON_PRETTY_PRINT);
+        return response()->json(
+            $attachment,
+            200,
+            [],
+            JSON_PRETTY_PRINT
+        );
     }
 
     /**

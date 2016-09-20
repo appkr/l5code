@@ -188,3 +188,26 @@ if (! function_exists('array_transpose')) {
         return $res;
     }
 }
+
+if (! function_exists('is_api_domain')) {
+    /**
+     * Determine if the current request is for HTTP api.
+     *
+     * @return bool
+     */
+    function is_api_domain()
+    {
+        return starts_with(request()->getHttpHost(), config('project.api_domain'));
+    }
+}
+
+if (! function_exists('jwt')) {
+    /**
+     * Create JWT instance.
+     *
+     * @return \Tymon\JWTAuth\JWTAuth
+     */
+    function jwt() {
+        return app('tymon.jwt.auth');
+    }
+}

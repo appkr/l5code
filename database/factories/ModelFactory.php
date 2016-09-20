@@ -21,6 +21,7 @@ $factory->define(App\Article::class, function (Faker\Generator $faker) {
         'title' => $faker->sentence(),
         'content' => $faker->paragraph(),
         'user_id' => $faker->randomElement($userId),
+        'view_count' => mt_rand(0, 100),
         'created_at' => $date,
         'updated_at' => $date,
     ];

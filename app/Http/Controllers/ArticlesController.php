@@ -83,8 +83,7 @@ class ArticlesController extends Controller implements Cacheable
             'notification' => $request->has('notification'),
         ]);
 
-//        $article = $request->user()->articles()->create($payload);
-        $article = \App\User::find(1)->articles()->create($payload);
+        $article = $request->user()->articles()->create($payload);
 
         if (! $article) {
             flash()->error(

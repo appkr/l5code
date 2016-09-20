@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
 class SessionsController extends Controller
 {
     /**
@@ -39,29 +37,25 @@ class SessionsController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        if (! auth()->attempt($request->only('email', 'password'), $request->has('remember'))) {
+        $token = is_api_domain()
+            ? jwt()->attempt($request->only('email', 'password'))
+            : auth()->attempt($request->only('email', 'password'), $request->has('remember'));
+
+        if (! $token) {
             if (\App\User::socialUser($request->input('email'))->first()) {
-                return $this->respondError(
-                    trans('auth.sessions.error_social_user')
-                );
+                return $this->respondSocialUser();
             }
 
-            return $this->respondError(
-                trans('auth.sessions.error_incorrect_credentials')
-            );
+            return $this->respondLoginFailed();
         }
 
         if (! auth()->user()->activated) {
             auth()->logout();
 
-            return $this->respondError(
-                trans('auth.sessions.error_not_confirmed')
-            );
+            return $this->respondNotConfirmed();
         }
 
-        return $this->respondCreated(
-            trans('auth.sessions.info_welcome', ['name' => auth()->user()->name])
-        );
+        return $this->respondCreated($token);
     }
 
     /**
@@ -84,12 +78,14 @@ class SessionsController extends Controller
     /**
      * Make a success response.
      *
-     * @param string $message
+     * @param string|boolean $token
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function respondCreated($message)
+    protected function respondCreated($token)
     {
-        flash($message);
+        flash(
+            trans('auth.sessions.info_welcome', ['name' => auth()->user()->name])
+        );
 
         return ($return = request('return'))
             ? redirect(urldecode($return))
@@ -105,6 +101,42 @@ class SessionsController extends Controller
     protected function respondError($message)
     {
         flash()->error($message);
+
+        return back()->withInput();
+    }
+
+    /**
+     * @return $this
+     */
+    protected function respondSocialUser()
+    {
+        flash()->error(
+            trans('auth.sessions.error_social_user')
+        );
+
+        return back()->withInput();
+    }
+
+    /**
+     * @return $this
+     */
+    protected function respondLoginFailed()
+    {
+        flash()->error(
+            trans('auth.sessions.error_incorrect_credentials')
+        );
+
+        return back()->withInput();
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function respondNotConfirmed()
+    {
+        flash()->error(
+            trans('auth.sessions.error_not_confirmed')
+        );
 
         return back()->withInput();
     }

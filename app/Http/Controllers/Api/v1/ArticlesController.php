@@ -9,11 +9,28 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ArticlesController extends ParentController
 {
+    /**
+     * ArticlesController constructor.
+     */
     public function __construct()
     {
-        //
+//        HTTP 기본 인증으로 인증을 받은 후, 부모 컨트롤러 생성자의 인증 미들웨어를 타게 되므로
+//        아래 로직은 정상적으로 작동해야 한다. 프레임워크 버그로 추정된다.
+//        $this->middleware('auth.basic.once', ['except' => ['index', 'show', 'tags']]);
+//        parent::__construct();
+
+//        parent::__construct();
+//        $this->middleware = [];
+//        $this->middleware('auth.basic.once', ['except' => ['index', 'show', 'tags']]);
+
+        parent::__construct();
+        $this->middleware = [];
+        $this->middleware('jwt.auth', ['except' => ['index', 'show', 'tags']]);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function tags() {
         return \App\Tag::all();
     }
@@ -36,9 +53,7 @@ class ArticlesController extends ParentController
         return response()->json(
             ['success' => 'created'],
             201,
-//            책에서는 show 메서드를 수록하지 않았으므로 아래 코드를 오류를 낸다.
-//            우리 소스코드에서는 show 메서드를 포함하고 있으므로 주석해제해도 작동한다.
-//            ['Location' => route('api.v1.articles.show', $article->id)],
+            ['Location' => route('api.v1.articles.show', $article->id)],
             JSON_PRETTY_PRINT
         );
     }

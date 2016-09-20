@@ -17,8 +17,8 @@ class CreateVotesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('comment_id')->unsigned();
-            $table->tinyInteger('up')->nullable();
-            $table->tinyInteger('down')->nullable();
+            $table->boolean('up')->nullable();
+            $table->boolean('down')->nullable();
             $table->timestamp('voted_at');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
