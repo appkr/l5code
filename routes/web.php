@@ -21,6 +21,16 @@ Route::get('tags/{slug}/articles', [
 Route::resource('attachments', 'AttachmentsController', ['only' => ['store', 'destroy']]);
 Route::get('attachments/{file}', 'AttachmentsController@show');
 
+/* 코멘트(댓글) */
+Route::resource('comments', 'CommentsController', ['only' => ['update', 'destroy']]);
+Route::resource('articles.comments', 'CommentsController', ['only' => 'store']);
+
+/* 투표 */
+Route::post('comments/{comment}/votes', [
+    'as' => 'comments.vote',
+    'uses' => 'CommentsController@vote',
+]);
+
 /* Markdown Viewer */
 Route::get('docs/{file?}', 'DocsController@show');
 Route::get('docs/images/{image}', 'DocsController@image')

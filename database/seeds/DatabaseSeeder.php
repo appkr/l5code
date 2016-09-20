@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => str_slug($slug) ]
             );
         }
+
         $this->command->info('Seeded: tags table');
 
         if (! app()->environment(['production'])) {
@@ -63,6 +64,7 @@ class DatabaseSeeder extends Seeder
                 )
             );
         }
+
         $this->command->info('Seeded: article_tag table');
 
         /* 첨부 파일 */
@@ -86,12 +88,46 @@ class DatabaseSeeder extends Seeder
             $filename = File::basename($path);
             $bytes = File::size($path);
             $mime = File::mimeType($path);
+
             $this->command->warn("File saved: {$filename}");
 
             $article->attachments()->save(
                 factory(App\Attachment::class)->make(compact('filename', 'bytes', 'mime'))
             );
         });
+
         $this->command->info('Seeded: attachments table and files');
+
+        /* 댓글 */
+        $articles->each(function ($article) {
+            $article->comments()->save(factory(App\Comment::class)->make());
+            $article->comments()->save(factory(App\Comment::class)->make());
+        });
+
+        // 댓글의 댓글(자식 댓글)
+        $articles->each(function ($article) use ($faker){
+            $commentIds = App\Comment::pluck('id')->toArray();
+
+            foreach(range(1,5) as $index) {
+                $article->comments()->save(
+                    factory(App\Comment::class)->make([
+                        'parent_id' => $faker->randomElement($commentIds),
+                    ])
+                );
+            }
+        });
+
+        $this->command->info('Seeded: comments table');
+
+        /* up & down 투표 */
+        $comments = App\Comment::all();
+
+        $comments->each(function ($comment) {
+            $comment->votes()->save(factory(App\Vote::class)->make());
+            $comment->votes()->save(factory(App\Vote::class)->make());
+            $comment->votes()->save(factory(App\Vote::class)->make());
+        });
+
+        $this->command->info('Seeded: votes table');
     }
 }

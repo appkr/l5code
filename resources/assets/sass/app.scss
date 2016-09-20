@@ -150,6 +150,73 @@ label[for=my-dropzone]>small {
   }
 }
 
+// Comments
+.link__login__comment {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+  border: 1px solid $input-border;
+  width: 100%;
+}
+
+.item__comment.top {
+  padding: 1rem;
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+  float: right;
+  width: 100%;
+  border: 1px solid $input-border;
+}
+
+.media__edit__comment,
+.media__create__comment.sub {
+  display: none;
+}
+
+.form__new__comment,
+.list__comment {
+  .form-group {
+    width: 100%;
+    margin: auto;
+  }
+
+  div.text-right {
+    margin: 10px auto;
+  }
+}
+
+.content__comment {
+  p {
+    margin: 0;
+  }
+}
+
+.action__comment {
+  button, span {
+    font-size: $font-size-base * 0.8;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  button {
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    transition: all .2s ease-in-out
+  }
+
+  &>span {
+    margin: 0 5px;
+  }
+}
+
 // Form
 .form-control {
   box-shadow: none;
@@ -178,6 +245,8 @@ label[for=my-dropzone]>small {
 
   .form-control:focus {
     z-index: 2;
+    border-color: $input-border;
+    box-shadow: none;
   }
 
   input {

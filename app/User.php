@@ -57,6 +57,15 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
     /* Query Scopes */
 
     public function scopeSocialUser(\Illuminate\Database\Eloquent\Builder $query, $email)
