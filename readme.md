@@ -5,8 +5,8 @@
 
 컴포넌트|버전
 ---|---
-프레임워크(`laravel/laravel`)|5.3.6
-핵심 컴포넌트(`laravel/framework`)|5.3.6
+프레임워크(`laravel/laravel`)|5.3.0
+핵심 컴포넌트(`laravel/framework`)|5.3.9
 
 ## 1. 다운로드
 
