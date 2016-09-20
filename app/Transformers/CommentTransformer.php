@@ -27,8 +27,10 @@ class CommentTransformer extends TransformerAbstract
      */
     public function transform(Comment $comment)
     {
+        $obfuscatedId = optimus($comment->id);
+
         $payload = [
-            'id' => $comment->id,
+            'id' => $obfuscatedId,
             'content' => $comment->content,
             'content_html' => markdown($comment->content),
             'author'       => [
@@ -40,7 +42,7 @@ class CommentTransformer extends TransformerAbstract
             'links' => [
                 [
                     'rel' => 'self',
-                    'href' => route('api.v1.comments.show', $comment->id),
+                    'href' => route('api.v1.comments.show', $obfuscatedId),
                 ],
             ],
         ];

@@ -211,3 +211,22 @@ if (! function_exists('jwt')) {
         return app('tymon.jwt.auth');
     }
 }
+
+if (! function_exists('optimus')) {
+    /**
+     * Create Optimus instance.
+     *
+     * @param int|null $id
+     * @return int|\Jenssegers\Optimus\Optimus
+     */
+    function optimus($id = null)
+    {
+        $factory = app('optimus');
+
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+
+        return $factory->encode($id);
+    }
+}
