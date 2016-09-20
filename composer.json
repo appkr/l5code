@@ -20,7 +20,9 @@
     "doctrine/dbal": "^2.5",
     "maknz/slack": "1.*",
     "tymon/jwt-auth": " 0.5.*",
-    "appkr/api": " 1.*"
+    "appkr/api": " 1.*",
+    "barryvdh/laravel-cors": "0.8.*",
+    "jenssegers/optimus": "0.2.*"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

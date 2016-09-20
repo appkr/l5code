@@ -25,9 +25,19 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Route::model('article', \App\Article::class);
+        Route::model('article', \App\Article::class, function ($id) {
+            return \App\Article::whereId(optimus()->decode($id))->first();
+        });
+
         Route::model('attachment', \App\Attachment::class);
-        Route::model('comment', \App\Comment::class);
+
+        Route::model('comment', \App\Comment::class, function ($id) {
+            return \App\Comment::whereId(optimus()->decode($id))->first();
+        });
+
+        Route::model('user', \App\User::class, function ($id) {
+            return \App\User::whereId(optimus()->decode($id))->first();
+        });
     }
 
     /**
