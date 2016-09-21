@@ -32,12 +32,14 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if (app()->environment('production')) {
+        if (app()->environment('production') && $this->shouldReport($exception)) {
             \Slack::send(
                 sprintf(
-                    "%s \n%s \n\n%s",
+                    "%s \n\n%s \n%s:%d \n\n%s",
+                    get_class($exception),
                     $exception->getMessage(),
                     $exception->getFile(),
+                    $exception->getLine(),
                     $exception->getTraceAsString()
                 )
             );
@@ -57,13 +59,13 @@ class Handler extends ExceptionHandler
     {
         if (app()->environment('production')) {
             $statusCode = 400;
-            $title = trans('messages.title');
-            $description = trans('messages.description');
+            $title = trans('messages.error.title');
+            $description = trans('messages.error.description');
 
             if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException
                 or $exception instanceof \Symfony\Component\HttpKernel\Exception\ NotFoundHttpException) {
                 $statusCode = 404;
-                $description = $exception->getMessage() ?: trans('messages.not_found');
+                $description = $exception->getMessage() ?: trans('messages.error.not_found');
             }
 
             return response(view('errors.notice', [
