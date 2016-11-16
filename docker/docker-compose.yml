@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+
+  lemp:
+    build: .
+    environment:                    # docker -e KEY=VAL
+      MYSQL_ROOT_PASSWORD=secret        # root 및 homestead 사용자의 MySQL 비밀번호
+    volumes:                        # docker -v <host_dir>:<container_dir>
+      - ../:/var/www/myapp              # 공유 폴더 설정.
+                                        # Docker 실행 컨텍스트의 상위 폴더, 즉 우리의 프로젝트 디렉터리를 /var/www/myapp에 마운트합니다.
+                                        # 이 폴더는 웹 서버의 document root 입니다.
+      - ./mysql_datadir:/var/lib/mysql  # MySQL 데이터 공유 폴더.
+    ports:                          # docker -p <host_port>:<container_port>
+      - "8000:80"                       # 호스트와 Docker 컨테이너간의 포트를 맵핑합니다.
+                                        # Docker 컨테이너에서는 80번이지만, 포트 충돌 회피를 위해 호스트에서 8000번에 맵핑합니다.
+      - "9001:9001"
+      - "33060:3306"
+    tty: true                       # docker -t
+    stdin_open: true                # docker -i

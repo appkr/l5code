@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\ClearOrphanedAttachments::class,
+        \App\Console\Commands\InitializeDockerContainer::class,
     ];
 
     /**
