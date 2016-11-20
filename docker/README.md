@@ -24,11 +24,11 @@ $ sudo apt-get install docker.io
 
 ### 2. 브랜치 이동
 
-소스코드를 다운로드 받았다면 `docker` 브랜치로 이동합니다.
+이 소스 코드를 다운로드 받았다면 `docker` 브랜치로 이동합니다.
 
 ```sh
-~/myapp $ git checkout docker 
-~/myapp $ git branch
+~/myapp(master) $ git checkout docker 
+~/myapp(docker) $ git branch
 # * docker
 #   master
 ```
@@ -49,10 +49,10 @@ $ sudo apt-get install docker.io
 Docker "이미지"는 서버 인프라에 대한 스냅샷입니다. Docker "컨테이너"는 이미지를 실행한 상태를 말합니다 (정확한 표현은 아닙니다). 이 절에서 이미지를 만들겁니다. 
 
 ```sh
-~/myapp $ cd docker
-~/myapp/docker $ docker-compose build   # 이미지를 빌드합니다.
+~/myapp(docker) $ cd docker
+~/myapp/docker(docker) $ docker-compose build   # 이미지를 빌드합니다.
 # ...
-~/myapp/docker $ docker images          # 빌드된 이미지를 확인합니다.
+~/myapp/docker(docker) $ docker images          # 빌드된 이미지를 확인합니다.
 # REPOSITORY       TAG     IMAGE ID      CREATED             SIZE
 # docker_lemp      latest  be090cf065f3  53 minutes ago      609.2 MB
 # appkr/lemp-base  latest  bb59765126dc  About an hour ago   609.2 MB
@@ -66,8 +66,8 @@ Docker "이미지"는 서버 인프라에 대한 스냅샷입니다. Docker "컨
 컨테이너를 실행하기 전에 꼭 이해해야할 내용은 볼륨 마운트입니다. 폴더 공유라 생각하면 됩니다. 호스트 머신에 있는 우리의 소스 코드 및 실습 중에 변경한 MySQL 데이터는 호스트와 Docker 컨테이너간에 공유되어야 합니다. "호스트" 머신은 내 로컬 컴퓨터를 의미합니다.
 
 ```sh
-~/myapp/docker $ mkdir mysql_datadir    # MySQL 데이터를 공유할 폴더를 만듭니다. 
-~/myapp/docker $ docker-compose up      # 만든 이미지를 실행합니다.
+~/myapp/docker(docker) $ mkdir mysql_datadir    # MySQL 데이터를 공유할 폴더를 만듭니다. 
+~/myapp/docker(docker) $ docker-compose up      # 만든 이미지를 실행합니다.
 # ...
 # 종료하려면 Ctrl+c를 누릅니다.
 ```
@@ -83,11 +83,11 @@ Docker "이미지"는 서버 인프라에 대한 스냅샷입니다. Docker "컨
 `myapp` 데이터베이스와 `homestead` 사용자를 만들고, 최초 마이그레이션과 데이터 시딩을 할 차례입니다. 4절에서 만든 MySQL 데이터 공유 폴더의 내용을 지우지 않는다면, 이 작업은 다시 수행할 필요가 없습니다.
 
 ```sh
-~/myapp $ docker ps                   # 실행 중인 컨테이너 목록을 확인합니다.
+~/myapp(docker) $ docker ps                   # 실행 중인 컨테이너 목록을 확인합니다.
 # CONTAINER ID    IMAGE        COMMAND           CREATED  STATUS  PORTS  NAMES
 # <container_id>  docker_lemp  "/entrypoint.sh"  3 min..  Up 3..  0.0.0  docker_lemp_1
 
-~/myapp $ docker exec -it <container_id> bash
+~/myapp(docker) $ docker exec -it <container_id> bash
                                       # 목록에서 얻은 <container_id>를 이용해서 컨테이너 안으로 들어갑니다.
                                       # 서버에 로그인했다고 생각하면 됩니다.
 
@@ -95,7 +95,7 @@ root@<container_id>:/var/www/myapp# bash docker/myinit.sh
 root@<container_id>:/var/www/myapp# exit
                                       # 초기화 작업을 수행하고 컨테이너를 빠져 나옵니다.
 
-~/myapp $
+~/myapp(docker) $
 ```
 
 ### 6. 테스트
