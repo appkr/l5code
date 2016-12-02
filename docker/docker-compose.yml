@@ -5,7 +5,7 @@ services:
   lemp:
     build: .
     environment:                    # docker -e KEY=VAL
-      MYSQL_ROOT_PASSWORD=secret        # root 및 homestead 사용자의 MySQL 비밀번호
+      - MYSQL_ROOT_PASSWORD=secret        # root 및 homestead 사용자의 MySQL 비밀번호
     volumes:                        # docker -v <host_dir>:<container_dir>
       - ../:/var/www/myapp              # 공유 폴더 설정.
                                         # Docker 실행 컨텍스트의 상위 폴더, 즉 우리의 프로젝트 디렉터리를 /var/www/myapp에 마운트합니다.
