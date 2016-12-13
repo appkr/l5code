@@ -85,6 +85,9 @@ class PasswordsController extends Controller
             );
         }
 
+        \App\User::whereEmail($request->input('email'))->first()->update([
+            'password' => bcrypt($request->input('password'))
+        ]);
         \DB::table('password_resets')->whereToken($token)->delete();
 
         return $this->respondSuccess(
