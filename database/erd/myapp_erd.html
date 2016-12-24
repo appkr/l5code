@@ -1,0 +1,1116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<!DOCTYPE html>
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>Default Layout</title>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<style type='text/css'>
+body {
+    font-family: 'Segoe UI', 'Lucida sans', Dialog;
+    font-size: 13px;
+    color: #444;
+    margin: 10px;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    caption-side: top;
+    width: auto;
+    margin: 10px 15px 5px 0;
+}
+
+
+.bordered td, .bordered th {
+   background-color: #fafafa;
+   border: 1px solid #D5D5D5;
+   padding: 3px 3px 3px 3px;
+   white-space:pre-wrap!important;
+}
+
+.bordered th {
+    background-color: #f0f0f0;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding: 3px 3px 3px 3px;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: left;
+    color: #333333;
+}
+
+.section-header h2 {
+    background-color: #f0f0f0;
+    font-size: 16px;
+    font-weight: normal;
+    border-top: solid 1px #D5D5D5;
+    border-bottom: solid 1px #D5D5D5;
+    width: 95%;
+    margin: 5px 0 5px 0;
+    padding: 5px 0 5px 0;
+    color: #4d82b8;
+}
+.section-header div {
+    font-size: 70%;
+    padding-left: 5px;
+}
+
+
+a, a:visited, a:hover, a:active {
+  color: #044282;
+  text-decoration: none;
+}
+
+th > a {
+    color:#858585;
+}
+
+.lg {
+    font-size: 110%;
+}
+
+h1 {
+    font-family: Verdana,Arial,Helvetica;
+    font-weight: normal;
+    color: #4d82b8;
+    margin: 20px 0 10px 0;
+}
+
+</style>
+</head>
+
+<body>
+<div class='svg-container'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' text-rendering='optimizeLegibility'   width='1008' height='654' viewbox='0 0 1008 654' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ document.getElementById(el[i]).setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ document.getElementById(el[i]).setAttribute('class','scene'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#000000; font-family: Trebuchet MS, 'Trebuchet MS', Dialog; font-size:12px; }
+  a text:hover        { text-shadow: 0 0 6px #d0ce00; }
+  text.highlight      { text-shadow: 0 0 4px #eac533; }
+  text.colType        { fill:#b3b3b3; }
+  text.relName        { fill:#b09c7c; }
+  path                { stroke:#5c554f; stroke-width:1.15; fill:none; }
+  path.scene          { stroke-width:10; opacity:0;}
+  path.highlight      { stroke-width:5; stroke:#eac533; opacity:0.6;}
+  rect.table          { fill:#ffffff; stroke:#aaa; stroke-width:1;shape-rendering:crispEdges;filter:url(#shadow); }
+  line.delim          { stroke-width:1; shape-rendering:crispEdges; }
+  text.callout        { fill:#000000; font-family: Trebuchet MS, 'Trebuchet MS', Dialog; font-size:12px; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#bebdbd; stroke-width:0.5; filter: url(#shadow);}
+  rect.grp            { stroke:#b1b1b1; stroke-width:1.7; opacity:0.8; }
+</style>
+<defs>
+  <pattern id='layoutBgA' patternUnits='userSpaceOnUse'  width='10' height='20' x='0' y='0' viewBox='0 0 5 10'>  
+     <line x1='-2' y1='1' x2='7' y2='10' stroke='#efefef' stroke-width='.5'/>  
+     <line x1='-2' y1='6' x2='7' y2='15' stroke='#efefef' stroke-width='.5'/>  
+     <line x1='-2' y1='-4' x2='7' y2='5' stroke='#efefef' stroke-width='.5'/>  
+  </pattern>  
+  <radialGradient id='layoutBgB' gradientUnits='userSpaceOnUse' cx='50%' cy='50%' r='75%' fx='46%' fy='22%'>
+     <stop offset='0%' stop-opacity='.2' stop-color='#f5f5f5' />  
+     <stop offset='100%' stop-color='#efefef' />  
+  </radialGradient>
+  <pattern id='layoutBgTr' patternUnits='userSpaceOnUse'  width='300' height='300' x='0' y='0' viewBox='0 0 300 300'>  
+    <text x='-85' y='200' transform='rotate(-45)' style='font-family:Arial;font-size:78px;font-weight:bold;fill:#e7e7e7;'>&#84;&#82;&#73;&#65;&#76;</text> 
+    <text x='-130' y='230' transform='rotate(-45)' style='font-family:Arial;font-size:24px;font-weight:bold;fill:#e7e7e7;'>&#77;ove &#116;he m&#111;use &#111;ver &#116;ables</text> 
+    <text x='-85' y='250' transform='rotate(-45)' style='font-family:Arial;font-size:24px;font-weight:bold;fill:#e7e7e7;'>&#116;o re&#97;d &#116;he c&#111;mmen&#116;s</text> 
+  </pattern>  
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
+          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
+   </linearGradient>
+  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f8f6d1' />
+  </radialGradient>
+  <filter id='shadow' width='120%' height='120%'> 
+      <feOffset result='offOut' in='SourceGraphic' dx='1' dy='1' /> 
+      <feColorMatrix result='matrixOut' in='offOut' type='matrix' 
+      values='0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.3 0' /> 
+      <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' /> 
+      <feBlend in='SourceGraphic' in2='blurOut' mode='normal' /> 
+    </filter> 
+  <filter id='fkShadow' height='130%'> 
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+    <feMerge>
+    <feMergeNode/> <!-- this contains the offset blurred image -->
+    <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter>
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#eefbf2' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#cff9cb' stop-opacity='1' /> 
+   </radialGradient>
+  <symbol id='calloutArrowDown' overflow='visible' >
+      <path d='M 0,0 L 8,12 L 16,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+      <path d='M 0,0 L 8,12 L 16,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' overflow='visible' >
+      <path d='M 0,16 L 8,4 L 16,16 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+      <path d='M 0,16 L 8,4 L 16,16' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <path style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='unq' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.8' y='7.4' style='font-size:7px;fill:#8a8a8a;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag0' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag1' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#f4a393;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag2' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#77ec8b;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' overflow='visible' >
+  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <symbol id='view' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
+     <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
+     <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+     <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+    </g>
+  </symbol>
+  <marker id='arrow01' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 8.000,4.000 L 16.000,4.000 L 8.000,0.000 L 16.000,4.000 L 8.000,8.000' />
+  </marker>
+  <marker id='arrow1' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 8.000,4.000 L 16.000,4.000 L 8.000,0.000 L 16.000,4.000 L 8.000,8.000' />
+  </marker>
+  <marker id='foot01' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <circle cx='12.00' cy='4.00' r='2.67' style='fill:white;stroke:#5e554d;' />
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' />
+  </marker>
+  <marker id='foot0p' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <circle cx='12.00' cy='4.00' r='2.67' style='fill:white;stroke:#5e554d;' />
+    <path d='M 0.00,0.00 L 8.00,4.00 L 0.00,8.00' />
+  </marker>
+  <marker id='foot1' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <path d='M 8.00,0.00 L 8.00, 8.00 z' />
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' />
+  </marker>
+  <marker id='foot1p' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerUnits='strokeWidth' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <path d='M 8.00,0.00 L 8.00, 8.00 z' />
+    <path d='M 0.00,0.00 L 8.00,4.00 L 0.00,8.00' />
+  </marker>
+  <linearGradient id='tbg_bfd4f5' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#e4ebf5' /> 
+     <stop offset='100%' stop-color='#c1d3ee' /> 
+  </linearGradient>
+  <linearGradient id='tbg_c8f5bf' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#e7f5e4' /> 
+     <stop offset='100%' stop-color='#c9eec1' /> 
+  </linearGradient>
+</defs>
+
+<!-- ============= Desktop ============= -->
+<rect x='1' y='1' width='1006' height='652' rx='8' ry='8' style='fill:url(#layoutBgB); stroke:#333333; stroke-width:0.5;' />
+<rect x='1' y='1' width='1006' height='652' rx='8' ry='8' style='fill:url(#layoutBgTr);' />
+<rect x='1' y='1' width='1006' height='652' rx='8' ry='8' style='fill:url(#layoutBgA); stroke:#333333; stroke-width:0.5;' />
+
+<!-- ============= Legend ============= -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='270' height='52' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
+  <text x='65' y='33'>Default Layout</text> 
+  <text x='65' y='49' style='fill:#aaaaaa; font-size:11px;'><tspan>Schema comments as mouse-over tooltips.</tspan></text> 
+<g transform="scale(0.75,0.75) translate(10,7)" > <a xlink:href='http://www.dbschema.com'> <rect style="fill:#eb7f2c;stroke:none;shape-rendering:geometricPrecision;" width="13.27" height="11.26" x="40.04" y="59.44" ry="3.14" transform="matrix(0.90187511,-0.43199686,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.27" height="11.26" x="54.83" y="59.57" ry="3.14" transform="matrix(0.90187511,-0.43199686,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.27" height="11.26" x="40.35" y="71.62" ry="3.14" transform="matrix(0.90187511,-0.43199686,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.27" height="11.26" x="54.68" y="71.75" ry="3.14" transform="matrix(0.90187511,-0.43199686,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.35" height="11.20" x="13.48" y="19.67" ry="3.12" transform="matrix(0.84723158,0.53122372,0,1,0,0)" /> <rect style="fill:#eb7f2c;stroke:none;shape-rendering:geometricPrecision;" width="13.35" height="11.20" x="28.36" y="19.80" ry="3.12" transform="matrix(0.84723158,0.53122372,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.35" height="11.20" x="13.79" y="31.78" ry="3.12" transform="matrix(0.84723158,0.53122372,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.35" height="11.20" x="28.21" y="31.92" ry="3.12" transform="matrix(0.84723158,0.53122372,0,1,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.49" height="14.24" x="34.59" y="-9.62" ry="3.97" transform="matrix(0.85815392,0.51339249,-0.91732703,0.39813455,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.49" height="14.24" x="49.63" y="-9.46" ry="3.97" transform="matrix(0.85815392,0.51339249,-0.91732703,0.39813455,0,0)" /> <rect style="fill:#2c49eb;stroke:none;shape-rendering:geometricPrecision;" width="13.49" height="14.24" x="34.90" y="5.77"  ry="3.97" transform="matrix(0.85815392,0.51339249,-0.91732703,0.39813455,0,0)" /> <rect style="fill:#eb7f2c;stroke:none;shape-rendering:geometricPrecision;" width="13.49" height="14.24" x="49.47" y="5.93"  ry="3.97" transform="matrix(0.85815392,0.51339249,-0.91732703,0.39813455,0,0)" /> <title>Generated using DbSchema - www.dbschema.com</title> </a></g>
+</g>
+
+<g transform='translate(0,110)'>
+<!-- ============= Fk 'article_tag_article_tag_article_id_foreign' ============= -->
+<path id='article_tag_article_tag_article_id_foreign'  onmouseover="hghl(['article_tag_article_tag_article_id_foreign','myapp.article_tag.article_id','myapp.articles.id'])" onmouseout="uhghl(['article_tag_article_tag_article_id_foreign','myapp.article_tag.article_id','myapp.articles.id'])" transform='translate(8,0)' class='scene' d='M 208 320 L 160,320' >
+	<title>Fk article_tag_article_id_foreign
+article_tag ref articles ( article_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 208 320 L 160,320' ></path>
+<text x='159' y='315' transform='rotate(0 159,315)' title='Fk article_tag_article_id_foreign
+article_tag ref articles ( article_id -&gt; id )' class='relName'>article_id</text>
+<!-- ============= Fk 'article_tag_article_tag_tag_id_foreign' ============= -->
+<path id='article_tag_article_tag_tag_id_foreign'  onmouseover="hghl(['article_tag_article_tag_tag_id_foreign','myapp.article_tag.tag_id','myapp.tags.id'])" onmouseout="uhghl(['article_tag_article_tag_tag_id_foreign','myapp.article_tag.tag_id','myapp.tags.id'])" transform='translate(8,0)' class='scene' d='M 320 320 L 632,320 Q 640,320 640,312 L 640,184 Q 640,176 648,176 L 656,176' >
+	<title>Fk article_tag_tag_id_foreign
+article_tag ref tags ( tag_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 320 320 L 632,320 Q 640,320 640,312 L 640,184 Q 640,176 648,176 L 656,176' ></path>
+<text x='329' y='315' transform='rotate(0 329,315)' title='Fk article_tag_tag_id_foreign
+article_tag ref tags ( tag_id -&gt; id )' class='relName'>tag_id</text>
+<!-- ============= Fk 'articles_articles_user_id_foreign' ============= -->
+<path id='articles_articles_user_id_foreign'  onmouseover="hghl(['articles_articles_user_id_foreign','myapp.articles.user_id','myapp.users.id'])" onmouseout="uhghl(['articles_articles_user_id_foreign','myapp.articles.user_id','myapp.users.id'])" transform='translate(8,0)' class='scene' d='M 160 416 L 440,416 Q 448,416 448,408 L 448,256' >
+	<title>Fk articles_user_id_foreign
+articles ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 160 416 L 440,416 Q 448,416 448,408 L 448,256' ></path>
+<text x='169' y='411' transform='rotate(0 169,411)' title='Fk articles_user_id_foreign
+articles ref users ( user_id -&gt; id )' class='relName'>user_id</text>
+<!-- ============= Fk 'comments_comments_parent_id_foreign' ============= -->
+<path id='comments_comments_parent_id_foreign'  onmouseover="hghl(['comments_comments_parent_id_foreign','myapp.comments.parent_id','myapp.comments.id'])" onmouseout="uhghl(['comments_comments_parent_id_foreign','myapp.comments.parent_id','myapp.comments.id'])" transform='translate(8,0)' class='scene' d='M 368 224 L 376,224 Q 384,224 384,232 L 384,248 Q 384,256 376,256 L 360,256 Q 352,256 352,248 L 352,240' >
+	<title>Fk comments_parent_id_foreign
+comments ref comments ( parent_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 368 224 L 376,224 Q 384,224 384,232 L 384,248 Q 384,256 376,256 L 360,256 Q 352,256 352,248 L 352,240' ></path>
+<text x='377' y='219' transform='rotate(0 377,219)' title='Fk comments_parent_id_foreign
+comments ref comments ( parent_id -&gt; id )' class='relName'>parent_id</text>
+<!-- ============= Fk 'comments_comments_user_id_foreign' ============= -->
+<path id='comments_comments_user_id_foreign'  onmouseover="hghl(['comments_comments_user_id_foreign','myapp.comments.user_id','myapp.users.id'])" onmouseout="uhghl(['comments_comments_user_id_foreign','myapp.comments.user_id','myapp.users.id'])" transform='translate(8,0)' class='scene' d='M 368 64 L 416,64' >
+	<title>Fk comments_user_id_foreign
+comments ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 368 64 L 416,64' ></path>
+<text x='377' y='59' transform='rotate(0 377,59)' title='Fk comments_user_id_foreign
+comments ref users ( user_id -&gt; id )' class='relName'>user_id</text>
+<!-- ============= Fk 'votes_votes_comment_id_foreign' ============= -->
+<path id='votes_votes_comment_id_foreign'  onmouseover="hghl(['votes_votes_comment_id_foreign','myapp.votes.comment_id','myapp.comments.id'])" onmouseout="uhghl(['votes_votes_comment_id_foreign','myapp.votes.comment_id','myapp.comments.id'])" transform='translate(8,0)' class='scene' d='M 160 64 L 208,64' >
+	<title>Fk votes_comment_id_foreign
+votes ref comments ( comment_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 160 64 L 208,64' ></path>
+<text x='169' y='59' transform='rotate(0 169,59)' title='Fk votes_comment_id_foreign
+votes ref comments ( comment_id -&gt; id )' class='relName'>comment_id</text>
+<!-- ============= Fk 'votes_votes_user_id_foreign' ============= -->
+<path id='votes_votes_user_id_foreign'  onmouseover="hghl(['votes_votes_user_id_foreign','myapp.votes.user_id','myapp.users.id'])" onmouseout="uhghl(['votes_votes_user_id_foreign','myapp.votes.user_id','myapp.users.id'])" transform='translate(8,0)' class='scene' d='M 160 80 L 184,80 Q 192,80 192,72 L 192,24 Q 192,16 200,16 L 440,16 Q 448,16 448,24 L 448,32' >
+	<title>Fk votes_user_id_foreign
+votes ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 160 80 L 184,80 Q 192,80 192,72 L 192,24 Q 192,16 200,16 L 440,16 Q 448,16 448,24 L 448,32' ></path>
+<text x='169' y='75' transform='rotate(0 169,75)' title='Fk votes_user_id_foreign
+votes ref users ( user_id -&gt; id )' class='relName'>user_id</text>
+<!-- ============= Table 'article_tag' ============= -->
+<rect class='table' x='224' y='296' width='96' height='96' rx='8' ry='8' style='stroke:none'/>
+<path d='M 224.00 324.00 L 224.00 304.00 Q 224.00 296.00 232.00 296.00 L 312.00 296.00 Q 320.00 296.00 320.00 304.00 L 320.00 324.00 L224.00 324.00 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='224' y='296' width='96' height='96' rx='8' ry='8' style='fill:none;stroke:#aeb5bf'/>
+<line class='delim' x1='224.000000' y1='324.000000' x2='320.000000' y2='324.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='240.000000' y1='324.000000' x2='240.000000' y2='392.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='308.000000' y1='324.000000' x2='308.000000' y2='392.000000' style='stroke:#aeb5bf'/>
+<a xlink:href='#article_tag'><text x='238' y='316'>article_tag</text><title>Table myapp.article_tag</title></a>
+  <use id='nn' x='226' y='333' xlink:href='#nn'/><a xlink:href='#article_tag.id'><use id='pk' x='226' y='332' xlink:href='#pk'/><title>Pk pk_article_tag ( id ) </title></a>
+<a xlink:href='#article_tag.id'><text id='myapp.article_tag.id' x='243' y='343'>id</text><title>id
+* int</title></a>
+  <use id='nn' x='226' y='349' xlink:href='#nn'/><a xlink:href='#article_tag.article_id'><use id='idx' x='226' y='348' xlink:href='#idx'/><title>article_tag_article_id_foreign ( article_id ) </title></a>
+<a xlink:href='#article_tag.article_id'><text id='myapp.article_tag.article_id' x='243' y='359' onmouseover="hghl(['article_tag_article_tag_article_id_foreign'])" onmouseout="uhghl(['article_tag_article_tag_article_id_foreign'])">article_id</text><title>article_id
+* int</title></a>
+<a xlink:href='#article_tag.article_id'><use id='fk' x='308' y='348' xlink:href='#fk'/><title>References articles ( article_id -&gt; id ) </title></a>
+  <use id='nn' x='226' y='365' xlink:href='#nn'/><a xlink:href='#article_tag.tag_id'><use id='idx' x='226' y='364' xlink:href='#idx'/><title>article_tag_tag_id_foreign ( tag_id ) </title></a>
+<a xlink:href='#article_tag.tag_id'><text id='myapp.article_tag.tag_id' x='243' y='375' onmouseover="hghl(['article_tag_article_tag_tag_id_foreign'])" onmouseout="uhghl(['article_tag_article_tag_tag_id_foreign'])">tag_id</text><title>tag_id
+* int</title></a>
+<a xlink:href='#article_tag.tag_id'><use id='fk' x='308' y='364' xlink:href='#fk'/><title>References tags ( tag_id -&gt; id ) </title></a>
+
+<!-- ============= Table 'articles' ============= -->
+<rect class='table' x='48' y='296' width='112' height='192' rx='8' ry='8' style='stroke:none'/>
+<path d='M 48.00 324.00 L 48.00 304.00 Q 48.00 296.00 56.00 296.00 L 152.00 296.00 Q 160.00 296.00 160.00 304.00 L 160.00 324.00 L48.00 324.00 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='48' y='296' width='112' height='192' rx='8' ry='8' style='fill:none;stroke:#aeb5bf'/>
+<line class='delim' x1='48.000000' y1='324.000000' x2='160.000000' y2='324.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='64.000000' y1='324.000000' x2='64.000000' y2='488.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='148.000000' y1='324.000000' x2='148.000000' y2='488.000000' style='stroke:#aeb5bf'/>
+<a xlink:href='#articles'><text x='79' y='316'>articles</text><title>Table myapp.articles</title></a>
+  <use id='nn' x='50' y='333' xlink:href='#nn'/><a xlink:href='#articles.id'><use id='pk' x='50' y='332' xlink:href='#pk'/><title>Pk pk_articles ( id ) </title></a>
+<a xlink:href='#articles.id'><text id='myapp.articles.id' x='67' y='343' onmouseover="hghl(['article_tag_article_tag_article_id_foreign'])" onmouseout="uhghl(['article_tag_article_tag_article_id_foreign'])">id</text><title>id
+* int</title></a>
+<a xlink:href='#articles.id'><use id='ref' x='148' y='332' xlink:href='#ref'/><title>Referred by article_tag ( article_id -&gt; id ) </title></a>
+  <use id='nn' x='50' y='349' xlink:href='#nn'/><a xlink:href='#articles.user_id'><use id='idx' x='50' y='348' xlink:href='#idx'/><title>articles_user_id_index ( user_id ) </title></a>
+<a xlink:href='#articles.user_id'><text id='myapp.articles.user_id' x='67' y='359' onmouseover="hghl(['articles_articles_user_id_foreign'])" onmouseout="uhghl(['articles_articles_user_id_foreign'])">user_id</text><title>user_id
+* int</title></a>
+<a xlink:href='#articles.user_id'><use id='fk' x='148' y='348' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='50' y='365' xlink:href='#nn'/><a xlink:href='#articles.title'><use id='idx' x='50' y='364' xlink:href='#idx'/><title>search ( title, content ) </title></a>
+<a xlink:href='#articles.title'><text id='myapp.articles.title' x='67' y='375'>title</text><title>title
+* varchar(255)</title></a>
+  <use id='nn' x='50' y='381' xlink:href='#nn'/><a xlink:href='#articles.content'><use id='idx' x='50' y='380' xlink:href='#idx'/><title>search ( title, content ) </title></a>
+<a xlink:href='#articles.content'><text id='myapp.articles.content' x='67' y='391'>content</text><title>content
+* text</title></a>
+  <a xlink:href='#articles.created_at'><text id='myapp.articles.created_at' x='67' y='407'>created_at</text><title>created_at
+timestamp</title></a>
+  <a xlink:href='#articles.updated_at'><text id='myapp.articles.updated_at' x='67' y='423'>updated_at</text><title>updated_at
+timestamp</title></a>
+  <use id='nn' x='50' y='429' xlink:href='#nn'/><a xlink:href='#articles.notification'><text id='myapp.articles.notification' x='67' y='439'>notification</text><title>notification
+* bit default 1</title></a>
+  <use id='nn' x='50' y='445' xlink:href='#nn'/><a xlink:href='#articles.view_count'><text id='myapp.articles.view_count' x='67' y='455'>view_count</text><title>view_count
+* tinyint default 0</title></a>
+  <a xlink:href='#articles.deleted_at'><text id='myapp.articles.deleted_at' x='67' y='471'>deleted_at</text><title>deleted_at
+timestamp</title></a>
+
+<!-- ============= Table 'attachments' ============= -->
+<rect class='table' x='848' y='40' width='112' height='160' rx='8' ry='8' style='stroke:none'/>
+<path d='M 848.00 68.00 L 848.00 48.00 Q 848.00 40.00 856.00 40.00 L 952.00 40.00 Q 960.00 40.00 960.00 48.00 L 960.00 68.00 L848.00 68.00 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='848' y='40' width='112' height='160' rx='8' ry='8' style='fill:none;stroke:#b1bfae'/>
+<line class='delim' x1='848.000000' y1='68.000000' x2='960.000000' y2='68.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='864.000000' y1='68.000000' x2='864.000000' y2='200.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='948.000000' y1='68.000000' x2='948.000000' y2='200.000000' style='stroke:#b1bfae'/>
+<a xlink:href='#attachments'><text x='865' y='60'>attachments</text><title>Table myapp.attachments</title></a>
+  <use id='nn' x='850' y='77' xlink:href='#nn'/><a xlink:href='#attachments.id'><use id='pk' x='850' y='76' xlink:href='#pk'/><title>Pk pk_attachments ( id ) </title></a>
+<a xlink:href='#attachments.id'><text id='myapp.attachments.id' x='867' y='87'>id</text><title>id
+* int</title></a>
+  <a xlink:href='#attachments.article_id'><use id='idx' x='850' y='92' xlink:href='#idx'/><title>attachments_article_id_index ( article_id ) </title></a>
+<a xlink:href='#attachments.article_id'><text id='myapp.attachments.article_id' x='867' y='103'>article_id</text><title>article_id
+int</title></a>
+  <use id='nn' x='850' y='109' xlink:href='#nn'/><a xlink:href='#attachments.filename'><text id='myapp.attachments.filename' x='867' y='119'>filename</text><title>filename
+* varchar(255)</title></a>
+  <a xlink:href='#attachments.bytes'><text id='myapp.attachments.bytes' x='867' y='135'>bytes</text><title>bytes
+int</title></a>
+  <a xlink:href='#attachments.mime'><text id='myapp.attachments.mime' x='867' y='151'>mime</text><title>mime
+varchar(255)</title></a>
+  <a xlink:href='#attachments.created_at'><text id='myapp.attachments.created_at' x='867' y='167'>created_at</text><title>created_at
+timestamp</title></a>
+  <a xlink:href='#attachments.updated_at'><text id='myapp.attachments.updated_at' x='867' y='183'>updated_at</text><title>updated_at
+timestamp</title></a>
+
+<!-- ============= Table 'comments' ============= -->
+<rect class='table' x='224' y='40' width='144' height='192' rx='8' ry='8' style='stroke:none'/>
+<path d='M 224.00 68.00 L 224.00 48.00 Q 224.00 40.00 232.00 40.00 L 360.00 40.00 Q 368.00 40.00 368.00 48.00 L 368.00 68.00 L224.00 68.00 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='224' y='40' width='144' height='192' rx='8' ry='8' style='fill:none;stroke:#aeb5bf'/>
+<line class='delim' x1='224.000000' y1='68.000000' x2='368.000000' y2='68.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='240.000000' y1='68.000000' x2='240.000000' y2='232.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='356.000000' y1='68.000000' x2='356.000000' y2='232.000000' style='stroke:#aeb5bf'/>
+<a xlink:href='#comments'><text x='264' y='60'>comments</text><title>Table myapp.comments</title></a>
+  <use id='nn' x='226' y='77' xlink:href='#nn'/><a xlink:href='#comments.id'><use id='pk' x='226' y='76' xlink:href='#pk'/><title>Pk pk_comments ( id ) </title></a>
+<a xlink:href='#comments.id'><text id='myapp.comments.id' x='243' y='87' onmouseover="hghl(['comments_comments_parent_id_foreign','votes_votes_comment_id_foreign'])" onmouseout="uhghl(['comments_comments_parent_id_foreign','votes_votes_comment_id_foreign'])">id</text><title>id
+* int</title></a>
+<a xlink:href='#comments.id'><use id='ref' x='356' y='76' xlink:href='#ref'/><title>Referred by comments ( parent_id -&gt; id ) 
+Referred by votes ( comment_id -&gt; id ) </title></a>
+  <use id='nn' x='226' y='93' xlink:href='#nn'/><a xlink:href='#comments.user_id'><use id='idx' x='226' y='92' xlink:href='#idx'/><title>comments_user_id_index ( user_id ) </title></a>
+<a xlink:href='#comments.user_id'><text id='myapp.comments.user_id' x='243' y='103' onmouseover="hghl(['comments_comments_user_id_foreign'])" onmouseout="uhghl(['comments_comments_user_id_foreign'])">user_id</text><title>user_id
+* int</title></a>
+<a xlink:href='#comments.user_id'><use id='fk' x='356' y='92' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <a xlink:href='#comments.parent_id'><use id='idx' x='226' y='108' xlink:href='#idx'/><title>comments_parent_id_foreign ( parent_id ) </title></a>
+<a xlink:href='#comments.parent_id'><text id='myapp.comments.parent_id' x='243' y='119' onmouseover="hghl(['comments_comments_parent_id_foreign'])" onmouseout="uhghl(['comments_comments_parent_id_foreign'])">parent_id</text><title>parent_id
+int</title></a>
+<a xlink:href='#comments.parent_id'><use id='fk' x='356' y='108' xlink:href='#fk'/><title>References comments ( parent_id -&gt; id ) </title></a>
+  <use id='nn' x='226' y='125' xlink:href='#nn'/><a xlink:href='#comments.commentable_type'><text id='myapp.comments.commentable_type' x='243' y='135'>commentable_type</text><title>commentable_type
+* varchar(255)</title></a>
+  <use id='nn' x='226' y='141' xlink:href='#nn'/><a xlink:href='#comments.commentable_id'><text id='myapp.comments.commentable_id' x='243' y='151'>commentable_id</text><title>commentable_id
+* int</title></a>
+  <use id='nn' x='226' y='157' xlink:href='#nn'/><a xlink:href='#comments.content'><text id='myapp.comments.content' x='243' y='167'>content</text><title>content
+* text</title></a>
+  <a xlink:href='#comments.created_at'><text id='myapp.comments.created_at' x='243' y='183'>created_at</text><title>created_at
+timestamp</title></a>
+  <a xlink:href='#comments.updated_at'><text id='myapp.comments.updated_at' x='243' y='199'>updated_at</text><title>updated_at
+timestamp</title></a>
+  <a xlink:href='#comments.deleted_at'><text id='myapp.comments.deleted_at' x='243' y='215'>deleted_at</text><title>deleted_at
+timestamp</title></a>
+
+<!-- ============= Table 'migrations' ============= -->
+<rect class='table' x='848' y='264' width='96' height='80' rx='8' ry='8' style='stroke:none'/>
+<path d='M 848.00 292.00 L 848.00 272.00 Q 848.00 264.00 856.00 264.00 L 936.00 264.00 Q 944.00 264.00 944.00 272.00 L 944.00 292.00 L848.00 292.00 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='848' y='264' width='96' height='80' rx='8' ry='8' style='fill:none;stroke:#b1bfae'/>
+<line class='delim' x1='848.000000' y1='292.000000' x2='944.000000' y2='292.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='864.000000' y1='292.000000' x2='864.000000' y2='344.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='932.000000' y1='292.000000' x2='932.000000' y2='344.000000' style='stroke:#b1bfae'/>
+<a xlink:href='#migrations'><text x='864' y='284'>migrations</text><title>Table myapp.migrations</title></a>
+  <use id='nn' x='850' y='301' xlink:href='#nn'/><a xlink:href='#migrations.migration'><text id='myapp.migrations.migration' x='867' y='311'>migration</text><title>migration
+* varchar(255)</title></a>
+  <use id='nn' x='850' y='317' xlink:href='#nn'/><a xlink:href='#migrations.batch'><text id='myapp.migrations.batch' x='867' y='327'>batch</text><title>batch
+* int</title></a>
+
+<!-- ============= Table 'password_resets' ============= -->
+<rect class='table' x='672' y='264' width='112' height='96' rx='8' ry='8' style='stroke:none'/>
+<path d='M 672.00 292.00 L 672.00 272.00 Q 672.00 264.00 680.00 264.00 L 776.00 264.00 Q 784.00 264.00 784.00 272.00 L 784.00 292.00 L672.00 292.00 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='672' y='264' width='112' height='96' rx='8' ry='8' style='fill:none;stroke:#b1bfae'/>
+<line class='delim' x1='672.000000' y1='292.000000' x2='784.000000' y2='292.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='688.000000' y1='292.000000' x2='688.000000' y2='360.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='772.000000' y1='292.000000' x2='772.000000' y2='360.000000' style='stroke:#b1bfae'/>
+<a xlink:href='#password_resets'><text x='679' y='284'>password_resets</text><title>Table myapp.password_resets</title></a>
+  <use id='nn' x='674' y='301' xlink:href='#nn'/><a xlink:href='#password_resets.email'><use id='idx' x='674' y='300' xlink:href='#idx'/><title>password_resets_email_index ( email ) </title></a>
+<a xlink:href='#password_resets.email'><text id='myapp.password_resets.email' x='691' y='311'>email</text><title>email
+* varchar(255)</title></a>
+  <use id='nn' x='674' y='317' xlink:href='#nn'/><a xlink:href='#password_resets.token'><use id='idx' x='674' y='316' xlink:href='#idx'/><title>password_resets_token_index ( token ) </title></a>
+<a xlink:href='#password_resets.token'><text id='myapp.password_resets.token' x='691' y='327'>token</text><title>token
+* varchar(255)</title></a>
+  <a xlink:href='#password_resets.created_at'><text id='myapp.password_resets.created_at' x='691' y='343'>created_at</text><title>created_at
+timestamp</title></a>
+
+<!-- ============= Table 'tags' ============= -->
+<rect class='table' x='672' y='40' width='112' height='160' rx='8' ry='8' style='stroke:none'/>
+<path d='M 672.00 68.00 L 672.00 48.00 Q 672.00 40.00 680.00 40.00 L 776.00 40.00 Q 784.00 40.00 784.00 48.00 L 784.00 68.00 L672.00 68.00 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='672' y='40' width='112' height='160' rx='8' ry='8' style='fill:none;stroke:#b1bfae'/>
+<line class='delim' x1='672.000000' y1='68.000000' x2='784.000000' y2='68.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='688.000000' y1='68.000000' x2='688.000000' y2='200.000000' style='stroke:#b1bfae'/>
+<line class='delim' x1='772.000000' y1='68.000000' x2='772.000000' y2='200.000000' style='stroke:#b1bfae'/>
+<a xlink:href='#tags'><text x='713' y='60'>tags</text><title>Table myapp.tags</title></a>
+  <use id='nn' x='674' y='77' xlink:href='#nn'/><a xlink:href='#tags.id'><use id='pk' x='674' y='76' xlink:href='#pk'/><title>Pk pk_tags ( id ) </title></a>
+<a xlink:href='#tags.id'><text id='myapp.tags.id' x='691' y='87' onmouseover="hghl(['article_tag_article_tag_tag_id_foreign'])" onmouseout="uhghl(['article_tag_article_tag_tag_id_foreign'])">id</text><title>id
+* int</title></a>
+<a xlink:href='#tags.id'><use id='ref' x='772' y='76' xlink:href='#ref'/><title>Referred by article_tag ( tag_id -&gt; id ) </title></a>
+  <use id='nn' x='674' y='93' xlink:href='#nn'/><a xlink:href='#tags.name'><text id='myapp.tags.name' x='691' y='103'>name</text><title>name
+* varchar(255)</title></a>
+  <use id='nn' x='674' y='109' xlink:href='#nn'/><a xlink:href='#tags.slug'><use id='idx' x='674' y='108' xlink:href='#idx'/><title>tags_slug_index ( slug ) </title></a>
+<a xlink:href='#tags.slug'><text id='myapp.tags.slug' x='691' y='119'>slug</text><title>slug
+* varchar(255)</title></a>
+  <a xlink:href='#tags.created_at'><text id='myapp.tags.created_at' x='691' y='135'>created_at</text><title>created_at
+timestamp</title></a>
+  <a xlink:href='#tags.updated_at'><text id='myapp.tags.updated_at' x='691' y='151'>updated_at</text><title>updated_at
+timestamp</title></a>
+  <a xlink:href='#tags.ko'><text id='myapp.tags.ko' x='691' y='167'>ko</text><title>ko
+varchar(255)</title></a>
+  <a xlink:href='#tags.en'><text id='myapp.tags.en' x='691' y='183'>en</text><title>en
+varchar(255)</title></a>
+
+<!-- ============= Table 'users' ============= -->
+<rect class='table' x='432' y='40' width='144' height='208' rx='8' ry='8' style='stroke:none'/>
+<path d='M 432.00 68.00 L 432.00 48.00 Q 432.00 40.00 440.00 40.00 L 568.00 40.00 Q 576.00 40.00 576.00 48.00 L 576.00 68.00 L432.00 68.00 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='432' y='40' width='144' height='208' rx='8' ry='8' style='fill:none;stroke:#aeb5bf'/>
+<line class='delim' x1='432.000000' y1='68.000000' x2='576.000000' y2='68.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='448.000000' y1='68.000000' x2='448.000000' y2='248.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='564.000000' y1='68.000000' x2='564.000000' y2='248.000000' style='stroke:#aeb5bf'/>
+<a xlink:href='#users'><text x='485' y='60'>users</text><title>Table myapp.users</title></a>
+  <use id='nn' x='434' y='77' xlink:href='#nn'/><a xlink:href='#users.id'><use id='pk' x='434' y='76' xlink:href='#pk'/><title>Pk pk_users ( id ) </title></a>
+<a xlink:href='#users.id'><text id='myapp.users.id' x='451' y='87' onmouseover="hghl(['articles_articles_user_id_foreign','comments_comments_user_id_foreign','votes_votes_user_id_foreign'])" onmouseout="uhghl(['articles_articles_user_id_foreign','comments_comments_user_id_foreign','votes_votes_user_id_foreign'])">id</text><title>id
+* int</title></a>
+<a xlink:href='#users.id'><use id='ref' x='564' y='76' xlink:href='#ref'/><title>Referred by articles ( user_id -&gt; id ) 
+Referred by comments ( user_id -&gt; id ) 
+Referred by votes ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='434' y='93' xlink:href='#nn'/><a xlink:href='#users.name'><text id='myapp.users.name' x='451' y='103'>name</text><title>name
+* varchar(255)</title></a>
+  <use id='nn' x='434' y='109' xlink:href='#nn'/><a xlink:href='#users.email'><use id='unq' x='434' y='108' xlink:href='#unq'/><title>Unq users_email_unique ( email ) </title></a>
+<a xlink:href='#users.email'><text id='myapp.users.email' x='451' y='119'>email</text><title>email
+* varchar(255)</title></a>
+  <a xlink:href='#users.password'><text id='myapp.users.password' x='451' y='135'>password</text><title>password
+varchar(60)</title></a>
+  <a xlink:href='#users.remember_token'><text id='myapp.users.remember_token' x='451' y='151'>remember_token</text><title>remember_token
+varchar(100)</title></a>
+  <a xlink:href='#users.created_at'><text id='myapp.users.created_at' x='451' y='167'>created_at</text><title>created_at
+timestamp</title></a>
+  <a xlink:href='#users.updated_at'><text id='myapp.users.updated_at' x='451' y='183'>updated_at</text><title>updated_at
+timestamp</title></a>
+  <a xlink:href='#users.last_login'><text id='myapp.users.last_login' x='451' y='199'>last_login</text><title>last_login
+timestamp</title></a>
+  <a xlink:href='#users.confirm_code'><text id='myapp.users.confirm_code' x='451' y='215'>confirm_code</text><title>confirm_code
+varchar(60)</title></a>
+  <use id='nn' x='434' y='221' xlink:href='#nn'/><a xlink:href='#users.activated'><text id='myapp.users.activated' x='451' y='231'>activated</text><title>activated
+* bit default 0</title></a>
+
+<!-- ============= Table 'votes' ============= -->
+<rect class='table' x='48' y='40' width='112' height='144' rx='8' ry='8' style='stroke:none'/>
+<path d='M 48.00 68.00 L 48.00 48.00 Q 48.00 40.00 56.00 40.00 L 152.00 40.00 Q 160.00 40.00 160.00 48.00 L 160.00 68.00 L48.00 68.00 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='table' x='48' y='40' width='112' height='144' rx='8' ry='8' style='fill:none;stroke:#aeb5bf'/>
+<line class='delim' x1='48.000000' y1='68.000000' x2='160.000000' y2='68.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='64.000000' y1='68.000000' x2='64.000000' y2='184.000000' style='stroke:#aeb5bf'/>
+<line class='delim' x1='148.000000' y1='68.000000' x2='148.000000' y2='184.000000' style='stroke:#aeb5bf'/>
+<a xlink:href='#votes'><text x='85' y='60'>votes</text><title>Table myapp.votes</title></a>
+  <use id='nn' x='50' y='77' xlink:href='#nn'/><a xlink:href='#votes.id'><use id='pk' x='50' y='76' xlink:href='#pk'/><title>Pk pk_votes ( id ) </title></a>
+<a xlink:href='#votes.id'><text id='myapp.votes.id' x='67' y='87'>id</text><title>id
+* int</title></a>
+  <use id='nn' x='50' y='93' xlink:href='#nn'/><a xlink:href='#votes.user_id'><use id='idx' x='50' y='92' xlink:href='#idx'/><title>votes_user_id_foreign ( user_id ) </title></a>
+<a xlink:href='#votes.user_id'><text id='myapp.votes.user_id' x='67' y='103' onmouseover="hghl(['votes_votes_user_id_foreign'])" onmouseout="uhghl(['votes_votes_user_id_foreign'])">user_id</text><title>user_id
+* int</title></a>
+<a xlink:href='#votes.user_id'><use id='fk' x='148' y='92' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='50' y='109' xlink:href='#nn'/><a xlink:href='#votes.comment_id'><use id='idx' x='50' y='108' xlink:href='#idx'/><title>votes_comment_id_foreign ( comment_id ) </title></a>
+<a xlink:href='#votes.comment_id'><text id='myapp.votes.comment_id' x='67' y='119' onmouseover="hghl(['votes_votes_comment_id_foreign'])" onmouseout="uhghl(['votes_votes_comment_id_foreign'])">comment_id</text><title>comment_id
+* int</title></a>
+<a xlink:href='#votes.comment_id'><use id='fk' x='148' y='108' xlink:href='#fk'/><title>References comments ( comment_id -&gt; id ) </title></a>
+  <a xlink:href='#votes.up'><text id='myapp.votes.up' x='67' y='135'>up</text><title>up
+bit</title></a>
+  <a xlink:href='#votes.down'><text id='myapp.votes.down' x='67' y='151'>down</text><title>down
+bit</title></a>
+  <use id='nn' x='50' y='157' xlink:href='#nn'/><a xlink:href='#votes.voted_at'><text id='myapp.votes.voted_at' x='67' y='167'>voted_at</text><title>voted_at
+* timestamp default CURRENT_TIMESTAMP</title></a>
+
+</g></svg></div>
+
+
+<br/><br/>
+<div class='section-header'><a name='article_tag'><h2>Table article_tag</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='article_tag.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='article_tag.article_id'>article&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='article_tag.tag_id'>tag&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;article&#95;tag</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>article&#95;tag&#95;article&#95;id&#95;foreign</td>
+		<td> ON article&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>article&#95;tag&#95;tag&#95;id&#95;foreign</td>
+		<td> ON tag&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>article_tag_article_id_foreign</td>
+		<td > ( article&#95;id ) ref <a href='#articles'>articles</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>article_tag_tag_id_foreign</td>
+		<td > ( tag&#95;id ) ref <a href='#tags'>tags</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='articles'><h2>Table articles</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='articles.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='articles.user_id'>user&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg></td>
+		<td><a name='articles.title'>title</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg></td>
+		<td><a name='articles.content'>content</a></td>
+		<td> text   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='articles.created_at'>created&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='articles.updated_at'>updated&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='articles.notification'>notification</a></td>
+		<td> bit   DEFAULT 1 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='articles.view_count'>view&#95;count</a></td>
+		<td> tinyint   DEFAULT 0 </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='articles.deleted_at'>deleted&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;articles</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>articles&#95;user&#95;id&#95;index</td>
+		<td> ON user&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>search</td>
+		<td> ON title&#44; content</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>articles_user_id_foreign</td>
+		<td > ( user&#95;id ) ref <a href='#users'>users</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='attachments'><h2>Table attachments</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='attachments.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td>
+		<td><a name='attachments.article_id'>article&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='attachments.filename'>filename</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='attachments.bytes'>bytes</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='attachments.mime'>mime</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='attachments.created_at'>created&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='attachments.updated_at'>updated&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;attachments</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>attachments&#95;article&#95;id&#95;index</td>
+		<td> ON article&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='comments'><h2>Table comments</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='comments.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='comments.user_id'>user&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='comments.parent_id'>parent&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='comments.commentable_type'>commentable&#95;type</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='comments.commentable_id'>commentable&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='comments.content'>content</a></td>
+		<td> text   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='comments.created_at'>created&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='comments.updated_at'>updated&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='comments.deleted_at'>deleted&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;comments</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>comments&#95;parent&#95;id&#95;foreign</td>
+		<td> ON parent&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>comments&#95;user&#95;id&#95;index</td>
+		<td> ON user&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>comments_parent_id_foreign</td>
+		<td > ( parent&#95;id ) ref <a href='#comments'>comments</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>comments_user_id_foreign</td>
+		<td > ( user&#95;id ) ref <a href='#users'>users</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='migrations'><h2>Table migrations</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='migrations.migration'>migration</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='migrations.batch'>batch</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='password_resets'><h2>Table password_resets</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg></td>
+		<td><a name='password_resets.email'>email</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg></td>
+		<td><a name='password_resets.token'>token</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='password_resets.created_at'>created&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>password&#95;resets&#95;email&#95;index</td>
+		<td> ON email</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>password&#95;resets&#95;token&#95;index</td>
+		<td> ON token</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='tags'><h2>Table tags</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='tags.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='tags.name'>name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg></td>
+		<td><a name='tags.slug'>slug</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='tags.created_at'>created&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='tags.updated_at'>updated&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='tags.ko'>ko</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='tags.en'>en</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;tags</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>tags&#95;slug&#95;index</td>
+		<td> ON slug</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='users'><h2>Table users</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='users.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='users.name'>name</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#unq'/></svg></td>
+		<td><a name='users.email'>email</a></td>
+		<td> varchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.password'>password</a></td>
+		<td> varchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.remember_token'>remember&#95;token</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.created_at'>created&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.updated_at'>updated&#95;at</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.last_login'>last&#95;login</a></td>
+		<td> timestamp   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='users.confirm_code'>confirm&#95;code</a></td>
+		<td> varchar&#40; 60 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='users.activated'>activated</a></td>
+		<td> bit   DEFAULT 0 </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;users</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#unq'/></svg></td><td>users&#95;email&#95;unique</td>
+		<td> ON email</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<div class='section-header'><a name='votes'><h2>Table votes</h2></a></div>
+<table class='bordered'>
+<thead>
+<tr><th colspan='4'>Columns</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='votes.id'>id</a></td>
+		<td> int UNSIGNED  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='votes.user_id'>user&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='votes.comment_id'>comment&#95;id</a></td>
+		<td> int UNSIGNED   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='votes.up'>up</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='votes.down'>down</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='votes.voted_at'>voted&#95;at</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;votes</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>votes&#95;comment&#95;id&#95;foreign</td>
+		<td> ON comment&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>votes&#95;user&#95;id&#95;foreign</td>
+		<td> ON user&#95;id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>votes_comment_id_foreign</td>
+		<td > ( comment&#95;id ) ref <a href='#comments'>comments</a> (id) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>votes_user_id_foreign</td>
+		<td > ( user&#95;id ) ref <a href='#users'>users</a> (id) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table>
+
+<p align='right'><a href='http://www.dbschema.com' style='color:#aaa'>Powered by DbSchema</a></p></body></html>
