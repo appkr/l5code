@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  lemp:
+    build: lemp-l5code
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - ../:/var/www/myapp
+      - ./mysql_datadir:/var/lib/mysql
+    ports:
+      - "8000:80"
+      - "9001:9001"
+      - "33060:3306"
+    tty: true
+    stdin_open: true
