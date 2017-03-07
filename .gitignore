@@ -12,3 +12,4 @@ Homestead.yaml
 .env
 public/files
 git_rearrange_tags.php
+docker/mysql_datadir
