@@ -78,12 +78,11 @@ class ArticlesController extends Controller implements Cacheable
      * @return \Illuminate\Http\Response
      */
     public function store(ArticlesRequest $request) {
-        // 글 저장
-        $payload = array_merge($request->all(), [
-            'notification' => $request->has('notification'),
-        ]);
+        $user = $request->user();
 
-        $article = $request->user()->articles()->create($payload);
+        $article = $user->articles()->create(
+            $request->getPayload()
+        );
 
         if (! $article) {
             flash()->error(
@@ -95,6 +94,12 @@ class ArticlesController extends Controller implements Cacheable
 
         // 태그 싱크
         $article->tags()->sync($request->input('tags'));
+
+        // 첨부파일 연결
+        $request->getAttachments()->each(function ($attachment) use ($article) {
+            $attachment->article()->associate($article);
+            $attachment->save();
+        });
 
         event(new \App\Events\ArticlesEvent($article));
         event(new \App\Events\ModelChanged(['articles']));
