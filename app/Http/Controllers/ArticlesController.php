@@ -177,11 +177,30 @@ class ArticlesController extends Controller implements Cacheable
     public function destroy(Article $article)
     {
         $this->authorize('delete', $article);
+        
+        // detele attached files
+        $this->unlinkAttachmentFiles($article->attachments);
+        
+        // delete attachment models
+        $article->attachments()->delete();
+        
         $article->delete();
 
         event(new \App\Events\ModelChanged(['articles']));
 
         return response()->json([], 204, [], JSON_PRETTY_PRINT);
+    }
+    
+    // delete attached files
+    private function unlinkAttachmentFiles($attachments)
+    {
+        $attachments->each(function ($att) {
+            $path = attachments_path($att->filename);
+
+            if (\File::exists($path)) {
+                return \File::delete($path);
+            }
+        });
     }
 
     /* Response Methods */
