@@ -32,6 +32,19 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if (app()->environment('production') && $this->shouldReport($exception)) {
+            \Slack::send(
+                sprintf(
+                    "%s \n\n%s \n%s:%d \n\n%s",
+                    get_class($exception),
+                    $exception->getMessage(),
+                    $exception->getFile(),
+                    $exception->getLine(),
+                    $exception->getTraceAsString()
+                )
+            );
+        }
+
         parent::report($exception);
     }
 
@@ -44,6 +57,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if (app()->environment('production')) {
+            $statusCode = 400;
+            $title = trans('messages.error.title');
+            $description = trans('messages.error.description');
+
+            if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException
+                or $exception instanceof \Symfony\Component\HttpKernel\Exception\ NotFoundHttpException) {
+                $statusCode = 404;
+                $description = $exception->getMessage() ?: trans('messages.error.not_found');
+            }
+
+            return response(view('errors.notice', [
+                'title' => $title,
+                'description' => $description,
+            ]), $statusCode);
+        }
+
         return parent::render($request, $exception);
     }
 
@@ -60,6 +90,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest(route('login'));
+        return redirect()->guest(route('sessions.create'));
     }
 }

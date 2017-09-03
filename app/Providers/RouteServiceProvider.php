@@ -23,9 +23,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        Route::model('article', \App\Article::class, function ($id) {
+            return \App\Article::whereId(optimus()->decode($id))->first();
+        });
+
+        Route::model('attachment', \App\Attachment::class);
+
+        Route::model('comment', \App\Comment::class, function ($id) {
+            return \App\Comment::whereId(optimus()->decode($id))->first();
+        });
+
+        Route::model('user', \App\User::class, function ($id) {
+            return \App\User::whereId(optimus()->decode($id))->first();
+        });
     }
 
     /**
@@ -51,9 +63,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/web.php');
+        });
     }
 
     /**
@@ -65,9 +80,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+        Route::group([
+            'middleware' => 'api',
+            'namespace' => $this->namespace,
+//            'prefix' => 'api',
+        ], function ($router) {
+            require base_path('routes/api.php');
+        });
     }
 }
