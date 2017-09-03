@@ -1,53 +1,182 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## 예제 프로젝트 5.4 업그레이드
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+### 1. 달라진 점
 
-## About Laravel
+라라벨 5.3에서 작성된 최종 예제 코드 대비, 라라벨 5.4로 업그레이드하면서 달라진 점은 크게 두 가지 입니다. 바꾸어 말하면, 아래 두 부분을 제외하고 책에 나온 예제 코드는 라라벨 5.4에서도 전부 작동하는 코드입니다. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+1. 라라벨 믹스 적용
+2. `maknz/slack` 컴포넌트 제거
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### 2.1. 라라벨 믹스 적용
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+**21장 "엘릭서와 프런트엔드"** 관련 내용입니다. 
 
-## Learning Laravel
+https://github.com/appkr/l5code/issues/11 에 자세히 설명해 두었습니다.
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+#### 2.2. `maknz/slack` 컴포넌트 제거
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+**30장 2절의 "오류 알림"** 관련 내용입니다. 
 
-## Laravel Sponsors
+`maknz/slack`가 제공하는 서비스프로바이더가 문제를 일으켜 걷어 내고, 라라벨 5.4부터 제공하는 Notification 기능으로 대체해서 슬랙 메시지를 보내는 것으로 변경했습니다.
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+```php
+<?php // config/services.php
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
+return [
+    'slack' => [
+        'endpoint' => env('SLACK_WEBHOOK', ''),
+    ]
+];
+```
 
-## Contributing
+```php
+<?php // app/Exceptions/Handler.php
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+class Handler extends ExceptionHandler
+{
+    // ...
+    
+    public function report(Exception $exception)
+    {
+        if (app()->environment('production') && $this->shouldReport($exception)) {
+            $this->notify(new ExceptionOccurred($exception));
+        }
 
-## Security Vulnerabilities
+        parent::report($exception);
+    }
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+    public function routeNotificationForSlack()
+    {
+        return config('services.slack.endpoint');
+    }
+    
+    // ...
+}
+```
 
-## License
+```php
+<?php // app/Notifications/ExceptionOccurred.php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+namespace App\Notifications;
+
+use Exception;
+use Illuminate\Notifications\Messages\SlackMessage;
+use Illuminate\Notifications\Notification;
+
+class ExceptionOccurred extends Notification
+{
+    private $e;
+
+    public function __construct(Exception $e)
+    {
+        $this->e = $e;
+    }
+
+    public function via($notifiable)
+    {
+        return ['slack'];
+    }
+
+    public function toSlack($notifiable)
+    {
+        return (new SlackMessage)
+            ->error()
+            ->content(sprintf(
+                "%s \n\n%s \n%s:%d \n\n%s",
+                get_class($this->e),
+                $this->e->getMessage(),
+                $this->e->getFile(),
+                $this->e->getLine(),
+                $this->e->getTraceAsString()
+            ));
+    }
+}
+```
+
+### 2. 설치 및 실행법
+
+```bash
+# 기존에 호스트 파일에 myapp.dev 레코드를 추가하지 않았다면. 
+~ $ sudo echo "myapp.dev 127.0.0.1" >> /etc/hosts
+
+# 예제 코드 저장소를 복제하지 않았다면.
+~ $ git clone git@github.com:appkr/l5code.git
+~ $ cd l5code
+
+# 예제 코드 프로젝트를 셋팅한 적이 없다면.
+~/l5code(master) $ cp .env.example .env
+~/l5code(master) $ chmod -R 775 storage bootstrap/cache public/files
+~/l5code(master) $ php artisan key:generate
+
+# 로컬 복제된 예제 코드를 이미 가지고 있다면.
+~/l5code(master) $ git pull --all
+
+~/l5code(master) $ git checkout laravel54
+~/l5code(laravel54) $ composer install
+~/l5code(laravel54) $ php artisan migrate:refresh --seed --force
+~/l5code(laravel54) $ php artisan serve --host=myapp.dev
+```
+
+브라우저에서 http://myapp.dev:8000 을 열어 확인합니다.
+
+```bash
+~/l5code(laravel54) $ touch tests/database.sqlite
+~/l5code(laravel54) $ php artisan migrate --seed --database=testing
+~/l5code(laravel54) $ vendor/bin/phpunit
+```
+
+API 작동 테스트를 위한 포스트맨 콜렉션은 여기서 받을 수 있습니다.
+
+https://www.getpostman.com/collections/56ac056289864393eea5
+
+### 3. 업그레이드 방법
+
+> 아래는 저자가 작업한 방식입니다. 제 기억을 복기하기 위해 기록해 둔 것입니다.
+
+라라벨 5.4 클린 프로젝트를 생성한다.
+
+```bash
+~ $ composer create-project laravel/laravel laravel54 5.4.30
+~ $ cd laravel54
+~/laravel54 $ git init
+~/laravel54(master) $ git add .
+~/laravel54(master) $ git commit -m '라라벨 5.4 클린 프로젝트 생성'
+```
+
+라라벨 5.3 클린 프로젝트를 생성한다.
+
+```bash
+~ $ composer create-project laravel/laravel laravel53 5.3.0
+~ $ cd laravel53
+~/laravel53 $ git init
+~/laravel53(master) $ git add .
+~/laravel53(master) $ git commit -m '라라벨 5.3 클린 프로젝트 생성'
+```
+
+5.3으로 작성된 예제 프로젝트를 방금 생성한 라라벨 5.3 클린 프로젝트에 덮어 쓴다.
+
+```bash
+~/laravel53(master) $ cp -r ../l5code/* ./
+~/laravel53(master) $ git add .
+~/laravel53(master) $ git commit -m 'Diff를 위해 출판용 예제 코드 복제'
+```
+
+변경된 파일만 뽑아내서, 라라벨 5.4 클린 프로젝트에 덮어 쓴다.
+
+```bash
+~/laravel53(master) $ git rev-parse --short HEAD
+~/laravel53(master) $ git diff-tree --no-commit-id --name-only -r d9c6942 | xargs -I{} rsync -R {} ../laravel54
+~/laravel53(master) $ cp ../l5code/.env ./
+~/laravel53(master) $ cp ../l5code/.editorconfig ./
+~/laravel53(master) $ cp ../l5code/.gitignore ./
+```
+
+[업그레이드 가이드](https://laravel.com/docs/5.4/upgrade)에 따라 코드를 수정하고, 작동을 확인한다.
+
+```bash
+# Delete "require" block of composer.json, and "composer require package" 
+# one by one is more safe (than resolving conflicts manually)
+~/laravel54(master) $ rm -rf composer.lock vendor
+~/laravel54(master) $ composer install
+~/laravel54(master) $ phpstrom .
+```
