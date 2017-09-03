@@ -2,12 +2,16 @@
 
 namespace App\Exceptions;
 
+use App\Notifications\ExceptionOccurred;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Notifications\Notifiable;
 
 class Handler extends ExceptionHandler
 {
+    use Notifiable;
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -33,19 +37,15 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         if (app()->environment('production') && $this->shouldReport($exception)) {
-            \Slack::send(
-                sprintf(
-                    "%s \n\n%s \n%s:%d \n\n%s",
-                    get_class($exception),
-                    $exception->getMessage(),
-                    $exception->getFile(),
-                    $exception->getLine(),
-                    $exception->getTraceAsString()
-                )
-            );
+            $this->notify(new ExceptionOccurred($exception));
         }
 
         parent::report($exception);
+    }
+
+    public function routeNotificationForSlack()
+    {
+        return config('services.slack.endpoint');
     }
 
     /**

@@ -42,4 +42,8 @@ return [
         'redirect' => env('GITHUB_CALLBACK'),
     ],
 
+    'slack' => [
+        'endpoint' => env('SLACK_WEBHOOK', ''),
+    ]
+
 ];

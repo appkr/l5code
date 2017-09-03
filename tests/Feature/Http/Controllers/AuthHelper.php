@@ -1,21 +1,15 @@
 <?php
 
-namespace Test\Http\Controllers;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Article;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\BrowserKitTestCase;
 
-class AuthHelper extends \TestCase
+class AuthHelper extends BrowserKitTestCase
 {
     use DatabaseTransactions;
-
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl;
 
     /**
      * @var User

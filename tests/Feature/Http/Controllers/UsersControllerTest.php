@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Http\Controllers;
+namespace Tests\Feature\Http\Controllers;
 
 class UsersControllerTest extends AuthHelper
 {
