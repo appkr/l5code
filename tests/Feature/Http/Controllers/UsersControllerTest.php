@@ -50,7 +50,7 @@ class UsersControllerTest extends AuthHelper
     {
         $this->createTestStub();
         $this->get(route('users.confirm', 'invalid_confirm_code'))
-            ->see('NotFoundHttpException');
+            ->seeStatusCode(404);
     }
 
     /** @test */
