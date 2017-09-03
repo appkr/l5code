@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Exception;
-use Illuminate\Notifications\Messages\SlackAttachment;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 

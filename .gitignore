@@ -7,4 +7,5 @@
 /tests/database.sqlite
 .env
 public/files
+public/js/temp.js
 docker/mysql_datadir
