@@ -35,7 +35,7 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Styles -->
-  <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+  <link href="/css/app.css" rel="stylesheet">
 
   @yield('style')
 
@@ -54,7 +54,7 @@
 <body id="app-layout">
   @include('layouts.partial.navigation')
 
-  <div class="container">
+  <div class="container" id="app">
     @include('flash::message')
 
     @yield('content')
@@ -63,7 +63,7 @@
   @include('layouts.partial.footer')
 
   <!-- Scripts -->
-  <script src="{{ elixir('js/app.js') }}"></script>
+  <script src="/js/app.js"></script>
 
   @yield('script')
 </body>
