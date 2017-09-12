@@ -161,6 +161,10 @@ class Kernel extends HttpKernel
 ~/l5code(master) $ git checkout laravel55
 ~/l5code(laravel55) $ composer install
 ~/l5code(laravel55) $ php artisan migrate:refresh --seed --force
+
+# 이전 버전에서 예제 코드를 구동한 적이 있다면. 
+~/l5code(laravel55) $ php artisan view:clear; php artisan cache:clear; php artisan config:clear; php artisan route:clear
+
 ~/l5code(laravel55) $ php artisan serve --host=myapp.dev
 ```
 
