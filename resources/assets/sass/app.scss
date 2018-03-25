@@ -1,0 +1,534 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// FontAwesome
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// Select2
+@import 'node_modules/select2/src/scss/core';
+
+.select2-dropdown,
+.select2-container--default .select2-selection--multiple,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: 1px solid $input-border;
+  border-radius: 4px;
+}
+
+.select2-container,
+.select2-container--default .select2-selection--multiple {
+  font-size: $font-size-base;
+}
+
+// Dropzone
+@import 'node_modules/dropzone/src/dropzone';
+
+.dropzone {
+  border: 1px solid $input-border;
+  border-radius: 4px;
+}
+
+.dropzone {
+  display: none;
+}
+
+label[for=my-dropzone]>small {
+  cursor: pointer;
+}
+
+.preview__content {
+  display: none;
+  margin-top: $font-size-base * 1.6;
+  height: auto;
+  @extend .form-control;
+  box-shadow: none;
+}
+
+// Application Layouts
+.container__article{
+  padding: 1em 0;
+}
+
+.action__article {
+  margin-top: 1em;
+}
+
+.footer__master {
+  margin-top: 1em;
+
+  a {
+    display: inline-block;
+    color: $text-color;
+    text-decoration: none;
+    padding: 0 5px;
+  }
+
+  ul {
+    li {
+      padding: 0;
+
+      &:first-child {
+        margin-right: 5px;
+      }
+    }
+
+    li:not(:first-child) {
+      a:hover,
+      a:active,
+      a:focus {
+        border-radius: 3px;
+        background-color: darken($body-bg, 5%);
+        transition: all 0.3s ease;
+      }
+
+      &.active > a {
+        border-radius: 3px;
+        background-color: $body-bg;
+      }
+    }
+  }
+}
+
+.back-to-top {
+  cursor: pointer;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  display: none;
+  z-index: 9998;
+  transition: all 0.5s ease-in-out;
+  padding: 8px 10px;
+}
+
+// Sidebar
+.sidebar__article,
+.tags__article,
+.attachments__article {
+  a {
+    color: $text-color;
+    text-decoration: none;
+  }
+}
+
+.sidebar__article {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    a {
+      padding: 0.5rem;
+      display: block;
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+      border-radius: 3px;
+      background-color: darken($body-bg, 5%);
+      transition: all 0.3s ease;
+    }
+
+    &.active>a {
+      border-radius: 3px;
+      background-color: darken($body-bg, 10%);
+    }
+  }
+
+  .badge {
+    float: right;
+    margin-right: 1rem;
+  }
+
+  form {
+    margin-bottom: 30px;
+  }
+}
+
+// Article
+.content__article {
+  margin: 2em;
+  img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    transition: all .2s ease-in-out
+  }
+}
+
+// Tags Line, Attachments Line
+.tags__article,
+.attachments__article {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: 100;
+  font-size: $font-size-base * 0.8;
+
+  li {
+    display: inline-block;
+  }
+
+  li:first-child {
+    margin-right: 10px;
+  }
+
+  li:not(:first-child) {
+    padding: 4px 8px;
+    background-color: darken($body-bg, 5%);
+    border-radius: 3px;
+
+    &:hover {
+      background-color: darken($body-bg, 10%);
+    }
+  }
+}
+
+// Comments
+.link__login__comment {
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 3px;
+  border: 1px solid $input-border;
+  width: 100%;
+}
+
+.item__comment.top {
+  padding: 1rem;
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+  float: right;
+  width: 100%;
+  border: 1px solid $input-border;
+}
+
+.media__edit__comment,
+.media__create__comment.sub {
+  display: none;
+}
+
+.form__new__comment,
+.list__comment {
+  .form-group {
+    width: 100%;
+    margin: auto;
+  }
+
+  div.text-right {
+    margin: 10px auto;
+  }
+}
+
+.content__comment {
+  p {
+    margin: 0;
+  }
+}
+
+.action__comment {
+  button, span {
+    font-size: $font-size-base * 0.8;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  button {
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  button:hover,
+  button:active,
+  button:focus {
+    transition: all .2s ease-in-out
+  }
+
+  &>span {
+    margin: 0 5px;
+  }
+}
+
+// Form
+.form-control {
+  box-shadow: none;
+}
+
+.form__auth {
+  max-width: 400px;
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto;
+
+  .checkbox {
+    margin-bottom: 1rem;
+  }
+
+  .checkbox {
+    font-weight: normal;
+  }
+
+  .form-control {
+    position: relative;
+    height: auto;
+    box-sizing: border-box;
+    padding: 0.8rem;
+  }
+
+  .form-control:focus {
+    z-index: 2;
+    border-color: $input-border;
+    box-shadow: none;
+  }
+
+  input {
+    margin-bottom: 10px;
+  }
+
+  .login-or {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -1px;
+    margin-left: -25px;
+    background-color: $body-bg;
+    width: 50px;
+    text-align: center;
+  }
+
+  .hr-or {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
+  .fa-github {
+    margin-right: 10px;
+  }
+}
+
+span.form-error {
+  margin-top: 5px;
+  display: block;
+  font-size: 0.8em;
+  color: $brand_danger;
+  font-style: italic;
+  font-weight: 100
+}
+
+// Alert, Flash Messages
+.alert {
+  display: inline-block;
+  position: fixed;
+  bottom: 50px;
+  right: 15px;
+  max-width: 450px;
+  opacity: .8;
+  z-index: 999;
+}
+
+// Markdown Viewer
+.docs__sidebar {
+  margin-top: 20px;
+}
+
+#app-layout {
+  pre {
+    background: #000000;
+    border-radius: 0;
+  }
+
+  // 이하 데일 리즈의 칼라 스킴에서 복사한 스타일시트
+
+  .hljs {
+    display: block;
+    padding: 0.5em;
+    background: #000000;
+    color: #BABABA;
+  }
+
+  .hljs-comment,
+  .hljs-template_comment,
+  .hljs-javadoc {
+    color: #494B4D;
+  }
+
+  .hljs-keyword,
+  .ruby .hljs-function .hljs-keyword,
+  .hljs-request,
+  .hljs-status,
+  .nginx .hljs-title {
+    color: #F08D24;
+  }
+
+  .hljs-function .hljs-keyword,
+  .hljs-sub .hljs-keyword,
+  .method,
+  .hljs-list .hljs-title {
+    color: #68C244;
+  }
+
+  .hljs-string,
+  .hljs-tag .hljs-value,
+  .hljs-cdata,
+  .hljs-filter .hljs-argument,
+  .hljs-attr_selector,
+  .apache .hljs-cbracket,
+  .hljs-date,
+  .tex .hljs-command,
+  .coffeescript .hljs-attribute {
+    color: #F2D42C;
+  }
+
+  .hljs-subst {
+    color: #DAEFA3;
+  }
+
+  .hljs-regexp {
+    color: #E9C062;
+  }
+
+  .hljs-title,
+  .hljs-sub .hljs-identifier,
+  .hljs-pi,
+  .hljs-tag,
+  .hljs-tag .hljs-keyword,
+  .hljs-decorator,
+  .hljs-shebang,
+  .hljs-prompt {
+    color: #E8341C;
+  }
+
+  .hljs-symbol,
+  .ruby .hljs-symbol .hljs-string,
+  .hljs-number {
+    color: #8E69C9;
+  }
+
+  .hljs-params,
+  .hljs-variable,
+  .clojure .hljs-attribute {
+    color: #1CC3E8;
+  }
+
+  .css .hljs-tag,
+  .hljs-rules .hljs-property,
+  .hljs-pseudo,
+  .tex .hljs-special {
+    color: #E8341C;
+  }
+
+  .css .hljs-class {
+    color: #1CC3E8;
+  }
+
+  .hljs-rules .hljs-keyword {
+    color: #1CC3E8;
+  }
+
+  .hljs-rules .hljs-value {
+    color: #E8341C;
+  }
+
+  .css .hljs-id {
+    color: #8B98AB;
+  }
+
+  .hljs-annotation,
+  .apache .hljs-sqbracket,
+  .nginx .hljs-built_in {
+    color: #9B859D;
+  }
+
+  .hljs-preprocessor,
+  .hljs-pragma {
+    color: #8996A8;
+  }
+
+  .hljs-hexcolor,
+  .css .hljs-value .hljs-number {
+    color: #DD7B3B;
+  }
+
+  .css .hljs-function {
+    color: #DAD085;
+  }
+
+  .diff .hljs-header,
+  .hljs-chunk,
+  .tex .hljs-formula {
+    background-color: #0E2231;
+    color: #F8F8F8;
+    font-style: italic;
+  }
+
+  .diff .hljs-change {
+    background-color: #4A410D;
+    color: #F8F8F8;
+  }
+
+  .hljs-addition {
+    background-color: #253B22;
+    color: #F8F8F8;
+  }
+
+  .hljs-deletion {
+    background-color: #420E09;
+    color: #F8F8F8;
+  }
+
+  .coffeescript .javascript,
+  .javascript .xml,
+  .tex .hljs-formula,
+  .xml .javascript,
+  .xml .vbscript,
+  .xml .css,
+  .xml .hljs-cdata {
+    opacity: 0.5;
+  }
+
+  // 이상 데일 리즈의 칼라 스킴에서 복사한 스타일시트
+}
+
+// 미디어 쿼리
+@media screen and (max-width: 991px) {
+  .action__article {
+    margin-bottom: 1em;
+  }
+
+  .sidebar__article {
+    margin-bottom: 2em;
+  }
+
+  .item__comment {
+    &>a.pull-left {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 479px) {
+
+}

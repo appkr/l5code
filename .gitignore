@@ -1,0 +1,15 @@
+/node_modules
+/npm-debug.log
+/public/storage
+/vendor
+/.idea
+/docs
+/public/css
+/public/js
+/tests/database.sqlite
+Homestead.json
+Homestead.yaml
+.env
+public/files
+git_rearrange_tags.php
+docker/mysql_datadir
