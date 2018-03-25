@@ -63,9 +63,10 @@ class ArticleTransformer extends TransformerAbstract
             ],
         ];
 
-        if ($fields = $this->getPartialFields()) {
-            $payload = array_only($payload, $fields);
-        }
+//        appkr/api 2.0 부터 getPartialFields() API는 삭제되었습니다.
+//        if ($fields = $this->getPartialFields()) {
+//            $payload = array_only($payload, $fields);
+//        }
 
         return $payload;
     }
@@ -81,12 +82,10 @@ class ArticleTransformer extends TransformerAbstract
     {
         $transformer = new \App\Transformers\CommentTransformer($params);
 
-        $parsed = $transformer->getParsedParams();
-
         $comments = $article->comments()
-                            ->limit($parsed['limit'])
-                            ->offset($parsed['offset'])
-                            ->orderBy($parsed['sort'], $parsed['order'])
+                            ->limit($transformer->getLimit())
+                            ->offset($transformer->getOffset())
+                            ->orderBy($transformer->getSortKey(), $transformer->getSortDirection())
                             ->get();
 
         return $this->collection($comments, $transformer);
@@ -118,12 +117,10 @@ class ArticleTransformer extends TransformerAbstract
     {
         $transformer = new \App\Transformers\TagTransformer($params);
 
-        $parsed = $transformer->getParsedParams();
-
         $tags = $article->tags()
-                        ->limit($parsed['limit'])
-                        ->offset($parsed['offset'])
-                        ->orderBy($parsed['sort'], $parsed['order'])
+                        ->limit($transformer->getLimit())
+                        ->offset($transformer->getOffset())
+                        ->orderBy($transformer->getSortKey(), $transformer->getSortDirection())
                         ->get();
 
         return $this->collection($tags, $transformer);
@@ -140,12 +137,10 @@ class ArticleTransformer extends TransformerAbstract
     {
         $transformer = new \App\Transformers\AttachmentTransformer($params);
 
-        $parsed = $transformer->getParsedParams();
-
         $attachments = $article->attachments()
-                               ->limit($parsed['limit'])
-                               ->offset($parsed['offset'])
-                               ->orderBy($parsed['sort'], $parsed['order'])
+                               ->limit($transformer->getLimit())
+                               ->offset($transformer->getOffset())
+                               ->orderBy($transformer->getSortKey(), $transformer->getSortDirection())
                                ->get();
 
         return $this->collection($attachments, $transformer);

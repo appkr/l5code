@@ -4,12 +4,12 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Article;
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\BrowserKitTestCase;
 
 class AuthHelper extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     /**
      * @var User

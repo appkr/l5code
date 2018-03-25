@@ -38,9 +38,10 @@ class UserTransformer extends TransformerAbstract
             'comments' => (int) $user->comments->count(),
         ];
 
-        if ($fields = $this->getPartialFields()) {
-            $payload = array_only($payload, $fields);
-        }
+//        appkr/api 2.0 부터 getPartialFields() API는 삭제되었습니다.
+//        if ($fields = $this->getPartialFields()) {
+//            $payload = array_only($payload, $fields);
+//        }
 
         return $payload;
     }
@@ -56,12 +57,10 @@ class UserTransformer extends TransformerAbstract
     {
         $transformer = new \App\Transformers\ArticleTransformer($params);
 
-        $parsed = $transformer->getParsedParams();
-
         $articles = $user->articles()
-            ->limit($parsed['limit'])
-            ->offset($parsed['offset'])
-            ->orderBy($parsed['sort'], $parsed['order'])
+            ->limit($transformer->getLimit())
+            ->offset($transformer->getOffset())
+            ->orderBy($transformer->getSortKey(), $transformer->getSortDirection())
             ->get();
 
         return $this->collection($articles, $transformer);
@@ -78,12 +77,10 @@ class UserTransformer extends TransformerAbstract
     {
         $transformer = new \App\Transformers\CommentTransformer($params);
 
-        $parsed = $transformer->getParsedParams();
-
         $comments = $user->comments()
-            ->limit($parsed['limit'])
-            ->offset($parsed['offset'])
-            ->orderBy($parsed['sort'], $parsed['order'])
+            ->limit($transformer->getLimit())
+            ->offset($transformer->getOffset())
+            ->orderBy($transformer->getSortKey(), $transformer->getSortDirection())
             ->get();
 
         return $this->collection($comments, $transformer);

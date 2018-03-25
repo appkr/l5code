@@ -47,9 +47,10 @@ class CommentTransformer extends TransformerAbstract
             ],
         ];
 
-        if ($fields = $this->getPartialFields()) {
-            $payload = array_only($payload, $fields);
-        }
+//        appkr/api 2.0 부터 getPartialFields() API는 삭제되었습니다.
+//        if ($fields = $this->getPartialFields()) {
+//            $payload = array_only($payload, $fields);
+//        }
 
         return $payload;
     }
