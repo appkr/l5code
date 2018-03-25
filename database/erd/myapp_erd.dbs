@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="myapp" id="Project_32c557ba" template="Default" database="MySql" >
+	<schema name="myapp" catalogname="myapp" >
+		<table name="article_tag" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="article_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="tag_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_article_tag" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="article_tag_article_id_foreign" unique="NORMAL" >
+				<column name="article_id" />
+			</index>
+			<index name="article_tag_tag_id_foreign" unique="NORMAL" >
+				<column name="tag_id" />
+			</index>
+			<fk name="article_tag_article_id_foreign" to_schema="myapp" to_table="articles" delete_action="cascade" >
+				<fk_column name="article_id" pk="id" />
+			</fk>
+			<fk name="article_tag_tag_id_foreign" to_schema="myapp" to_table="tags" delete_action="cascade" >
+				<fk_column name="tag_id" pk="id" />
+			</fk>
+		</table>
+		<table name="articles" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="title" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="content" type="text" length="65535" decimal="0" jt="-1" mandatory="y" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="notification" type="bit" decimal="0" jt="-7" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="view_count" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" >
+				<defo>0</defo>
+			</column>
+			<column name="deleted_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<index name="pk_articles" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="articles_user_id_index" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="search" unique="NORMAL" >
+				<column name="title" />
+				<column name="content" />
+			</index>
+			<fk name="articles_user_id_foreign" to_schema="myapp" to_table="users" delete_action="cascade" update_action="cascade" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="attachments" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="article_id" type="int" length="10" decimal="0" jt="4" unsigned="y" />
+			<column name="filename" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="bytes" type="int" length="10" decimal="0" jt="4" unsigned="y" />
+			<column name="mime" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<index name="pk_attachments" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="attachments_article_id_index" unique="NORMAL" >
+				<column name="article_id" />
+			</index>
+		</table>
+		<table name="comments" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="parent_id" type="int" length="10" decimal="0" jt="4" unsigned="y" />
+			<column name="commentable_type" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="commentable_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="content" type="text" length="65535" decimal="0" jt="-1" mandatory="y" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="deleted_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<index name="pk_comments" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="comments_parent_id_foreign" unique="NORMAL" >
+				<column name="parent_id" />
+			</index>
+			<index name="comments_user_id_index" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<fk name="comments_parent_id_foreign" to_schema="myapp" to_table="comments" >
+				<fk_column name="parent_id" pk="id" />
+			</fk>
+			<fk name="comments_user_id_foreign" to_schema="myapp" to_table="users" delete_action="cascade" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="migrations" >
+			<column name="migration" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="batch" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+		</table>
+		<table name="password_resets" >
+			<column name="email" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="token" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<index name="password_resets_email_index" unique="NORMAL" >
+				<column name="email" />
+			</index>
+			<index name="password_resets_token_index" unique="NORMAL" >
+				<column name="token" />
+			</index>
+		</table>
+		<table name="tags" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="slug" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="ko" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="en" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_tags" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="tags_slug_index" unique="NORMAL" >
+				<column name="slug" />
+			</index>
+		</table>
+		<table name="users" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="password" type="varchar" length="60" decimal="0" jt="12" />
+			<column name="remember_token" type="varchar" length="100" decimal="0" jt="12" />
+			<column name="created_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="last_login" type="timestamp" length="19" decimal="0" jt="93" />
+			<column name="confirm_code" type="varchar" length="60" decimal="0" jt="12" />
+			<column name="activated" type="bit" decimal="0" jt="-7" mandatory="y" >
+				<defo>0</defo>
+			</column>
+			<index name="pk_users" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="users_email_unique" unique="UNIQUE" >
+				<column name="email" />
+			</index>
+		</table>
+		<table name="votes" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" autoincrement="y" />
+			<column name="user_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="comment_id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" />
+			<column name="up" type="bit" decimal="0" jt="-7" />
+			<column name="down" type="bit" decimal="0" jt="-7" />
+			<column name="voted_at" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_votes" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="votes_comment_id_foreign" unique="NORMAL" >
+				<column name="comment_id" />
+			</index>
+			<index name="votes_user_id_foreign" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<fk name="votes_comment_id_foreign" to_schema="myapp" to_table="comments" delete_action="cascade" >
+				<fk_column name="comment_id" pk="id" />
+			</fk>
+			<fk name="votes_user_id_foreign" to_schema="myapp" to_table="users" delete_action="cascade" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="myapp" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.40-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="myapp" user="root" />
+	<layout name="Default Layout" id="Layout_1ea545d" show_relation="columns" >
+		<entity schema="myapp" name="article_tag" color="bfd4f5" x="224" y="304" />
+		<entity schema="myapp" name="articles" color="bfd4f5" x="48" y="304" />
+		<entity schema="myapp" name="attachments" color="c8f5bf" x="848" y="48" />
+		<entity schema="myapp" name="comments" color="bfd4f5" x="224" y="48" />
+		<entity schema="myapp" name="migrations" color="c8f5bf" x="848" y="272" />
+		<entity schema="myapp" name="password_resets" color="c8f5bf" x="672" y="272" />
+		<entity schema="myapp" name="tags" color="c8f5bf" x="672" y="48" />
+		<entity schema="myapp" name="users" color="bfd4f5" x="432" y="48" />
+		<entity schema="myapp" name="votes" color="bfd4f5" x="48" y="48" />
+	</layout>
+	<layout name="Sample Layout with Groups" id="Layout_878282f" show_relation="columns" >
+		<entity schema="myapp" name="article_tag" color="bfd4f5" x="224" y="448" />
+		<entity schema="myapp" name="articles" color="bfd4f5" x="48" y="448" />
+		<entity schema="myapp" name="attachments" color="c8f5bf" x="848" y="192" />
+		<entity schema="myapp" name="comments" color="bfd4f5" x="224" y="192" />
+		<entity schema="myapp" name="migrations" color="c8f5bf" x="848" y="416" />
+		<entity schema="myapp" name="password_resets" color="c8f5bf" x="672" y="416" />
+		<entity schema="myapp" name="tags" color="c8f5bf" x="672" y="192" />
+		<entity schema="myapp" name="users" color="bfd4f5" x="432" y="192" />
+		<entity schema="myapp" name="votes" color="bfd4f5" x="48" y="192" />
+		<callout x="224" y="80" pointer="NO" >
+			<comment><![CDATA[In DbSchema you may create multiple layouts with the same or different tables.
+Layouts will be saved to project file. 
+Double-click any column, foreign key or table headers to edit.]]></comment>
+		</callout>
+		<group name="comments" color="ecf0f7" >
+			<entity schema="myapp" name="comments" />
+			<entity schema="myapp" name="users" />
+			<entity schema="myapp" name="article_tag" />
+			<entity schema="myapp" name="articles" />
+			<entity schema="myapp" name="votes" />
+		</group>
+		<group name="tags" color="eef7ec" >
+			<entity schema="myapp" name="tags" />
+			<entity schema="myapp" name="attachments" />
+			<entity schema="myapp" name="migrations" />
+			<entity schema="myapp" name="password_resets" />
+		</group>
+	</layout>
+	<layout name="Sample Layout with Relational Data Browse" id="Layout_26fe9c0a" show_relation="columns" >
+		<entity schema="myapp" name="article_tag" color="bfd4f5" x="224" y="416" />
+		<entity schema="myapp" name="articles" color="bfd4f5" x="48" y="416" />
+		<entity schema="myapp" name="attachments" color="c8f5bf" x="848" y="160" />
+		<entity schema="myapp" name="comments" color="bfd4f5" x="224" y="160" />
+		<entity schema="myapp" name="migrations" color="c8f5bf" x="848" y="384" />
+		<entity schema="myapp" name="password_resets" color="c8f5bf" x="672" y="384" />
+		<entity schema="myapp" name="tags" color="c8f5bf" x="672" y="160" />
+		<entity schema="myapp" name="users" color="bfd4f5" x="432" y="160" />
+		<entity schema="myapp" name="votes" color="bfd4f5" x="48" y="160" />
+		<callout x="224" y="48" pointer="NO" >
+			<comment><![CDATA[Below is a Relational Data Browse for exploring and editing data from multiple tables at a time.
+Tables should be bind by foreign keys - if they are not you can create VIRTUAL foreign keys in the layout. 
+Virtual foreign keys will be saved to project file.
+ 
+Descend into children tables by pressing the foreign key arrow icon near title.
+Right-click column headers in browse tables to set filters.]]></comment>
+		</callout>
+		<browser id="Browse_2061bf65" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="myapp" entity="comments" x="10" y="10" width="400" height="300" >
+				<browse_table schema="myapp" entity="users" fk="comments_user_id_foreign" x="420" y="10" width="400" height="300" record_view="y" />
+			</browse_table>
+		</browser>
+	</layout>
+</project>

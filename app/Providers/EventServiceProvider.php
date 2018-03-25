@@ -13,9 +13,27 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        \Illuminate\Auth\Events\Login::class => [
+            \App\Listeners\UsersEventListener::class,
         ],
+        \App\Events\ArticlesEvent::class => [
+            \App\Listeners\ArticlesEventListener::class,
+        ],
+        \App\Events\CommentsEvent::class => [
+            \App\Listeners\CommentsEventListener::class,
+        ],
+        \App\Events\ModelChanged::class => [
+            \App\Listeners\CacheHandler::class,
+        ],
+    ];
+
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        \App\Listeners\UsersEventListener::class,
     ];
 
     /**

@@ -1,59 +1,177 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## 예제 프로젝트 5.5 업그레이드
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+책에 수록된 코드 예제는 라라벨 5.5 버전에서도 그대로 작동합니다. 아래 달라진 점 부분만 고쳐주시면 됩니다.
 
-## About Laravel
+### 1. 달라진 점
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+라라벨 5.3에서 작성된 최종 예제 코드 대비, 라라벨 5.5로 업그레이드하면서 달라져야 하는 점은 네 가지 입니다.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. 라라벨 믹스 적용
+2. `maknz/slack` 컴포넌트 제거
+3. `barryvdh\laravel-cors` 사용법 변경 내용분 적용
+4. 모델 팩토리 비활성화
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+#### 1.1. 라라벨 믹스 적용
 
-## Learning Laravel
+**21장 "엘릭서와 프런트엔드"** 관련 내용입니다.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+https://github.com/appkr/l5code/issues/11 에 자세히 설명해 두었습니다.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+#### 1.2. `maknz/slack` 컴포넌트 제거
 
-## Laravel Sponsors
+**30장 2절의 "오류 알림"** 관련 내용입니다.
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+`maknz/slack`가 제공하는 서비스프로바이더가 문제를 일으켜 걷어 내고, 라라벨 5.4부터 제공하는 Notification 기능으로 대체해서 슬랙 메시지를 보내는 것으로 변경했습니다.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+```php
+<?php // config/services.php
 
-## Contributing
+return [
+    'slack' => [
+        'endpoint' => env('SLACK_WEBHOOK', ''),
+    ]
+];
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```php
+<?php // app/Exceptions/Handler.php
 
-## Security Vulnerabilities
+class Handler extends ExceptionHandler
+{
+    use \Illuminate\Notifications\Notifiable;
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    // ...
 
-## License
+    public function report(Exception $exception)
+    {
+        if (app()->environment('production') && $this->shouldReport($exception)) {
+            $this->notify(new ExceptionOccurred($exception));
+        }
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        parent::report($exception);
+    }
+
+    public function routeNotificationForSlack()
+    {
+        return config('services.slack.endpoint');
+    }
+
+    // ...
+}
+```
+
+```php
+<?php // app/Notifications/ExceptionOccurred.php
+
+namespace App\Notifications;
+
+use Exception;
+use Illuminate\Notifications\Messages\SlackMessage;
+use Illuminate\Notifications\Notification;
+
+class ExceptionOccurred extends Notification
+{
+    private $e;
+
+    public function __construct(Exception $e)
+    {
+        $this->e = $e;
+    }
+
+    public function via($notifiable)
+    {
+        return ['slack'];
+    }
+
+    public function toSlack($notifiable)
+    {
+        return (new SlackMessage)
+            ->error()
+            ->content(sprintf(
+                "%s \n\n%s \n%s:%d \n\n%s",
+                get_class($this->e),
+                $this->e->getMessage(),
+                $this->e->getFile(),
+                $this->e->getLine(),
+                $this->e->getTraceAsString()
+            ));
+    }
+}
+```
+
+#### 1.3. `barryvdh\laravel-cors` 사용법 변경 내용분 적용
+
+**36장 1절의 "CORS"** 관련 내용입니다.
+
+해당 컴포넌트에서 제공하는 미들웨어 사용법이 변경되었습니다. `'cors'`라는 상수 방식의 미들웨어 별칭을 더 이상 제공하지 않고, FQCN을 이용해야 합니다.
+
+```diff
+<?php // routes/api.php
+
+Route::group([
+    'domain' => config('project.api_domain'),
+    'namespace' => 'Api',
+    'as' => 'api.',
+-    'middleware' => ['cors']
+], function () {
+    // ...
+});
+```
+
+```diff
+<?php // app/Http/Kernel.php
+
+class Kernel extends HttpKernel
+{
+    protected $middlewareGroups = [
+        'api' => [
+            'throttle:60,1',
+            'bindings',
++            \Barryvdh\Cors\HandleCors::class,
+        ],
+    ];
+}
+```
+
+#### 1.4. 모델 팩토리 비활성화
+
+라라벨 5.5부터 모델당 모델 팩토리를 하나씩 쓸 수 있도록 바뀌었습니다. 물론 기존처럼 통합된 `ModelFactory` 도 쓸 수 있습니다. 충돌을 피하기 위해 5.5 버전에 추가된 `database\factories\UserFactory.php` 의 모든 내용을 주석처리했습니다. 
+
+### 2. 설치 및 실행법
+
+이 브랜치를 로컬 컴퓨터에서 실행하려면 다음 안내를 따릅니다. 이 브랜치는 챕터별 커밋 이력이 없는 라라벨 5.5에서 작동하는 최종 버전의 예제 코드 입니다.
+
+```bash
+# 기존에 호스트 파일에 myapp.dev 레코드를 추가하지 않았다면.
+~ $ sudo echo "127.0.0.1 myapp.dev" >> /etc/hosts
+~ $ sudo echo "127.0.0.1 api.myapp.dev" >> /etc/hosts
+
+# 예제 코드 저장소를 복제하지 않았다면.
+~ $ git clone git@github.com:appkr/l5code.git
+~ $ cd l5code
+
+# 예제 코드 프로젝트를 셋팅한 적이 없다면.
+~/l5code(master) $ cp .env.example .env
+~/l5code(master) $ chmod -R 775 storage bootstrap/cache public/files
+~/l5code(master) $ php artisan key:generate
+
+# 로컬 복제된 예제 코드를 이미 가지고 있다면.
+~/l5code(master) $ git pull --all
+
+~/l5code(master) $ git checkout laravel55
+~/l5code(laravel55) $ composer install
+~/l5code(laravel55) $ php artisan migrate:refresh --seed --force
+~/l5code(laravel55) $ php artisan serve --host=myapp.dev
+```
+
+브라우저에서 http://myapp.dev:8000 을 열어 확인합니다.
+
+```bash
+~/l5code(laravel55) $ touch tests/database.sqlite
+~/l5code(laravel55) $ php artisan migrate --seed --database=testing
+~/l5code(laravel55) $ vendor/bin/phpunit
+```
+
+API 작동 테스트를 위한 포스트맨 콜렉션은 여기서 받을 수 있습니다.
+
+https://www.getpostman.com/collections/56ac056289864393eea5
