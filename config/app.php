@@ -165,14 +165,15 @@ return [
 
         /*
          * Package Service Providers...
+         * Auto Discover 기능이 제공되는 서비스는 주석처리했습니다.
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
+//        Intervention\Image\ImageServiceProvider::class,
+//        Laracasts\Flash\FlashServiceProvider::class,
+//        Laravel\Socialite\SocialiteServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Appkr\Api\ApiServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
+//        Appkr\Api\ApiServiceProvider::class,
+//        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...
