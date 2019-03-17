@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,27 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        \Illuminate\Auth\Events\Login::class => [
-            \App\Listeners\UsersEventListener::class,
+        Registered::class => [
+            SendEmailVerificationNotification::class,
         ],
-        \App\Events\ArticlesEvent::class => [
-            \App\Listeners\ArticlesEventListener::class,
-        ],
-        \App\Events\CommentsEvent::class => [
-            \App\Listeners\CommentsEventListener::class,
-        ],
-        \App\Events\ModelChanged::class => [
-            \App\Listeners\CacheHandler::class,
-        ],
-    ];
-
-    /**
-     * The subscriber classes to register.
-     *
-     * @var array
-     */
-    protected $subscribe = [
-        \App\Listeners\UsersEventListener::class,
     ];
 
     /**
