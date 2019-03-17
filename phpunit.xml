@@ -15,6 +15,7 @@
 
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
+            <exclude>./tests/Feature/Http/Controllers/AuthHelper.php</exclude>
         </testsuite>
     </testsuites>
     <filter>
@@ -29,5 +30,6 @@
         <server name="MAIL_DRIVER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
+        <server name="DB_CONNECTION" value="testing"/>
     </php>
 </phpunit>

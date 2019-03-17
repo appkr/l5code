@@ -37,7 +37,6 @@ return [
         'stack' => [
             'driver' => 'stack',
             'channels' => ['daily'],
-            'ignore_exceptions' => false,
         ],
 
         'single' => [
@@ -62,7 +61,7 @@ return [
         ],
 
         'papertrail' => [
-            'driver' => 'monolog',
+            'driver'  => 'monolog',
             'level' => 'debug',
             'handler' => SyslogUdpHandler::class,
             'handler_with' => [
@@ -74,7 +73,6 @@ return [
         'stderr' => [
             'driver' => 'monolog',
             'handler' => StreamHandler::class,
-            'formatter' => env('LOG_STDERR_FORMATTER'),
             'with' => [
                 'stream' => 'php://stderr',
             ],
