@@ -9,8 +9,8 @@ services:
       - ../:/var/www/myapp
       - ./mysql_datadir:/var/lib/mysql
     ports:
-      - "8000:80"
+      - "80:80"
       - "9001:9001"
-      - "33060:3306"
+      - "3306:3306"
     tty: true
     stdin_open: true
