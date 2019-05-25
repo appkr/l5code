@@ -26,4 +26,4 @@ RUN rm /etc/nginx/sites-available/default \
 
 WORKDIR /var/www/myapp
 VOLUME ["/var/www/myapp", "/var/lib/mysql"]
-EXPOSE 80 9991 3306
+EXPOSE 80 3306 9991 10001

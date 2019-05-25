@@ -62,7 +62,7 @@ $ sudo apt update && apt install docker
 # WARNING: Image for service lemp was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 # Creating docker_lemp_1
 
-~/myapp(docker) $ docker-compose -f docker/docker-composer.yml ps
+~/myapp(docker) $ docker-compose -f docker/docker-compose.yml ps
     Name           Command       State                                        Ports
 ------------------------------------------------------------------------------------------------------------------------
 docker_lemp_1   /entrypoint.sh   Up      0.0.0.0:3306->3306/tcp, 0.0.0.0:80->80/tcp, 0.0.0.0:9001->9001/tcp, 9991/tcp
@@ -120,15 +120,16 @@ Docker 환경을 삭제하고 싶을 때는 다음 명령을 이용합니다. (�
 서비스|접속 정보
 ---|---
 Web|`http://localhost`
-Supervisor|`http://localhost:9001` (HTTP Basic Auth => `homestead`/`secret`)
 MySQL|`$ mysql -h127.0.0.1 -P3306 -uhomestead -p`
+Supervisor|`http://localhost:9001` (HTTP Basic Auth => `homestead`/`secret`)
+Xdebug|10001 (IDEKEY=IDEA)
 
 ## 5. 트러블슈팅
 
 문제가 있다면 모든 작업을 되돌리고, 처음부터 다시 시작해 보세요.
 
 ```bash
-~/myapp(docker) $ rm -rf mysql_datadir/*
+~/myapp(docker) $ rm -rf docker/mysql_datadir/*
 
 ~/myapp(docker) $ docker-compose -f docker/docker-compose.yml down
 ```
