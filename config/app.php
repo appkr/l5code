@@ -169,7 +169,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Maknz\Slack\SlackServiceProvider::class,
+//        Maknz\Slack\SlackServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Appkr\Api\ApiServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
@@ -182,6 +182,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        App\Providers\CustomLoggerServiceProvider::class,
 
     ],
 
