@@ -1,4 +1,4 @@
-FROM appkr/lemp-base:latest
+FROM appkr/lemp-base:16.04
 
 #-------------------------------------------------------------------------------
 # 환경변수를 설정합니다.
@@ -26,4 +26,3 @@ RUN rm /etc/nginx/sites-available/default \
 
 WORKDIR /var/www/myapp
 VOLUME ["/var/www/myapp", "/var/lib/mysql"]
-EXPOSE 80 3306 9991 10001

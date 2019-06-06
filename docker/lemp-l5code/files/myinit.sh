@@ -1,21 +1,26 @@
 #!/bin/bash
 
 if [ ! -d $MYSQL_DATA_DIR/myapp ]; then
-    # homestead 사용자 생성
+    echo -e "리모트 접속이 가능한 root 사용자를 만듭니다"
+    mysql -v -e "CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
+    mysql -v -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+
+    echo -e "homestead 사용자를 만듭니다"
     mysql -v -e "CREATE USER 'homestead'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
     mysql -v -e "CREATE USER 'homestead'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';"
-
-    # homestead 사용자 권한 부여
     mysql -v -e "GRANT ALL PRIVILEGES ON myapp.* TO 'homestead'@'localhost';"
     mysql -v -e "GRANT ALL PRIVILEGES ON myapp.* TO 'homestead'@'%';"
     mysql -v -e "FLUSH PRIVILEGES;"
 
-    # 데이터베이스 생성
+    echo -e "myapp 이름을 가진 데이터베이스를 만듭니다"
     mysql -v -e "CREATE DATABASE myapp;"
 
-    # 폴더에 쓰기 권한 부여
-    chmod -R 775 storage /var/www/myapp/bootstrap/cache /var/www/myapp/public/files
+    echo -e "PHP 스크립트가 폴더에 쓸 수 있도록 폴더 권한을 변경합니다"
+    chmod -R 775 storage /var/www/myapp/bootstrap/cache
 
-    # 테이블 마이그레이션 및 시딩
-    php /var/www/myapp/artisan migrate --seed --force
+    if [[ -f /var/www/myapp/public/files ]]; then
+      echo -e "예제 프로젝트이면, 테이블 마이그레이션 및 시딩을 수행합니다"
+      chmod -R 775 /var/www/myapp/public/files
+      php /var/www/myapp/artisan migrate --seed --force
+    fi
 fi
