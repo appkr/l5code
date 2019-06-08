@@ -139,20 +139,26 @@ $ sudo apt update && apt install docker
 
 ```bash
 # 프로젝트 폴더를 Docker에 연결해야하므로 이 명령은 프로젝트 폴더에서 수행해야 합니다.
+~/myapp(docker) $ docker build \
+    -f ./docker/lemp-l5code/Dockerfile \
+    --tag lemp:latest \
+    ./docker/lemp-l5code
+
 ~/myapp(docker) $ docker run -d \
-    --name lemp
+    --name myapp
     -v `pwd`:/var/www/myapp \
     -v `pwd`/docker/mysql_datadir:/var/lib/mysql \
     -p 80:80 \
     -p 3306:3306 \
     -p 9001:9001 \
-    appkr/lemp-base:16.04
+    -p 10001:10001 \
+    lemp:latest
 ```
 
 ```bash
 # 한번 run했던 컨테이너를 삭제하지 않았다면, 이후 stop, start는 아무 폴더에서나 할 수 있습니다.
-~ $ docker stop lemp
-~ $ docker start lemp
+~ $ docker stop myapp
+~ $ docker start myapp
 ```
 
 ## 참고. 다운로드 받은 Docker 환경을 여러분의 프로젝트에 적용하려면 

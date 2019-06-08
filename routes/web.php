@@ -1,5 +1,11 @@
 <?php
 
+Route::get('health', function () {
+    return new \Illuminate\Http\JsonResponse([
+        'status' => 'UP'
+    ]);
+});
+
 Route::get('/', [
     'as' => 'root',
     'uses' => 'WelcomeController@index',
