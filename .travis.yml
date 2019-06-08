@@ -1,0 +1,21 @@
+language: php
+
+php:
+  - 7.0
+
+install:
+  - composer self-update
+  - travis_retry composer install --no-interaction --no-scripts --prefer-source --dev
+
+before_script:
+  - TRAVIS=true
+  - cp .env.example .env
+  - php artisan key:generate
+  - touch tests/database.sqlite
+  - php artisan migrate --seed --database=testing
+
+script:
+  - vendor/bin/phpunit
+
+matrix:
+  fast_finish: true
