@@ -16,7 +16,7 @@ if [ ! -d $MYSQL_DATA_DIR/myapp ]; then
     mysql -v -e "CREATE DATABASE myapp;"
 
     echo -e "PHP 스크립트가 폴더에 쓸 수 있도록 폴더 권한을 변경합니다"
-    chmod -R 775 storage /var/www/myapp/bootstrap/cache
+    chmod -R 775 /var/www/myapp/storage /var/www/myapp/bootstrap/cache
 
     if [[ -f /var/www/myapp/public/files ]]; then
       echo -e "예제 프로젝트이면, 테이블 마이그레이션 및 시딩을 수행합니다"
