@@ -1,3 +1,7 @@
+이 문서를 확인해주세요: [2022년에 빨간책을 보시는 분들을 위한 실습 시작 가이드](https://github.com/appkr/l5code/issues/20)
+
+---
+
 [![Build Status](https://travis-ci.org/appkr/l5code.svg?branch=master)](https://travis-ci.org/appkr/l5code)
 
 # 라라벨로 배우는 실전 PHP 웹 프로그래밍 (출판용 소스코드)
